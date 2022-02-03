@@ -1,4 +1,4 @@
-# MKS22X-Labss
+# MKS22X-Labs
 
 Lab repository for APCS
 
