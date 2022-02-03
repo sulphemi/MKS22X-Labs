@@ -2,7 +2,7 @@ public class Recursion {
   /*Print all words that are made of the letters a-e inclusive.
   *@param length : the length of the words that are to be printed
   */
-  public static void printAllWords(int length){
+  public static void printAllWords(int length) {
     printAllWords(length,"");
   }
 
@@ -28,7 +28,7 @@ public class Recursion {
   *@param letters: the letters you should be using,
   *@precondition: letters contains at least 2 characters, and has no duplicates.
   */
-  public static void printNoDoubleLetterWords(int length,char[] letters){
+  public static void printNoDoubleLetterWords(int length,char[] letters) {
     printNoDoubleLetterWords(length,"",letters);
   }
 
@@ -38,14 +38,17 @@ public class Recursion {
   *@param word   : the partial word so far.
   *@param letters: the letters you should be using
   */
-  public static void printNoDoubleLetterWords(int length,String word,char[]letters){
+  public static void printNoDoubleLetterWords(int length, String word, char[] letters) {
     if (length == 0) {
       System.out.println(word);
       return;
     }
 
     for (char letter : letters) {
-      printNoDoubleLetterWords(length - 1, word + letter, letters);
+      //check if adding letter makes double letter
+      if (!(word.length() >= 1 && word.endsWith("" + letter))) {
+        printNoDoubleLetterWords(length - 1, word + letter, letters);
+      }
     }
   }
 
