@@ -1,0 +1,9 @@
+# java class files
+*.class
+
+# temporary files
+*.tmp
+*.temp
+
+# hahaha MacOS bad
+.DS_Store
