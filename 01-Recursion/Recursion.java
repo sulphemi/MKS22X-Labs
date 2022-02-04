@@ -53,9 +53,23 @@ public class Recursion {
   }
 
 
+  public static String reverse(String s) {
+    if (s.length() < 2) {
+      return s;
+    } else {
+      //the string without the first character
+      String headless = s.substring(s.length() - 1);
+      char lastLetter = s.charAt(s.length() - 1);
+      return reverse(headless) + lastLetter;
+    }
+  }
+
+
   /*** MAIN ***/
   public static void main(String[] args) {
-    char[] letters = {'a', 'b', 'c'};
-    printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
+    //char[] letters = {'a', 'b', 'c'};
+    //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
+
+    System.out.println(reverse(args[0]));
   }
 }
