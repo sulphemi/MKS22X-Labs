@@ -64,7 +64,7 @@ public class Recursion {
     }
   }
 
-
+  //this method takes negatives
   public static double sqrt(double n) {
     return 0;
   }
@@ -74,6 +74,12 @@ public class Recursion {
     //yell at user for inputting negative
     if (n < 0) {
       throw new IllegalArgumentException("bwahahahahahaaa did you actually just put a *negative* number in a *sqrt* function??? this isnt precalc stop doing that");
+    }
+
+    //check for accuracy
+    //the target percent error is 0.01% or 0.0001
+    if (guess * guess / n < 0.0001) {
+      return guess;
     }
 
     return 0;
