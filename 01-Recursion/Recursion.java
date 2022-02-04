@@ -66,7 +66,17 @@ public class Recursion {
 
 
   public static double sqrt(double n) {
-    
+    return 0;
+  }
+
+  //note that this function does not take negatives
+  public static double sqrt(double n, double guess) {
+    //yell at user for inputting negative
+    if (n < 0) {
+      throw new IllegalArgumentException("bwahahahahahaaa did you actually just put a *negative* number in a *sqrt* function??? this isnt precalc stop doing that");
+    }
+
+    return 0;
   }
 
   /*** MAIN ***/
