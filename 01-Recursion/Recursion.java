@@ -58,9 +58,9 @@ public class Recursion {
       return s;
     } else {
       //the string without the first character
-      String headless = s.substring(s.length() - 1);
-      char lastLetter = s.charAt(s.length() - 1);
-      return reverse(headless) + lastLetter;
+      String headless = s.substring(1);
+      char firstLetter = s.charAt(0);
+      return reverse(headless) + firstLetter;
     }
   }
 
