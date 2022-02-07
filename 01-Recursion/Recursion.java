@@ -85,6 +85,17 @@ public class Recursion {
     return sqrt(n, (n / guess + guess) / 2.0);
   }
 
+  /*
+  *@param length how long the words must be
+  *param word the variable to store the partial solution (should start at "")
+  *@return the number of words that have no adjacent matching letters using the letters a-z.
+  *Repetition allowed except when letters are adjacent.
+  */
+  public static long countNoDoubleLetterWords(int length,String word){
+    //Hint: not a wrapper method, but you must call it starting with "" as your word.
+  }
+
+
   /*** MAIN ***/
   public static void main(String[] args) {
     //char[] letters = {'a', 'b', 'c'};
