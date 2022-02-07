@@ -71,17 +71,19 @@ public class Recursion {
       throw new IllegalArgumentException("bwahahahahahaaa did you actually just put a *negative* number in a *sqrt* function??? this isnt precalc stop doing that");
     }
 
-    return sqrt(n, 1.0);
+    return sqrt(n, 2.0);
   }
 
   //precondition: n > 0
   public static double sqrt(double n, double guess) {
     //check for accuracy
     //the target percent error is 0.01% or 0.0001
-    if (guess * guess / n < 0.1) {
+    if ((guess * guess - n) / n < 0.0001) {
+      System.out.println(guess * guess / n);
       return guess;
     }
 
+    System.out.println(guess * guess / n);
     System.out.println(guess);
     return sqrt(n, (n / guess + guess) / 2.0);
   }
