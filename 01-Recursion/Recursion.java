@@ -78,13 +78,10 @@ public class Recursion {
   public static double sqrt(double n, double guess) {
     //check for accuracy
     //the target percent error is 0.01% or 0.0001
-    if ((guess * guess - n) / n < 0.0001) {
-      System.out.println(guess * guess / n);
+    if (Math.abs((guess * guess - n) / n) < 0.0001) {
       return guess;
     }
 
-    System.out.println(guess * guess / n);
-    System.out.println(guess);
     return sqrt(n, (n / guess + guess) / 2.0);
   }
 
