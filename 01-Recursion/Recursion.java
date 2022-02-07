@@ -66,23 +66,24 @@ public class Recursion {
 
   //this method takes negatives
   public static double sqrt(double n) {
-    return 0;
-  }
-
-  //note that this function does not take negatives
-  public static double sqrt(double n, double guess) {
     //yell at user for inputting negative
     if (n < 0) {
       throw new IllegalArgumentException("bwahahahahahaaa did you actually just put a *negative* number in a *sqrt* function??? this isnt precalc stop doing that");
     }
 
+    return sqrt(n, 1.0);
+  }
+
+  //precondition: n > 0
+  public static double sqrt(double n, double guess) {
     //check for accuracy
     //the target percent error is 0.01% or 0.0001
-    if (guess * guess / n < 0.0001) {
+    if (guess * guess / n < 0.1) {
       return guess;
     }
 
-    return 0;
+    System.out.println(guess);
+    return sqrt(n, (n / guess + guess) / 2.0);
   }
 
   /*** MAIN ***/
@@ -90,6 +91,6 @@ public class Recursion {
     //char[] letters = {'a', 'b', 'c'};
     //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
 
-    System.out.println(reverse(args[0]));
+    System.out.println(sqrt(Integer.parseInt(args[0])));
   }
 }
