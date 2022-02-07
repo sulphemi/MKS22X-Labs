@@ -91,8 +91,17 @@ public class Recursion {
   *@return the number of words that have no adjacent matching letters using the letters a-z.
   *Repetition allowed except when letters are adjacent.
   */
-  public static long countNoDoubleLetterWords(int length,String word){
+  public static long countNoDoubleLetterWords(int length, String word) {
     //Hint: not a wrapper method, but you must call it starting with "" as your word.
+
+    //base
+    if () {
+      return 1;
+    }
+
+    for (char letter = 'a'; letter <= 'z'; letter++) {
+      return countNoDoubleLetterWords(length - 1; word + letter);
+    }
   }
 
 
