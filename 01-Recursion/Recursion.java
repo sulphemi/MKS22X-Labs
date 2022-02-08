@@ -71,6 +71,10 @@ public class Recursion {
       throw new IllegalArgumentException("bwahahahahahaaa did you actually just put a *negative* number in a *sqrt* function??? this isnt precalc stop doing that");
     }
 
+    if (n == 0) {
+      return 0;
+    }
+
     return sqrt(n, n / 2);
   }
 
@@ -133,7 +137,7 @@ public class Recursion {
     //base case
     if ()
 
-    
+
   }
 
 
