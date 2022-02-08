@@ -133,11 +133,11 @@ public class Recursion {
 
 
   //returns if partial sum is possible
-  public boolean partialSum(int start, int[] arr, int target) {
+  public boolean partialSum(int start, int[] arr, int target, int sum) {
     //base case
-    if ()
-
-
+    if (sum == target) {
+      return true;
+    }
   }
 
 
