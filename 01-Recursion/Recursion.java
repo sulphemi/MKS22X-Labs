@@ -133,11 +133,16 @@ public class Recursion {
 
 
   //returns if partial sum is possible
-  public boolean partialSum(int start, int[] arr, int target, int sum) {
+  public static boolean partialSum(int start, int[] arr, int target, int sum) {
     //base case
     if (sum == target) {
       return true;
     }
+
+    return (
+      partialSum(start + 1, arr, target, sum + arr[start]) ||     //with current index
+      partialSum(start + 1, arr, target, sum)                     //without current index
+      );
   }
 
 
@@ -147,8 +152,12 @@ public class Recursion {
     //char[] letters = {'a', 'b', 'c'};
     //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
 
-    for (int i = 0; i <= 10; i++) {
-      System.out.println(fibIter(i, 0, 1));
+    int[] arr = new int[args.length];
+
+    for (int i = 0; i < args.length; i++) {
+      arr[i] = Integer.parseInt(args[i]);
     }
+
+    System.out.println(partialSum(0, arr, 10, 0));
   }
 }
