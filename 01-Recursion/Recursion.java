@@ -93,15 +93,21 @@ public class Recursion {
   */
   public static long countNoDoubleLetterWords(int length, String word) {
     //Hint: not a wrapper method, but you must call it starting with "" as your word.
+    long count = 0;
 
     //base
-    if () {
+    if (length == word.length()) {
+      System.out.println(word);
       return 1;
     }
 
     for (char letter = 'a'; letter <= 'z'; letter++) {
-      return countNoDoubleLetterWords(length - 1; word + letter);
+      if (! word.endsWith("" + letter)) {
+        count += countNoDoubleLetterWords(length, word + letter);
+      }
     }
+
+    return count;
   }
 
 
@@ -110,6 +116,6 @@ public class Recursion {
     //char[] letters = {'a', 'b', 'c'};
     //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
 
-    System.out.println(sqrt(Integer.parseInt(args[0])));
+    System.out.println(countNoDoubleLetterWords(2, ""));
   }
 }
