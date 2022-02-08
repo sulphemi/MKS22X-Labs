@@ -127,6 +127,17 @@ public class Recursion {
     return fibIter(n - 1, f2, f1 + f2);
   }
 
+
+  //returns if partial sum is possible
+  public boolean partialSum(int start, int[] arr, int target) {
+    //base case
+    if ()
+
+    
+  }
+
+
+
   /*** MAIN ***/
   public static void main(String[] args) {
     //char[] letters = {'a', 'b', 'c'};
