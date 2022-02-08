@@ -138,6 +138,10 @@ public class Recursion {
     if (sum == target) {
       return true;
     }
+    if (start == arr.length) {
+      //means we reached the end without being able to partial sum thingy thing thing
+      return false;
+    }
 
     return (
       partialSum(start + 1, arr, target, sum + arr[start]) ||     //with current index
