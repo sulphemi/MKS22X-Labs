@@ -116,6 +116,11 @@ public class Recursion {
   */
   public static int fibIter(int n, int f1, int f2){
     //DO NOT call fibIter more than once
+
+    //base case
+    if (n == 0) {
+      return f2;
+    }
   }
 
   /*** MAIN ***/
