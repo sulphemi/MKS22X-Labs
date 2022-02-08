@@ -119,7 +119,7 @@ public class Recursion {
 
     //base case
     if (n == 0) {
-      return f2;
+      return f1;
     }
 
     //iterate
