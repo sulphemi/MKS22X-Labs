@@ -123,7 +123,8 @@ public class Recursion {
     }
 
     //iterate
-    return fibIter(n - 1, f1 + f2, f1 + f1 + f2);
+    //fibIter(n - 1, first term, second term)
+    return fibIter(n - 1, f2, f1 + f2);
   }
 
   /*** MAIN ***/
