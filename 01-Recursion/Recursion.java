@@ -97,7 +97,6 @@ public class Recursion {
 
     //base
     if (length == word.length()) {
-      System.out.println(word);
       return 1;
     }
 
@@ -116,6 +115,6 @@ public class Recursion {
     //char[] letters = {'a', 'b', 'c'};
     //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
 
-    System.out.println(countNoDoubleLetterWords(2, ""));
+    System.out.println(countNoDoubleLetterWords(5, ""));
   }
 }
