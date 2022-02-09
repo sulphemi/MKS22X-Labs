@@ -41,10 +41,14 @@ public class RecursionClasswork {
       return false;
     }
 
-    return (
-      partialSum(start + 1, arr, target, sum + arr[start]) ||     //with current index
-      partialSum(start + 1, arr, target, sum)                     //without current index
-      );
+    if (arr[start] == 6) { //check if current element is 6
+      return groupSum6(start + 1, arr, target, sum + arr[start]);
+    } else {
+      return (
+        groupSum6(start + 1, arr, target, sum + arr[start]) ||     //with current index
+        groupSum6(start + 1, arr, target, sum)                     //without current index
+        );
+    }
   }
 
   public static void main(String[] args) {
@@ -57,6 +61,6 @@ public class RecursionClasswork {
       arr[i] = Integer.parseInt(args[i]);
     }
 
-    System.out.println(splitArray(arr));
+    System.out.println(groupSum6(0, arr, 10, 0));
   }
 }
