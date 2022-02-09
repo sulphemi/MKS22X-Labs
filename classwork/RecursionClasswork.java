@@ -18,7 +18,14 @@ public class RecursionClasswork {
 
   //check if it is possible to split array into two sums
   public static boolean splitArray(int[] nums) {
-    return splitArray(int[] nums, int pointer, int sum);
+    return splitArray(nums, 0, 0, 0);
+  }
+
+  public static boolean splitArray(int[] nums, int pointer, int sum1, int sum2) {
+    //base case
+    if (pointer > nums.length) {
+      return sum1 == sum2;
+    }
   }
 
   public static void main(String[] args) {
