@@ -30,6 +30,23 @@ public class RecursionClasswork {
     return splitArray(nums, pointer + 1, sum1 + nums[pointer], sum2) || splitArray(nums, pointer + 1, sum1, sum2 + nums[pointer]);
   }
 
+  //is it possible to choose a group of some of the ints + all 6's, beginning at the start index, such that the group sums to the given target
+  public static boolean groupSum6(int start, int[] arr, int target, int sum) {
+    //base case
+    if (sum == target) {
+      return true;
+    }
+    if (start == arr.length) {
+      //means we reached the end without being able to partial sum thingy thing thing
+      return false;
+    }
+
+    return (
+      partialSum(start + 1, arr, target, sum + arr[start]) ||     //with current index
+      partialSum(start + 1, arr, target, sum)                     //without current index
+      );
+  }
+
   public static void main(String[] args) {
     //char[] letters = {'a', 'b', 'c'};
     //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
