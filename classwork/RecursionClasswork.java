@@ -16,6 +16,11 @@ public class RecursionClasswork {
       );
   }
 
+  //check if it is possible to split array into two sums
+  public static boolean splitArray(int[] nums) {
+    return splitArray(int[] nums, int pointer, int sum);
+  }
+
   public static void main(String[] args) {
     //char[] letters = {'a', 'b', 'c'};
     //printNoDoubleLetterWords(Integer.parseInt(args[0]), letters);
