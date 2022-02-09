@@ -23,9 +23,11 @@ public class RecursionClasswork {
 
   public static boolean splitArray(int[] nums, int pointer, int sum1, int sum2) {
     //base case
-    if (pointer > nums.length) {
+    if (pointer >= nums.length) {
       return sum1 == sum2;
     }
+
+    return splitArray(nums, pointer + 1, sum1 + nums[pointer], sum2) || splitArray(nums, pointer + 1, sum1, sum2 + nums[pointer]);
   }
 
   public static void main(String[] args) {
@@ -38,6 +40,6 @@ public class RecursionClasswork {
       arr[i] = Integer.parseInt(args[i]);
     }
 
-    System.out.println(partialSum(0, arr, 10, 0));
+    System.out.println(splitArray(arr));
   }
 }
