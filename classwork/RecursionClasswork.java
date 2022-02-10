@@ -70,6 +70,10 @@ public class RecursionClasswork {
     }
   }
 
+  public static boolean groupNoAdj(int start, int[] arr, int target) {
+    return groupNoAdj(start, arr, target, 0, false);
+  }
+
 
   public static void main(String[] args) {
     //char[] letters = {'a', 'b', 'c'};
