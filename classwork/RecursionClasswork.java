@@ -88,7 +88,10 @@ public class RecursionClasswork {
   public static boolean splitOdd10(int index, int[] nums, int sum1, int sum2) {
     //base case
     if (index == nums.length) { //if we reached the end of the array
-
+      return checkIfOneSumIsOddAndIfTheOtherIsAMultipleOf10ButOrderOfTheParametersDoesntMatter(sum1, sum2);
+    } else {
+      return splitOdd10(index + 1, nums, sum1 + nums[index], sum2) ||
+             splitOdd10(index + 1, nums, sum1, sum2 + nums[index]);
     }
   }
 
