@@ -53,8 +53,21 @@ public class RecursionClasswork {
   //such that the group sums to the given target with this additional constraint:
   //If a value in the array is chosen to be in the group, the value immediately
   //following it in the array must not be chosen. (No loops needed.)
-  public static boolean groupNoAdj(int start, int[] nums, int target) {
-    
+  public static boolean groupNoAdj(int start, int[] arr, int target, int sum, boolean exclude) {
+    //base case
+    if (start == arr.length) {
+      //means we reached the end
+      return sum == target;
+    }
+
+    if (exclude) { //include is flag to represent whether current index should be included
+      return groupNoAdj(start + 1, arr, target, sum, false);
+    } else {
+      return (
+        groupNoAdj(start + 1, arr, target, sum + arr[start], true) ||       //with current index (exclude next)
+        groupNoAdj(start + 1, arr, target, sum, false)                      //without current index (do not exclude next)
+        );
+    }
   }
 
 
