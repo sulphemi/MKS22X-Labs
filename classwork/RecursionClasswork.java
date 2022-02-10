@@ -33,12 +33,10 @@ public class RecursionClasswork {
   //is it possible to choose a group of some of the ints + all 6's, beginning at the start index, such that the group sums to the given target
   public static boolean groupSum6(int start, int[] arr, int target, int sum) {
     //base case
-    if (sum == target) {
-      return true;
-    }
+    //can't stop early because all 6's have to be included
     if (start == arr.length) {
-      //means we reached the end without being able to partial sum thingy thing thing
-      return false;
+      //means we reached the end
+      return sum == target;
     }
 
     if (arr[start] == 6) { //check if current element is 6
