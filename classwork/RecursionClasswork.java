@@ -81,8 +81,15 @@ public class RecursionClasswork {
   helper method that takes whatever arguments you like, and make the initial
   call to your recursive helper from splitOdd10(). (No loops needed.)
   */
-  public static boolean splitOdd10(int[] nums) {
-    
+  public static boolean checkIfOneSumIsOddAndIfTheOtherIsAMultipleOf10ButOrderOfTheParametersDoesntMatter(int sum1, int sum2) { //very informative method name
+    return (sum1 % 10 == 0) && (sum2 % 2 != 0) || (sum1 % 2 != 0) && (sum2 % 10 == 0);
+  }
+
+  public static boolean splitOdd10(int index, int[] nums, int sum1, int sum2) {
+    //base case
+    if (index == nums.length) { //if we reached the end of the array
+
+    }
   }
 
 
