@@ -12,7 +12,14 @@ public class QueenBoard {
   }
 
   /***** PRIVATE METHODS *****/
-  // private boolean addQueen() {}
+  private boolean addQueen(int row, int col) {
+    //check if space is valid
+    if (board[row][col] == 0) {
+      
+    } else {
+      return false;
+    }
+  }
   // private boolean removeQueen() {}
   //
   /***** PUBLIC METHODS *****/
