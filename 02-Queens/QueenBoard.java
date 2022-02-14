@@ -72,6 +72,24 @@ public class QueenBoard {
   }
   //
   // public boolean solve() {} //wrapper method
+  public static QueenBoard solve(QueenBoard QB, int row, int column, int placed) { //solver method
+    //base case
+    if (row == QB.board.length) { //means we reached the end
+      return QB;
+    } else {
+      //recurive case
+      //try to add a queen at given location
+      if (QB.addQueen(row, column)) {
+        //adding succeeded
+        for (int i = 0; i < QB.board.length; i++) { //iterate through the columns
+          return solve(QB.deepCopy(), row + 1, i, placed);
+        }
+        return QB;
+      } else { //adding was impossible
+        return QB; //end tree early
+      }
+    }
+  }
   //
   // public int countSolutions() {}
 
@@ -91,7 +109,6 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    qb.addQueen(4, 4);
-    System.out.println(qb);
+    System.out.println(solve(qb, 0, 0, 0));
   }
 }
