@@ -47,14 +47,20 @@ public class QueenBoard {
     }
   }
   // private boolean removeQueen() {}
-  
+
+  private static String padLeft(String str, int target, String pad) {
+    while (str.length() < target) {
+      str = pad + str;
+    }
+    return str;
+  }
   /***** PUBLIC METHODS *****/
   public String toString() {
     String output = "";
 
     for (int i = 0; i < board.length; i++) {
       for (int k = 0; k < board.length; k++) {
-        output += board[i][k];
+        output += padLeft("" + board[i][k], 2, " ");
         output += ' ';
       }
       if (i != board.length - 1) {
