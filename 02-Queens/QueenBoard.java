@@ -15,9 +15,16 @@ public class QueenBoard {
   private boolean addQueen(int row, int col) {
     //check if space is valid
     if (board[row][col] == 0) {
-      
+      //set square as queen
+      board[row][col] = 1;
+      //downwards
+      for (int i = row + 1; i < board.length; i++) {
+        board[i][col] = -1;
+      }
+
+      return true; //success
     } else {
-      return false;
+      return false; //fail
     }
   }
   // private boolean removeQueen() {}
@@ -59,15 +66,7 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    QueenBoard qbclone = qb.deepCopy();
-    System.out.println("qb:");
-    System.out.println(qb.toString());
-    System.out.println("copy:");
-    System.out.println(qbclone);
-    qb.board[0][0] = 5;
-    System.out.println("qb");
+    qb.addQueen(4, 4);
     System.out.println(qb);
-    System.out.println("copy:");
-    System.out.println(qbclone);
   }
 }
