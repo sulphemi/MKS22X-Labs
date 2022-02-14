@@ -22,13 +22,32 @@ public class QueenBoard {
         board[i][col] = -1;
       }
 
+      int i, k;
+      //left diagonal
+      i = row + 1;
+      k = col + 1;
+      while (i < board.length && k < board.length) {
+        board[i][k] = -1;
+        i++;
+        k++;
+      }
+
+      //right diagonal
+      i = row + 1;
+      k = col + 1;
+      while (i < board.length && k >= 0) {
+        board[i][k] = -1;
+        i++;
+        k--;
+      }
+
       return true; //success
     } else {
       return false; //fail
     }
   }
   // private boolean removeQueen() {}
-  //
+  
   /***** PUBLIC METHODS *****/
   public String toString() {
     String output = "";
