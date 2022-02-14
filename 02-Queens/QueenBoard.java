@@ -23,7 +23,7 @@ public class QueenBoard {
       }
 
       int i, k;
-      //left diagonal
+      //right diagonal
       i = row + 1;
       k = col + 1;
       while (i < board.length && k < board.length) {
@@ -32,9 +32,9 @@ public class QueenBoard {
         k++;
       }
 
-      //right diagonal
+      //left diagonal
       i = row + 1;
-      k = col + 1;
+      k = col - 1;
       while (i < board.length && k >= 0) {
         board[i][k] = -1;
         i++;
