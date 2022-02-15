@@ -59,7 +59,7 @@ public class QueenBoard {
     return str;
   }
   /***** PUBLIC METHODS *****/
-  public String toString() {
+  public String toStringDebug() { //prints board literally
     String output = "";
 
     for (int i = 0; i < board.length; i++) {
@@ -69,6 +69,22 @@ public class QueenBoard {
       }
       if (i != board.length - 1) {
         output += '\n'; //newline after row
+      }
+    }
+
+    return output;
+  }
+
+  public String toString() {
+    String output = "";
+
+    for (int i = 0; i < board.length; i++) {
+      for (int k = 0; k < board.length; k++) {
+        output += board[i][k] == 1 ? 'Q' : '_';
+        output += ' ';
+      }
+      if (i != board.length - 1) {
+        output += '\n';
       }
     }
 
