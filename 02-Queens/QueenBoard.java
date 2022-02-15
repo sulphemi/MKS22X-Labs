@@ -1,6 +1,7 @@
 public class QueenBoard {
   /***** FIELDS *****/
-  int[][] board;
+  int[][] board; //2d array representing board
+  int queensAdded; //keeps track of how many queens were added
 
   /***** CONSTRUCTORS *****/
   public QueenBoard(int n) { //initializes the board for size n
@@ -41,6 +42,7 @@ public class QueenBoard {
         k--;
       }
 
+      queensAdded++;
       return true; //success
     } else {
       return false; //fail
