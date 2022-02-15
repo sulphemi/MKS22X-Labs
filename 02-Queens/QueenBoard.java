@@ -82,6 +82,7 @@ public class QueenBoard {
   }
   //
   // public boolean solve() {} //wrapper method
+  /*
   public static QueenBoard solve(QueenBoard QB, int row, int column) { //solver method
     //base case
     if (row == QB.board.length) { //means we reached the end
@@ -103,6 +104,10 @@ public class QueenBoard {
         return QB; //end tree early
       }
     }
+  } */
+
+  public static boolean solve(QueenBoard QB, int row, int column) {
+    
   }
   //
   // public int countSolutions() {}
