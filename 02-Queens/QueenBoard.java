@@ -6,10 +6,12 @@ public class QueenBoard {
   /***** CONSTRUCTORS *****/
   public QueenBoard(int n) { //initializes the board for size n
     board = new int[n][n];
+    queensAdded = 0;
   }
 
-  public QueenBoard(int[][] array) { //note that board will now be linked to array
+  public QueenBoard(int[][] array, int existingQueens) { //note that board will now be linked to array
     board = array;
+    queensAdded = existingQueens;
   }
 
   /***** PRIVATE METHODS *****/
@@ -106,11 +108,25 @@ public class QueenBoard {
     }
   } */
 
-  public static boolean solve(QueenBoard QB, int row, int column) {
+  public static boolean solve(QueenBoard QB, int row) {
     if (row == QB.board.length) {
       return true;
     } else {
-      
+      for (int i = 0; i < QB.board.length; i++) {
+        QueenBoard child = QB.deepCopy();
+        if (child.addQueen(row, i)) {
+          System.out.println(child);
+          if (solve(child, row + 1)) {
+            return true;
+          } else {
+            continue;
+          }
+        } else {
+          continue;
+        }
+      }
+
+      return false;
     }
   }
   //
@@ -126,12 +142,12 @@ public class QueenBoard {
       }
     }
 
-    return new QueenBoard(newBoard);
+    return new QueenBoard(newBoard, queensAdded);
   }
 
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    System.out.println(solve(qb, 0, 0));
+    System.out.println(solve(qb, 0));
   }
 }
