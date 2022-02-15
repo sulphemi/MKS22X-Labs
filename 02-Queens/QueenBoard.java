@@ -90,14 +90,6 @@ public class QueenBoard {
 
     return output;
   }
-
-  private QueenBoard compare(QueenBoard other) {
-    if (other.queensAdded > this.queensAdded) {
-      return other;
-    } else {
-      return this;
-    }
-  }
   //
   // public boolean solve() {} //wrapper method
   /*
