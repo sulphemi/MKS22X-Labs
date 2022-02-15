@@ -107,7 +107,11 @@ public class QueenBoard {
   } */
 
   public static boolean solve(QueenBoard QB, int row, int column) {
-    
+    if (row == QB.board.length) {
+      return true;
+    } else {
+      
+    }
   }
   //
   // public int countSolutions() {}
