@@ -2,6 +2,8 @@ public class QueenBoard {
   /***** FIELDS *****/
   int[][] board; //2d array representing board
   int queensAdded; //keeps track of how many queens were added
+  boolean animated; //whether to bore user with animation
+  int delay; //the wait time between animation frames (in ms)
 
   /***** CONSTRUCTORS *****/
   public QueenBoard(int n) { //initializes the board for size n
@@ -15,7 +17,8 @@ public class QueenBoard {
   }
 
   /***** PRIVATE METHODS *****/
-  private void modifySquare(int row, int col, int increment) { //1 = add queen, -1 = remove
+  private void modifySquare(int row, int col, int increment) {
+    //1 = add queen, -1 = remove
     //set queen square
     board[row][col] += increment;
     //downwards
@@ -100,6 +103,14 @@ public class QueenBoard {
     }
 
     return output;
+  }
+
+  public void setAnimate(boolean newValue) {
+    animated = newValue;
+  }
+
+  public void setDelay(int newDelay) {
+    delay = newDelay;
   }
   //
   // public boolean solve() {} //wrapper method
