@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class QueenBoard {
   /***** FIELDS *****/
   int[][] board; //2d array representing board
@@ -176,6 +178,22 @@ public class QueenBoard {
   //
   // public int countSolutions() {}
 
+  public static boolean listSolutions(ArrayList<QueenBoard> list, QueenBoard QB, int row) {
+    if (row == QB.board.length) {
+      list.add(QB);
+      return true;
+    } else {
+      for (int i = 0; i < QB.board.length; i++) {
+        QueenBoard child = QB.deepCopy();
+        if (child.addQueen(row, i)) {
+          listSolutions(list, child, row + 1);
+        }
+      }
+
+      return false;
+    }
+  }
+
   public QueenBoard deepCopy() {
     //copy board to fresh int[][]
     int[][] newBoard = new int[board.length][board.length];
@@ -192,6 +210,9 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    System.out.println(qb.solve(0));
+    ArrayList<QueenBoard> list = new ArrayList<QueenBoard>();
+    System.out.println((qb.listSolutions(qb, list, 0)));
+    System.out.println(list);
+    System.out.println(list.size());
   }
 }
