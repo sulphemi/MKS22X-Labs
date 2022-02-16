@@ -199,20 +199,7 @@ public class QueenBoard {
 
   /***** MAIN *****/
   public static void main(String[] args) {
-    /*
     QueenBoard qb = new QueenBoard(8);
     System.out.println(qb.solve(0));
-    */
-
-    QueenBoard qb = new QueenBoard(8);
-    System.out.println(qb.toStringDebug());
-
-    System.out.println();
-    qb.addQueen(3,3);
-    System.out.println(qb.toStringDebug());
-
-    System.out.println();
-    System.out.println((qb.removeQueen(3,3)));
-    System.out.println(qb.toStringDebug());
   }
 }
