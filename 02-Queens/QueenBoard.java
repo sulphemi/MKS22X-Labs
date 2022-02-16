@@ -78,7 +78,7 @@ public class QueenBoard {
 
     for (int i = 0; i < board.length; i++) {
       for (int k = 0; k < board.length; k++) {
-        output += padLeft("" + board[i][k], 2, " ");
+        output += padLeft("" + board[i][k], 3, " ");
         output += ' ';
       }
       if (i != board.length - 1) {
@@ -138,7 +138,7 @@ public class QueenBoard {
     }
   } */
 
-  public static boolean solve(QueenBoard QB, int row) {
+  public static boolean oldSolve(QueenBoard QB, int row) {
     if (row == QB.board.length) {
       return true;
     } else {
@@ -146,10 +146,32 @@ public class QueenBoard {
         QueenBoard child = QB.deepCopy();
         if (child.addQueen(row, i)) {
           System.out.println(child);
-          if (solve(child, row + 1)) {
+          if (oldSolve(child, row + 1)) {
             return true;
           } else {
             continue;
+          }
+        } else {
+          continue;
+        }
+      }
+
+      return false;
+    }
+  }
+
+  public boolean solve(int row) {
+    if (row == board.length) {
+      return true;
+    } else {
+      for (int i = 0; i < board.length; i++) {
+        if (addQueen(row, i)) {
+          System.out.println(this.toStringDebug());
+          System.out.println();
+          if (solve(row + 1)) {
+            return true;
+          } else {
+            removeQueen(row, i);
           }
         } else {
           continue;
@@ -178,6 +200,6 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    System.out.println(solve(qb, 0));
+    System.out.println(qb.solve(0));
   }
 }
