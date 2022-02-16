@@ -15,42 +15,53 @@ public class QueenBoard {
   }
 
   /***** PRIVATE METHODS *****/
+  private void modifySquare(int row, int col, int increment) { //1 = add queen, -1 = remove
+    //set queen square
+    board[row][col] += increment;
+    //downwards
+    for (int i = row + 1; i < board.length; i++) {
+      board[i][col] -= increment;
+    }
+
+    int i, k;
+    //right diagonal
+    i = row + 1;
+    k = col + 1;
+    while (i < board.length && k < board.length) {
+      board[i][k] -= increment;
+      i++;
+      k++;
+    }
+
+    //left diagonal
+    i = row + 1;
+    k = col - 1;
+    while (i < board.length && k >= 0) {
+      board[i][k] -= increment;
+      i++;
+      k--;
+    }
+  }
+
   private boolean addQueen(int row, int col) {
-    //check if space is valid
     if (board[row][col] == 0) {
-      //set square as queen
-      board[row][col] = 1;
-      //downwards
-      for (int i = row + 1; i < board.length; i++) {
-        board[i][col] = -1;
-      }
-
-      int i, k;
-      //right diagonal
-      i = row + 1;
-      k = col + 1;
-      while (i < board.length && k < board.length) {
-        board[i][k] = -1;
-        i++;
-        k++;
-      }
-
-      //left diagonal
-      i = row + 1;
-      k = col - 1;
-      while (i < board.length && k >= 0) {
-        board[i][k] = -1;
-        i++;
-        k--;
-      }
-
+      modifySquare(row, col, 1);
       queensAdded++;
       return true; //success
     } else {
       return false; //fail
     }
   }
-  // private boolean removeQueen() {}
+
+  private boolean removeQueen(int row, int col) {
+    if (board[row][col] != 1) {
+      modifySquare(row, col, -1);
+      queensAdded--;
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   private static String padLeft(String str, int target, String pad) {
     while (str.length() < target) {
