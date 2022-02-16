@@ -148,11 +148,7 @@ public class QueenBoard {
           System.out.println(child);
           if (oldSolve(child, row + 1)) {
             return true;
-          } else {
-            continue;
           }
-        } else {
-          continue;
         }
       }
 
@@ -166,15 +162,11 @@ public class QueenBoard {
     } else {
       for (int i = 0; i < board.length; i++) {
         if (addQueen(row, i)) {
-          System.out.println(this.toStringDebug());
-          System.out.println();
           if (solve(row + 1)) {
             return true;
           } else {
             removeQueen(row, i);
           }
-        } else {
-          continue;
         }
       }
 
