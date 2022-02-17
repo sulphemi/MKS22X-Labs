@@ -114,31 +114,6 @@ public class QueenBoard {
   public void setDelay(int newDelay) {
     delay = newDelay;
   }
-  //
-  // public boolean solve() {} //wrapper method
-  /*
-  public static QueenBoard solve(QueenBoard QB, int row, int column) { //solver method
-    //base case
-    if (row == QB.board.length) { //means we reached the end
-      System.out.println("reached end");
-      return QB;
-    } else {
-      //recurive case
-      //try to add a queen at given location
-      if (QB.addQueen(row, column)) {
-        //adding succeeded
-        for (int i = 0; i < QB.board.length; i++) { //iterate through the columns
-          System.out.println("iterating for i = " + i);
-          System.out.println(QB);
-          return QB.compare(solve(QB.deepCopy(), row + 1, i));
-        }
-        return QB;
-      } else { //adding was impossible
-        System.out.println("add failed");
-        return QB; //end tree early
-      }
-    }
-  } */
 
   public static boolean oldSolve(QueenBoard QB, int row) {
     if (row == QB.board.length) {
