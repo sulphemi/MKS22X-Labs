@@ -158,11 +158,11 @@ public class QueenBoard {
       return true;
     } else {
       for (int i = 0; i < board.length; i++) {
-        if (addQueen(row, i)) {
-          if (solve(row + 1)) {
+        if (addQueenWithAnimation(row, i)) {
+          if (solveWithAnimation(row + 1)) {
             return true;
           } else {
-            removeQueen(row, i);
+            removeQueenWithAnimation(row, i);
           }
         }
       }
