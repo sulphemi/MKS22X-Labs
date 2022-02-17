@@ -152,8 +152,26 @@ public class QueenBoard {
       return false;
     }
   }
-  //
-  // public int countSolutions() {}
+
+  public int countSolutions(int row) {
+    int count = 0;
+
+    if (row == board.length) {
+      return true;
+    } else {
+      for (int i = 0; i < board.length; i++) {
+        if (addQueen(row, i)) {
+          if (solve(row + 1)) {
+            return true;
+          } else {
+            removeQueen(row, i);
+          }
+        }
+      }
+
+      return false;
+    }
+  }
 
   public static boolean listSolutions(ArrayList<QueenBoard> list, QueenBoard QB, int row) {
     if (row == QB.board.length) {
