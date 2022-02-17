@@ -161,10 +161,7 @@ public class QueenBoard {
     } else {
       for (int i = 0; i < board.length; i++) {
         if (addQueen(row, i)) {
-          System.out.println(this);
-          System.out.println();
             count += countSolutions(row + 1);
-          //} else {
             removeQueen(row, i);
           }
         }
