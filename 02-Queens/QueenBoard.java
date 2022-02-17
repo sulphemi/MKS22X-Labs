@@ -153,6 +153,24 @@ public class QueenBoard {
     }
   }
 
+  public boolean solveWithAnimation(int row) {
+    if (row == board.length) {
+      return true;
+    } else {
+      for (int i = 0; i < board.length; i++) {
+        if (addQueen(row, i)) {
+          if (solve(row + 1)) {
+            return true;
+          } else {
+            removeQueen(row, i);
+          }
+        }
+      }
+
+      return false;
+    }
+  }
+
   public int countSolutions(int row) {
     int count = 0;
 
