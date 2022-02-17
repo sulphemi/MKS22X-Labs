@@ -97,7 +97,9 @@ public class QueenBoard {
     for (int i = 0; i < board.length; i++) {
       for (int k = 0; k < board.length; k++) {
         output += board[i][k] == 1 ? 'Q' : '_';
-        output += ' ';
+        if (i != board.length) {
+          output += ' ';
+        }
       }
       if (i != board.length - 1) {
         output += '\n';
@@ -185,9 +187,7 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    ArrayList<QueenBoard> list = new ArrayList<QueenBoard>();
-    System.out.println((qb.listSolutions(qb, list, 0)));
-    System.out.println(list);
-    System.out.println(list.size());
+    qb.solve(0);
+    System.out.println(qb);
   }
 }
