@@ -157,21 +157,19 @@ public class QueenBoard {
     int count = 0;
 
     if (row == board.length) {
-      return true;
+      return 1;
     } else {
       for (int i = 0; i < board.length; i++) {
         if (addQueen(row, i)) {
-          if (solve(row + 1)) {
-            return true;
+            count += countSolutions(row + 1);
           } else {
             removeQueen(row, i);
           }
         }
       }
 
-      return false;
+      return count;
     }
-  }
 
   public static boolean listSolutions(ArrayList<QueenBoard> list, QueenBoard QB, int row) {
     if (row == QB.board.length) {
@@ -205,7 +203,6 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    qb.solve(0);
-    System.out.println(qb);
+    System.out.println(qb.countSolutions(0));
   }
 }
