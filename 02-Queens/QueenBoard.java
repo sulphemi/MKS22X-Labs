@@ -164,7 +164,7 @@ public class QueenBoard {
           System.out.println(this);
           System.out.println();
             count += countSolutions(row + 1);
-          } else {
+          //} else {
             removeQueen(row, i);
           }
         }
