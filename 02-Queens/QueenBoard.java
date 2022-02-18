@@ -58,18 +58,6 @@ public class QueenBoard {
     }
   }
 
-  private boolean addQueenWithAnimation(int row, int col) {
-    if (board[row][col] == 0) {
-      Text.wait(delay);
-      modifySquare(row, col, 1);
-      queensAdded++;
-      display();
-      return true; //success
-    } else {
-      return false; //fail
-    }
-  }
-
   private boolean removeQueen(int row, int col) {
     if (board[row][col] == 1) {
       modifySquare(row, col, -1);
@@ -196,7 +184,7 @@ public class QueenBoard {
       return true;
     } else {
       for (int i = 0; i < board.length; i++) {
-        if (addQueenWithAnimation(row, i)) {
+        if (addQueen(row, i)) {
           if (solveWithAnimation(row + 1)) {
             return true;
           } else {
