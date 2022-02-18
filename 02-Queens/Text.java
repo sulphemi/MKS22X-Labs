@@ -18,4 +18,8 @@ public class Text{
     catch (InterruptedException e) {
     }
   }
+
+  public static void clear() {
+    System.out.print(CLEAR_SCREEN);
+  }
 }
