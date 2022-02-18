@@ -71,14 +71,15 @@ public class QueenBoard {
   }
 
   /***** UTILITIES *****/
-  private void display() { //essentially prints a readable toDebugString
+  private void display(int row) { //row refers to the row of the latest queen placed
+    //essentially prints a readable toDebugString
     Text.wait(delay);
     Text.clear();
     String output = "";
 
     for (int i = 0; i < board.length; i++) {
       for (int k = 0; k < board.length; k++) {
-        if (board[i][k] == 0) { //square is blank
+        if (board[i][k] == 0 && i > row) { //square is blank AND there is no queen on this row
           output += '_';
         } else if (board[i][k] > 0) { //square is a queen
           output += 'Q';
@@ -95,6 +96,7 @@ public class QueenBoard {
     }
 
     System.out.println(output);
+    System.out.println("Queen count: " + (row + 1));
   }
 
   private static String padLeft(String str, int target, String pad) {
@@ -224,7 +226,7 @@ public class QueenBoard {
     } else {
       for (int i = 0; i < board.length; i++) {
         if (addQueen(row, i)) {
-          display(); //display once after changing the board
+          display(row); //display once after changing the board
           if (solveWithAnimation(row + 1)) {
             return true;
           } else {
