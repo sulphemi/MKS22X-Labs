@@ -60,7 +60,6 @@ public class QueenBoard {
 
   private boolean addQueenWithAnimation(int row, int col) {
     if (board[row][col] == 0) {
-      display();
       Text.wait(delay);
       modifySquare(row, col, 1);
       queensAdded++;
@@ -88,6 +87,32 @@ public class QueenBoard {
     return str;
   }
   /***** PUBLIC METHODS *****/
+  public void display() { //essentially prints a readable toDebugString
+    Text.wait(delay);
+    Text.clear();
+    String output = "";
+
+    for (int i = 0; i < board.length; i++) {
+      for (int k = 0; k < board.length; k++) {
+        if (board[i][k] == 0) { //square is blank
+          output += '_';
+        } else if (board[i][k] > 0) { //square is a queen
+          output += 'Q';
+        } else { //square is invalid
+          output += 'X';
+        }
+        if (i != board.length) {
+          output += ' ';
+        }
+      }
+      if (i != board.length - 1) {
+        output += '\n';
+      }
+    }
+
+    System.out.println(output);
+  }
+
   public String toStringDebug() { //prints board literally
     String output = "";
 
@@ -175,7 +200,7 @@ public class QueenBoard {
           if (solveWithAnimation(row + 1)) {
             return true;
           } else {
-            removeQueenWithAnimation(row, i);
+            removeQueen(row, i);
           }
         }
       }
@@ -233,6 +258,7 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    System.out.println(qb.countSolutions(0));
+    qb.setDelay(500);
+    System.out.println(qb.solveWithAnimation(0));
   }
 }
