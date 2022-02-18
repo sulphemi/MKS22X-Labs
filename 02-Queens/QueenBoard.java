@@ -246,6 +246,11 @@ public class QueenBoard {
 
   /***** WRAPPERS *****/
   public boolean solve() {
+    //throw an exception if board is not empty
+    if (queensAdded != 0) {
+      throw new IllegalStateException("The board is not empty! I'm not Magnus Carlsen, I don't know how to solve a non-empty board!");
+    }
+
     if (animated) {
       return solveWithAnimation(0);
     } else {
@@ -256,6 +261,10 @@ public class QueenBoard {
   }
 
   public int countSolutions() {
+    if (queensAdded != 0) {
+      throw new IllegalStateException("Start with an empty board! Also I like your hat.");
+    }
+
     return countSolutions(0);
   }
 
