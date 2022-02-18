@@ -117,6 +117,10 @@ public class QueenBoard {
     return new QueenBoard(newBoard, queensAdded);
   }
 
+  private static int parse(String str) {
+    return Integer.parseInt(str);
+  }
+
   /***** DEPRECIATED *****/
   private static boolean oldSolve(QueenBoard QB, int row) {
     if (row == QB.board.length) {
@@ -219,8 +223,8 @@ public class QueenBoard {
       return true;
     } else {
       for (int i = 0; i < board.length; i++) {
-        display(); //displays once before changing the board
         if (addQueen(row, i)) {
+          display(); //display once after changing the board
           if (solveWithAnimation(row + 1)) {
             return true;
           } else {
@@ -275,9 +279,22 @@ public class QueenBoard {
   }
 
   /***** MAIN *****/
-  public static void main(String[] args) {
-    QueenBoard qb = new QueenBoard(8);
-    qb.setDelay(100);
-    System.out.println(qb.solveWithAnimation(0));
+  public static void main(String[] args) { //usage: java QueenBoard *size* (delay)
+    try {
+      int size = parse(args[0]);
+      QueenBoard QB = new QueenBoard(size);
+
+      if (args.length > 1) {
+        int delay = parse(args[1]);
+        QB.setAnimate(true);
+        QB.setDelay(delay);
+
+        QB.solve();
+      }
+    } catch (NumberFormatException NFE) {
+      System.out.println("Il y a un problème avec votre parametres.");
+    } catch (ArrayIndexOutOfBoundsException AIOOE) {
+      System.out.println("Donnez au moins UNE parametre.");
+    }
   }
 }
