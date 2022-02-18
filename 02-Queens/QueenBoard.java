@@ -184,6 +184,7 @@ public class QueenBoard {
       return true;
     } else {
       for (int i = 0; i < board.length; i++) {
+        display(); //displays once before changing the board
         if (addQueen(row, i)) {
           if (solveWithAnimation(row + 1)) {
             return true;
@@ -246,7 +247,7 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
-    qb.setDelay(500);
+    qb.setDelay(100);
     System.out.println(qb.solveWithAnimation(0));
   }
 }
