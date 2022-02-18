@@ -281,20 +281,24 @@ public class QueenBoard {
   /***** MAIN *****/
   public static void main(String[] args) { //usage: java QueenBoard *size* (delay)
     try {
-      int size = parse(args[0]);
+      int size;
+      if (args.length > 0) {
+        size = parse(args[0]);
+      } else {
+        size = 8;
+      }
+
       QueenBoard QB = new QueenBoard(size);
 
       if (args.length > 1) {
         int delay = parse(args[1]);
         QB.setAnimate(true);
         QB.setDelay(delay);
-
-        QB.solve();
       }
+
+      System.out.println(QB.solve());
     } catch (NumberFormatException NFE) {
       System.out.println("Il y a un problème avec votre parametres.");
-    } catch (ArrayIndexOutOfBoundsException AIOOE) {
-      System.out.println("Donnez au moins UNE parametre.");
     }
   }
 }
