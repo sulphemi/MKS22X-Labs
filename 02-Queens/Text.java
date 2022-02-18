@@ -20,6 +20,7 @@ public class Text{
   }
 
   public static void clear() {
+    System.out.print(go(0,0));
     System.out.print(CLEAR_SCREEN);
   }
 }
