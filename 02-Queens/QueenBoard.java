@@ -2,10 +2,10 @@ import java.util.ArrayList;
 
 public class QueenBoard {
   /***** FIELDS *****/
-  int[][] board; //2d array representing board
-  int queensAdded; //keeps track of how many queens were added
-  boolean animated; //whether to bore user with animation
-  int delay; //the wait time between animation frames (in ms)
+  private int[][] board; //2d array representing board
+  private int queensAdded; //keeps track of how many queens were added
+  private boolean animated; //whether to bore user with animation
+  private int delay; //the wait time between animation frames (in ms)
 
   /***** CONSTRUCTORS *****/
   public QueenBoard(int n) { //initializes the board for size n
