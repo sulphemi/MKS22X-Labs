@@ -11,9 +11,11 @@ public class QueenBoard {
   public QueenBoard(int n) { //initializes the board for size n
     board = new int[n][n];
     queensAdded = 0;
+    animated = false;
+    delay = 0;
   }
 
-  public QueenBoard(int[][] array, int existingQueens) { //note that board will now be linked to array
+  private QueenBoard(int[][] array, int existingQueens) { //note that board will now be linked to array
     board = array;
     queensAdded = existingQueens;
   }
@@ -68,14 +70,8 @@ public class QueenBoard {
     }
   }
 
-  private static String padLeft(String str, int target, String pad) {
-    while (str.length() < target) {
-      str = pad + str;
-    }
-    return str;
-  }
-  /***** PUBLIC METHODS *****/
-  public void display() { //essentially prints a readable toDebugString
+  /***** UTILITIES *****/
+  private void display() { //essentially prints a readable toDebugString
     Text.wait(delay);
     Text.clear();
     String output = "";
@@ -86,7 +82,7 @@ public class QueenBoard {
           output += '_';
         } else if (board[i][k] > 0) { //square is a queen
           output += 'Q';
-        } else { //square is invalid
+        } else { //square is invalid (represent with an X)
           output += 'X';
         }
         if (i != board.length) {
@@ -101,6 +97,62 @@ public class QueenBoard {
     System.out.println(output);
   }
 
+  private static String padLeft(String str, int target, String pad) {
+    while (str.length() < target) {
+      str = pad + str;
+    }
+    return str;
+  }
+
+  private QueenBoard deepCopy() {
+    //copy board to fresh int[][]
+    int[][] newBoard = new int[board.length][board.length];
+
+    for (int i = 0; i < board.length; i++) {
+      for (int k = 0; k < board.length; k++) {
+        newBoard[i][k] = board[i][k];
+      }
+    }
+
+    return new QueenBoard(newBoard, queensAdded);
+  }
+
+  /***** DEPRECIATED *****/
+  private static boolean oldSolve(QueenBoard QB, int row) {
+    if (row == QB.board.length) {
+      return true;
+    } else {
+      for (int i = 0; i < QB.board.length; i++) {
+        QueenBoard child = QB.deepCopy();
+        if (child.addQueen(row, i)) {
+          System.out.println(child);
+          if (oldSolve(child, row + 1)) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    }
+  }
+
+  private static boolean listSolutions(ArrayList<QueenBoard> list, QueenBoard QB, int row) {
+    if (row == QB.board.length) {
+      list.add(QB);
+      return true;
+    } else {
+      for (int i = 0; i < QB.board.length; i++) {
+        QueenBoard child = QB.deepCopy();
+        if (child.addQueen(row, i)) {
+          listSolutions(list, child, row + 1);
+        }
+      }
+
+      return false;
+    }
+  }
+
+  /***** PUBLIC METHODS *****/
   public String toStringDebug() { //prints board literally
     String output = "";
 
@@ -121,14 +173,14 @@ public class QueenBoard {
     String output = "";
 
     for (int i = 0; i < board.length; i++) {
-      for (int k = 0; k < board.length; k++) {
+      for (int k = 0; k < board.length; k++) { //loop through 2D array
         output += board[i][k] == 1 ? 'Q' : '_';
         if (i != board.length) {
-          output += ' ';
+          output += ' '; //space between
         }
       }
       if (i != board.length - 1) {
-        output += '\n';
+        output += '\n'; //newline after each row
       }
     }
 
@@ -143,39 +195,22 @@ public class QueenBoard {
     delay = newDelay;
   }
 
-  public static boolean oldSolve(QueenBoard QB, int row) {
-    if (row == QB.board.length) {
-      return true;
-    } else {
-      for (int i = 0; i < QB.board.length; i++) {
-        QueenBoard child = QB.deepCopy();
-        if (child.addQueen(row, i)) {
-          System.out.println(child);
-          if (oldSolve(child, row + 1)) {
-            return true;
-          }
-        }
-      }
-
-      return false;
-    }
-  }
-
+  /***** SOLVE METHODS *****/
   public boolean solve(int row) {
-    if (row == board.length) {
+    if (row == board.length) { //means we reached end and found solution
       return true;
     } else {
-      for (int i = 0; i < board.length; i++) {
-        if (addQueen(row, i)) {
-          if (solve(row + 1)) {
+      for (int i = 0; i < board.length; i++) { //loop through next row
+        if (addQueen(row, i)) { //check if queen can be placed
+          if (solve(row + 1)) { //call on next row
             return true;
           } else {
-            removeQueen(row, i);
+            removeQueen(row, i); //remove queen and move to next branch
           }
         }
       }
 
-      return false;
+      return false; //means we didnt find solution
     }
   }
 
@@ -214,35 +249,6 @@ public class QueenBoard {
 
       return count;
     }
-
-  public static boolean listSolutions(ArrayList<QueenBoard> list, QueenBoard QB, int row) {
-    if (row == QB.board.length) {
-      list.add(QB);
-      return true;
-    } else {
-      for (int i = 0; i < QB.board.length; i++) {
-        QueenBoard child = QB.deepCopy();
-        if (child.addQueen(row, i)) {
-          listSolutions(list, child, row + 1);
-        }
-      }
-
-      return false;
-    }
-  }
-
-  public QueenBoard deepCopy() {
-    //copy board to fresh int[][]
-    int[][] newBoard = new int[board.length][board.length];
-
-    for (int i = 0; i < board.length; i++) {
-      for (int k = 0; k < board.length; k++) {
-        newBoard[i][k] = board[i][k];
-      }
-    }
-
-    return new QueenBoard(newBoard, queensAdded);
-  }
 
   /***** WRAPPERS *****/
   public boolean solve() {
