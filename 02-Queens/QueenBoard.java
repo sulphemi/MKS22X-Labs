@@ -202,7 +202,7 @@ public class QueenBoard {
   }
 
   /***** SOLVE METHODS *****/
-  public boolean solve(int row) {
+  private boolean solve(int row) {
     if (row == board.length) { //means we reached end and found solution
       return true;
     } else {
@@ -220,7 +220,7 @@ public class QueenBoard {
     }
   }
 
-  public boolean solveWithAnimation(int row) {
+  private boolean solveWithAnimation(int row) {
     if (row == board.length) {
       return true;
     } else {
@@ -239,7 +239,7 @@ public class QueenBoard {
     }
   }
 
-  public int countSolutions(int row) {
+  private int countSolutions(int row) {
     int count = 0;
 
     if (row == board.length) {
