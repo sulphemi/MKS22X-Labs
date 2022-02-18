@@ -244,6 +244,21 @@ public class QueenBoard {
     return new QueenBoard(newBoard, queensAdded);
   }
 
+  /***** WRAPPERS *****/
+  public boolean solve() {
+    if (animated) {
+      return solveWithAnimation(0);
+    } else {
+      return solve(0);
+    }
+    //Mr.K will yell at me if i do this but alternate one-liner:
+    //return animated ? solveWithAnimation(0) : solve(0);
+  }
+
+  public int countSolutions() {
+    return countSolutions(0);
+  }
+
   /***** MAIN *****/
   public static void main(String[] args) {
     QueenBoard qb = new QueenBoard(8);
