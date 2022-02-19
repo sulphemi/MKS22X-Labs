@@ -9,17 +9,19 @@ public class ReadFile {
       String txt = "";
       int lines = 0;
       char[][] maze;
+      int mazeLength;
 
       do {
         txt += steve.nextLine();
         lines++;
       } while (steve.hasNextLine());
 
-      maze = new char[lines][txt.length() / lines];
+      mazeLength = txt.length() / lines;
+      maze = new char[lines][mazeLength];
 
       for (int i = 0; i < lines; i++) {
-        for (int k = 0; k < maze[0].length; k++) {
-          maze[i][k] = txt.charAt(k + (maze[0].length * i));
+        for (int k = 0; k < mazeLength; k++) {
+          maze[i][k] = txt.charAt(k + (mazeLength * i));
         }
       }
 
