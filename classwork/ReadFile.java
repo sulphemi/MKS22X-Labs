@@ -7,13 +7,13 @@ public class ReadFile {
       File file = new File("Maze1.txt");
       Scanner steve = new Scanner(file);
       String txt = "";
-      int lines = 1;
+      int lines = 0;
       char[][] maze;
 
-      while (steve.hasNextLine()) {
+      do {
         txt += steve.nextLine();
         lines++;
-      }
+      } while (steve.hasNextLine());
 
       maze = new char[lines][txt.length() / lines];
 
@@ -24,13 +24,22 @@ public class ReadFile {
       }
 
 
+
+      System.out.println("Lines = " + lines);
+      System.out.println(toString(maze));
+    }
+
+    private static String toString(char[][] array) {
       String output = "";
-      for (int i = 0; i < maze.length; i++) {
-        for (int k = 0; k < maze[0].length; k++) {
-          output += maze[i][k];
+      for (int i = 0; i < array.length; i++) {
+        for (int k = 0; k < array[0].length; k++) {
+          output += array[i][k];
         }
-        output += '\n';
+        if (i != array.length - 1) {
+          output += '\n';
+        }
       }
-      System.out.println(output);
+
+      return output;
     }
   }
