@@ -20,8 +20,26 @@ public class Maze{
   Some text editors always include a newline at the end of a file, but that is not always present.
   Make sure your file reading is able to handle this.
   */
-  public Maze(String filename) throws FileNotFoundException{
-    //COMPLETE CONSTRUCTOR
+  public Maze(String filename) throws IOException {
+    BufferedReader bob = new BufferedReader(new FileReader(filename));
+    String txt = ""; //string representation of the file
+    int lines = 0;
+    char[][] maze;
+    int mazeLength;
+
+    do {
+      txt += bob.readLine(); //read line into string
+      lines++;
+    } while (bob.ready()); //there exists next line
+
+    mazeLength = txt.length() / lines;
+    maze = new char[lines][mazeLength];
+
+    for (int i = 0; i < lines; i++) {
+      for (int k = 0; k < mazeLength; k++) {
+        maze[i][k] = txt.charAt(k + (mazeLength * i));
+      }
+    }
   }
 
   private void wait(int millis){
