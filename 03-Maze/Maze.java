@@ -120,6 +120,7 @@ public class Maze{
       //base case: reached end
       return moves;
     } else {
+      maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
       if (valid(row + 1, col)) {
         solve(row + 1, col);
