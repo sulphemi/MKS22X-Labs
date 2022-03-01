@@ -119,24 +119,16 @@ public class Maze{
     if (maze[row][col] == 'E') {
       //base case: reached end
       return moves;
+    } else if (! valid(row, col)){
+      //we are standing on a bad bad square
+      return -1;
     } else {
       maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
-      if (valid(row + 1, col)) {
-        solve(row + 1, col, moves);
-      }
-
-      if (valid(row, col + 1)) {
-        solve(row, col + 1, moves);
-      }
-
-      if (valid(row + 1, col)) {
-        solve(row + 1, col, moves);
-      }
-
-      if (valid(row, col - 1)) {
-        solve(row, col - 1, moves);
-      }
+      solve(row + 1, col, moves);
+      solve(row, col + 1, moves);
+      solve(row + 1, col, moves);
+      solve(row, col - 1, moves);
 
       //we reached the end so backtrack
     }
