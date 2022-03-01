@@ -24,7 +24,6 @@ public class Maze{
     BufferedReader bob = new BufferedReader(new FileReader(filename));
     String txt = ""; //string representation of the file
     int lines = 0;
-    char[][] maze;
     int mazeLength;
 
     while (bob.ready()) {
@@ -72,7 +71,7 @@ public class Maze{
       for (int k = 0; k < maze[0].length; k++) {
         output += maze[i][k];
       }
-      if (i != array.length - 1) {
+      if (i != maze.length - 1) {
         output += '\n';
       }
     }
@@ -84,15 +83,15 @@ public class Maze{
   Note the helper function has the same name, but different parameters.
   Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
   */
-  public int solve(){
-    //only clear the terminal if you are running animation
-    if(animate){
-      clearTerminal();
-    }
-    //start solving at the location of the s.
-    return solve(startRow,startCol);
-
-  }
+  // public int solve(){
+  //   //only clear the terminal if you are running animation
+  //   if(animate){
+  //     clearTerminal();
+  //   }
+  //   //start solving at the location of the s.
+  //   return solve(startRow,startCol);
+  //
+  // }
 
   /*
   Recursive Solve function:
@@ -111,6 +110,7 @@ public class Maze{
   private int solve(int row, int col, int moves) { //you can add more parameters since this is private
     //automatic animation! You are welcome.
     if(animate){
+      clearTerminal();
       gotoTop();
       System.out.println(this);
       wait(50);
@@ -123,23 +123,22 @@ public class Maze{
       maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
       if (valid(row + 1, col)) {
-        solve(row + 1, col);
+        solve(row + 1, col, moves);
       }
 
       if (valid(row, col + 1)) {
-        solve(row, col + 1);
+        solve(row, col + 1, moves);
       }
 
       if (valid(row + 1, col)) {
-        solve(row + 1, col);
+        solve(row + 1, col, moves);
       }
 
       if (valid(row, col - 1)) {
-        solve(row, col - 1);
+        solve(row, col - 1, moves);
       }
 
       //we reached the end so backtrack
-
     }
 
     //COMPLETE SOLVE
@@ -150,7 +149,10 @@ public class Maze{
     return !(maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
   }
 
-  public static void main(String[] args) {
-    Maze something = new Maze("Maze1.txt");
+  public static void main(String[] args) throws Exception {
+    Maze something = new Maze("/Users/jing/Documents/MKS22X-Labs/classwork/Maze1.txt");
+    assert something != null;
+    something.setAnimate(true);
+    something.solve(7, 1, 0);
   }
 }
