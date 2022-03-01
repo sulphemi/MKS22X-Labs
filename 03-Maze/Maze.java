@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 public class Maze{
-  private char[][]maze;
+  private char[][] maze;
   private boolean animate;//false by default
   private int startRow,startCol;
 
@@ -116,15 +116,40 @@ public class Maze{
       wait(50);
     }
 
-    if (maze[row, col] == 'E') {
+    if (maze[row][col] == 'E') {
       //base case: reached end
       return moves;
     } else {
-      //recursive case: try to call self on next squares
+      //recursive case: try to call self on surrounding squares
+      if (valid(row + 1, col)) {
+        solve(row + 1, col);
+      }
+
+      if (valid(row, col + 1)) {
+        solve(row, col + 1);
+      }
+
+      if (valid(row + 1, col)) {
+        solve(row + 1, col);
+      }
+
+      if (valid(row, col - 1)) {
+        solve(row, col - 1);
+      }
+
+      //we reached the end so backtrack
 
     }
 
     //COMPLETE SOLVE
     return -1; //so it compiles
+  }
+
+  private boolean valid(int row, int col) {
+    return !(maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
+  }
+
+  public static void main(String[] args) {
+    Maze something = new Maze("Maze1.txt");
   }
 }
