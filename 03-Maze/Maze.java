@@ -27,10 +27,10 @@ public class Maze{
     char[][] maze;
     int mazeLength;
 
-    do {
+    while (bob.ready()) {
       txt += bob.readLine(); //read line into string
       lines++;
-    } while (bob.ready()); //there exists next line
+    }
 
     mazeLength = txt.length() / lines;
     maze = new char[lines][mazeLength];
