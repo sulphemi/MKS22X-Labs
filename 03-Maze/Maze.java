@@ -108,12 +108,20 @@ public class Maze{
   All visited spots that were not part of the solution are changed to '.'
   All visited spots that are part of the solution are changed to '@'
   */
-  private int solve(int row, int col){ //you can add more parameters since this is private
+  private int solve(int row, int col, int moves) { //you can add more parameters since this is private
     //automatic animation! You are welcome.
     if(animate){
       gotoTop();
       System.out.println(this);
       wait(50);
+    }
+
+    if (maze[row, col] == 'E') {
+      //base case: reached end
+      return moves;
+    } else {
+      //recursive case: try to call self on next squares
+
     }
 
     //COMPLETE SOLVE
