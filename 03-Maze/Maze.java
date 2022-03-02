@@ -137,6 +137,8 @@ public class Maze{
 
       returnVal = solve(row, col - 1, moves + 1);
       if (returnVal > -1) {return returnVal + 1;}
+
+      maze[row][col] = '.';
     }
 
     //COMPLETE SOLVE
