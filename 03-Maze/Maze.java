@@ -107,7 +107,7 @@ public class Maze{
   All visited spots that were not part of the solution are changed to '.'
   All visited spots that are part of the solution are changed to '@'
   */
-  private int solve(int row, int col, int moves) { //you can add more parameters since this is private
+  private int solve(int row, int col) { //you can add more parameters since this is private
     //automatic animation! You are welcome.
     if(animate){
       clearTerminal();
@@ -126,20 +126,20 @@ public class Maze{
       maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
       int returnVal;
-      returnVal = solve(row + 1, col, moves + 1);
+      returnVal = solve(row + 1, col);
       if (returnVal > -1) {return returnVal + 1;}
 
-      returnVal = solve(row, col + 1, moves + 1);
+      returnVal = solve(row, col + 1);
       if (returnVal > -1) {return returnVal + 1;}
 
-      returnVal = solve(row - 1, col, moves + 1);
+      returnVal = solve(row - 1, col);
       if (returnVal > -1) {return returnVal + 1;}
 
-      returnVal = solve(row, col - 1, moves + 1);
+      returnVal = solve(row, col - 1);
       if (returnVal > -1) {return returnVal + 1;}
 
       //when we get to this point it means we have run out of places to go (dead end)
-      maze[row][col] = '.';
+      maze[row][col] = '.'; //mark as dead end
       return -1; //didnt find solution
     }
   }
