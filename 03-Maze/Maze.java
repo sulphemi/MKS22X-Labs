@@ -119,26 +119,35 @@ public class Maze{
     if (maze[row][col] == 'E') {
       //base case: reached end
       return moves;
-    } else if (! valid(row, col)){
+    } else if (invalid(row, col)){
       //we are standing on a bad bad square
       return -1;
     } else {
       maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
-      solve(row + 1, col, moves);
-      solve(row, col + 1, moves);
-      solve(row + 1, col, moves);
-      solve(row, col - 1, moves);
+      int returnVal;
+      returnVal = solve(row + 1, col, moves + 1);
+      if (returnVal > 0) {return returnVal;}
+
+      returnVal = solve(row, col + 1, moves + 1);
+      if (returnVal > 0) {return returnVal;}
+
+      returnVal = solve(row + 1, col, moves + 1);
+      if (returnVal > 0) {return returnVal;}
+
+      returnVal = solve(row, col - 1, moves + 1);
+      if (returnVal > 0) {return returnVal;}
 
       //we reached the end so backtrack
+      System.out.println("bonk! " + row + " " + col);
     }
 
     //COMPLETE SOLVE
     return -1; //so it compiles
   }
 
-  private boolean valid(int row, int col) {
-    return !(maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
+  private boolean invalid(int row, int col) {
+    return (maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
   }
 
   public static void main(String[] args) throws Exception {
