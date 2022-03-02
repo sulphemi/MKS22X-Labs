@@ -118,28 +118,25 @@ public class Maze{
 
     if (maze[row][col] == 'E') {
       //base case: reached end
-      return moves;
+      return 0;
     } else if (invalid(row, col)){
-      //we are standing on a bad bad square
+      //base case: we are standing on a bad bad square and this child must die
       return -1;
     } else {
       maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
       int returnVal;
       returnVal = solve(row + 1, col, moves + 1);
-      if (returnVal > 0) {return returnVal;}
+      if (returnVal > -1) {return returnVal + 1;}
 
       returnVal = solve(row, col + 1, moves + 1);
-      if (returnVal > 0) {return returnVal;}
+      if (returnVal > -1) {return returnVal + 1;}
 
-      returnVal = solve(row + 1, col, moves + 1);
-      if (returnVal > 0) {return returnVal;}
+      returnVal = solve(row - 1, col, moves + 1);
+      if (returnVal > -1) {return returnVal + 1;}
 
       returnVal = solve(row, col - 1, moves + 1);
-      if (returnVal > 0) {return returnVal;}
-
-      //we reached the end so backtrack
-      System.out.println("bonk! " + row + " " + col);
+      if (returnVal > -1) {return returnVal + 1;}
     }
 
     //COMPLETE SOLVE
