@@ -125,18 +125,18 @@ public class Maze{
     } else {
       maze[row][col] = '@';
       //recursive case: try to call self on surrounding squares
-      int returnVal;
-      returnVal = solve(row + 1, col);
-      if (returnVal > -1) {return returnVal + 1;}
+      int moves;
+      moves = solve(row + 1, col);
+      if (moves > -1) {return moves + 1;}
 
-      returnVal = solve(row, col + 1);
-      if (returnVal > -1) {return returnVal + 1;}
+      moves = solve(row, col + 1);
+      if (moves > -1) {return moves + 1;}
 
-      returnVal = solve(row - 1, col);
-      if (returnVal > -1) {return returnVal + 1;}
+      moves = solve(row - 1, col);
+      if (moves > -1) {return moves + 1;}
 
-      returnVal = solve(row, col - 1);
-      if (returnVal > -1) {return returnVal + 1;}
+      moves = solve(row, col - 1);
+      if (moves > -1) {return moves + 1;}
 
       //when we get to this point it means we have run out of places to go (dead end)
       maze[row][col] = '.'; //mark as dead end
@@ -152,6 +152,6 @@ public class Maze{
     Maze something = new Maze("/Users/jing/Documents/MKS22X-Labs/classwork/Maze1.txt");
     assert something != null;
     something.setAnimate(true);
-    something.solve(7, 1, 0);
+    something.solve(7, 1);
   }
 }
