@@ -138,11 +138,10 @@ public class Maze{
       returnVal = solve(row, col - 1, moves + 1);
       if (returnVal > -1) {return returnVal + 1;}
 
+      //when we get to this point it means we have run out of places to go (dead end)
       maze[row][col] = '.';
+      return -1; //didnt find solution
     }
-
-    //COMPLETE SOLVE
-    return -1; //so it compiles
   }
 
   private boolean invalid(int row, int col) {
