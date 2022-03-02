@@ -3,7 +3,7 @@ import java.io.*;
 public class Maze{
   private char[][] maze;
   private boolean animate;//false by default
-  private int startRow,startCol;
+  private int startRow, startCol;
 
   /*Constructor loads a maze text file, and sets animate to false by default.
   When the file is not found then:
@@ -46,6 +46,7 @@ public class Maze{
       Thread.sleep(millis);
     }
     catch (InterruptedException e) {
+      System.out.println("Error 418: IM A TEAPOT");
     }
   }
 
@@ -148,10 +149,30 @@ public class Maze{
     return (maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
   }
 
+  //wrapper method
+  public int solve() {
+    //loop through the maze to find the start
+    int row = -1;
+    int col = -1;
+    for (int i = 0; i < maze.length; i++) {
+      for (int k = 0; k < maze[0].length; k++) {
+        if (maze[i][k] == 'S') {
+          row = i;
+          col = k;
+        }
+      }
+    }
+
+    assert row != -1;
+    assert col != -1;
+
+    return solve(row, col);
+  }
+
   public static void main(String[] args) throws Exception {
     Maze something = new Maze("/Users/jing/Documents/MKS22X-Labs/classwork/Maze1.txt");
     assert something != null;
     something.setAnimate(true);
-    something.solve(7, 1);
+    something.solve();
   }
 }
