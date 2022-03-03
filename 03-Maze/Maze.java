@@ -169,8 +169,15 @@ public class Maze{
     return solve(row, col);
   }
 
-  public static void generate(char[][] maze, int startRow, int startCol) {
-    
+  public static void generate(char[][] array, int row, int col) {
+    if (array[row][col] != '#') {
+      //base case: not a wall
+      return; //do nothing
+    } else if () {
+
+    } else {
+
+    }
   }
 
   public static void main(String[] args) throws Exception {
