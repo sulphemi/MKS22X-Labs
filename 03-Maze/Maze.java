@@ -169,6 +169,10 @@ public class Maze{
     return solve(row, col);
   }
 
+  public static void generate(char[][] maze, int startRow, int startCol) {
+    
+  }
+
   public static void main(String[] args) throws Exception {
     Maze something = new Maze("/Users/jing/Documents/MKS22X-Labs/classwork/Maze1.txt");
     assert something != null;
