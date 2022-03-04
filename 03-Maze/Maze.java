@@ -169,16 +169,41 @@ public class Maze{
     return solve(row, col);
   }
 
-  // public static void generate(char[][] array, int row, int col) {
-  //   if (array[row][col] != '#') {
-  //     //base case: not a wall
-  //     return; //do nothing
-  //   } else if () {
-  //
-  //   } else {
-  //
-  //   }
-  // }
+  public static void generate(char[][] array, int row, int col) {
+    //automatic animation! You are welcome.
+    if(animate){
+      clearTerminal();
+      gotoTop();
+      System.out.println(this);
+      wait(50);
+    }
+
+    if (maze[row][col] == 'E') {
+      //base case: reached end
+      return 0;
+    } else if (invalid(row, col)){
+      //base case: we are standing on a bad bad square and this child must die
+      return -1;
+    } else {
+      maze[row][col] = '@';
+      //recursive case: try to call self on surrounding squares
+      int moves;
+      moves = solve(row + 1, col);
+      if (moves > -1) {return moves + 1;}
+
+      moves = solve(row, col + 1);
+      if (moves > -1) {return moves + 1;}
+
+      moves = solve(row - 1, col);
+      if (moves > -1) {return moves + 1;}
+
+      moves = solve(row, col - 1);
+      if (moves > -1) {return moves + 1;}
+
+      //when we get to this point it means we have run out of places to go (dead end)
+      maze[row][col] = '.'; //mark as dead end
+      return -1; //didnt find solution
+  }
 
   public static void main(String[] args) throws Exception {
     List<Maze> mazes = new LinkedList<Maze>();
