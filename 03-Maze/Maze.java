@@ -169,21 +169,28 @@ public class Maze{
     return solve(row, col);
   }
 
-  public static void generate(char[][] array, int row, int col) {
-    if (array[row][col] != '#') {
-      //base case: not a wall
-      return; //do nothing
-    } else if () {
-
-    } else {
-
-    }
-  }
+  // public static void generate(char[][] array, int row, int col) {
+  //   if (array[row][col] != '#') {
+  //     //base case: not a wall
+  //     return; //do nothing
+  //   } else if () {
+  //
+  //   } else {
+  //
+  //   }
+  // }
 
   public static void main(String[] args) throws Exception {
-    Maze something = new Maze("/Users/jing/Documents/MKS22X-Labs/classwork/Maze1.txt");
-    assert something != null;
-    something.setAnimate(true);
-    something.solve();
+    List<Maze> mazes = new LinkedList<Maze>();
+    for (int i = 1; i <= 5; i++) {
+      mazes.add(new Maze("mazes/maze" + i));
+    }
+    assert mazes.size() == 5;
+
+    while (mazes.size() > 0) {
+      mazes.get(0).setAnimate(true);
+      mazes.get(0).solve();
+      mazes.remove(0);
+    }
   }
 }
