@@ -193,6 +193,22 @@ public class Maze{
     gotoTop();
     System.out.println(this);
 
+    if (maze[row][col] == '#' && safeToCarve(row, col)) {
+      maze[row][col] = ' '; //carve
+      //call self on surrounding rows
+      if (coinFlip()) generate(row + 1, col, count + 1);
+      if (coinFlip()) generate(row, col + 1, count + 1);
+      if (coinFlip()) generate(row - 1, col, count + 1);
+      if (coinFlip()) generate(row, col - 1, count + 1);
+    }
+  }
+
+  public void generatec(int row, int col, int count) {
+    wait(100);
+    clearTerminal();
+    gotoTop();
+    System.out.println(this);
+
     if (count < 10) {
       if (maze[row][col] == '#' && safeToCarve(row, col)) {
         maze[row][col] = ' '; //carve
@@ -216,12 +232,12 @@ public class Maze{
   }
 
   private static boolean coinFlip() {
-    return randInt(0, 1) == 0;
+    return randInt(0, 3) == 0;
   }
 
   //both inclusive
   private static int randInt(int lower, int upper) {
-    return (int) Math.random() * (upper - lower + 1) + lower;
+    return (int)(Math.random() * (upper - lower + 1) + lower);
   }
 
   //before carving, there are fewer than 2 ways to step in
@@ -254,8 +270,14 @@ public class Maze{
     }
   }
 
-  public static void main(String[] args) {
+  public static void mainc(String[] args) {
     Maze maze = new Maze(20, 20);
     maze.generate();
+  }
+
+  public static void main(String[] args) {
+    for (int i = 0; i < 30; i++) {
+      System.out.println(randInt(0, 100));
+    }
   }
 }
