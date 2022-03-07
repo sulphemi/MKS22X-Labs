@@ -177,7 +177,8 @@ public class Maze{
   //proposed generate algorithm:
   //1: fill array with # and ' ' at random
   //2: let solve method carve walls such that:
-  //   only carve walla with less than two ways in
+  //   only carve walls with less than two ways in
+  //   random chance to carve wall or not
   //precondition: array is filled only with #s
   public void generate(int row, int col) {
     wait(100);
@@ -186,20 +187,12 @@ public class Maze{
     System.out.println(this);
 
     maze[row][col] = 'X';
-    if (true) {
-      switch (randInt(1, 4)) {
-        case 1:
-          generate(row + 1, col);
-          break;
-        case 2:
-          generate(row, col + 1);
-          break;
-        case 3:
-          generate(row - 1, col);
-          break;
-        case 4:
-          generate(row, col - 1);
-          break;
+
+    //call self on surrounding rows
+    generate(row + 1, col);
+    generate(row, col + 1);
+    generate(row - 1, col);
+    generate(row, col - 1);
       }
     }
   }
