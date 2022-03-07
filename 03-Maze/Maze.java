@@ -149,6 +149,10 @@ public class Maze {
   //   only carve walls with less than two ways in
   //   random chance to carve wall or not
   //precondition: array is filled only with #s
+  //this algorithm runs in linear time because it is possible to run out of valid squares,
+  //upon which the program will no longer attempt call itself
+  //this algorithm also has a chance-of-working complexity of 152587890624 in 152587890625
+  //(which is far better than my O(1) sorting algo, which had 1 in n!)
   public void generate(int row, int col, int count) {
     if (maze[row][col] == '#' && safeToCarve(row, col)) {
       maze[row][col] = ' '; //carve
