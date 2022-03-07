@@ -186,10 +186,9 @@ public class Maze{
     gotoTop();
     System.out.println(this);
 
-    maze[row][col] = 'X';
-
     if (maze[row][col] == '#' && safeToCarve(row, col)) {
       //call self on surrounding rows
+      maze[row][col] = 'X';
       generate(row + 1, col);
       generate(row, col + 1);
       generate(row - 1, col);
@@ -206,10 +205,10 @@ public class Maze{
     //quick and dirty solution
     try {
       int count = 0; //keeps track of empty spaces leading into the wall
-      count += (int)(maze[row + 1][col] == ' '); //see i told you this was gonna be dirty
-      count += (int)(maze[row][col + 1] == ' ');
-      count += (int)(maze[row - 1][col] == ' ');
-      count += (int)(maze[row][col - 1] == ' ');
+      count += maze[row + 1][col] == ' ' ? 1 : 0; //see i told you this was gonna be dirty
+      count += maze[row][col + 1] == ' ' ? 1 : 0; //EDIT: JAVA DID NOT LET ME CAST BOOL TO INT AND NOT IM MAD
+      count += maze[row - 1][col] == ' ' ? 1 : 0; //I WANT MY 1 + TRUE = 2 BACK STUPID LANGUAGE THAT THINKS ITS SOO COOL
+      count += maze[row][col - 1] == ' ' ? 1 : 0; //BECAUSE ITS STRONGLY TYPED AND EVERYTHING BUT ITS STILL SLOWER THAN C++
 
       return count >= 2;
     } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
