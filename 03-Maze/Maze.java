@@ -231,8 +231,9 @@ public class Maze{
     generate(row, col - 1, 0);
   }
 
+  // (not a fair coinflip)
   private static boolean coinFlip() {
-    return randInt(0, 3) == 0;
+    return randInt(0, 4) != 0;
   }
 
   //both inclusive
@@ -270,14 +271,8 @@ public class Maze{
     }
   }
 
-  public static void mainc(String[] args) {
+  public static void main(String[] args) {
     Maze maze = new Maze(20, 20);
     maze.generate();
-  }
-
-  public static void main(String[] args) {
-    for (int i = 0; i < 30; i++) {
-      System.out.println(randInt(0, 100));
-    }
   }
 }
