@@ -188,11 +188,6 @@ public class Maze{
   //   random chance to carve wall or not
   //precondition: array is filled only with #s
   public void generate(int row, int col, int count) {
-    wait(100);
-    clearTerminal();
-    gotoTop();
-    System.out.println(this);
-
     if (maze[row][col] == '#' && safeToCarve(row, col)) {
       maze[row][col] = ' '; //carve
       //call self on surrounding rows
@@ -222,13 +217,38 @@ public class Maze{
   }
 
   public void generate() {
-    int row = 10;
-    int col = 10;
+    //start from middle
+    int row = maze.length / 2;
+    int col = maze[0].length / 2;
     maze[row][col] = ' ';
     generate(row + 1, col, 0);
     generate(row, col + 1, 0);
     generate(row - 1, col, 0);
     generate(row, col - 1, 0);
+
+    //look for place to put start, starting from bottom row
+    for (int i = maze.length - 2; i >= 0; i++) {
+      for (int k = 0; k < maze[i].length; k++) {
+        if (maze[i][k] == ' ') {
+          maze[i][k] = 'S';
+          //bargain bin break
+          i = -1;
+          k = maze[i].length;
+        }
+      }
+    }
+
+    //look for place to put end, starting from top row
+    for (int i = 1; i < maze.length; i++) {
+      for (int k = 0; k < maze[i].length; k++) {
+        if (maze[i][k] == ' ') {
+          maze[i][k] = 'E';
+          //bargain bin break
+          i = maze.length;
+          k = maze[i].length;
+        }
+      }
+    }
   }
 
   // (not a fair coinflip)
@@ -272,7 +292,8 @@ public class Maze{
   }
 
   public static void main(String[] args) {
-    Maze maze = new Maze(20, 20);
+    Maze maze = new Maze(20, 10);
     maze.generate();
+    System.out.println(maze);
   }
 }
