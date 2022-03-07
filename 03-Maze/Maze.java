@@ -1,25 +1,12 @@
 import java.util.*;
 import java.io.*;
 public class Maze{
+  /***** FIELDS *****/
   private char[][] maze;
-  private boolean animate;//false by default
-  private int startRow, startCol;
+  private boolean animate = false; //false by default
 
-  /*Constructor loads a maze text file, and sets animate to false by default.
-  When the file is not found then:
-  throw a FileNotFoundException
+  /***** CONSTRUCTORS *****/
 
-  You may assume the file contains a rectangular ascii maze, made with the following 4 characters:
-  '#' - Walls - locations that cannot be moved onto
-  ' ' - Empty Space - locations that can be moved onto
-  'E' - the location of the goal if any (0 or more per file)
-  'S' - the location of the start(exactly 1 per file)
-
-  You may also assume the maze has a border of '#' around the edges.
-  So you don't have to check for out of bounds!
-  Some text editors always include a newline at the end of a file, but that is not always present.
-  Make sure your file reading is able to handle this.
-  */
   public Maze(String filename) throws IOException {
     BufferedReader bob = new BufferedReader(new FileReader(filename));
     String txt = ""; //string representation of the file
@@ -52,7 +39,9 @@ public class Maze{
     }
   }
 
-  private void wait(int millis){
+  /***** PRIVATE HELPERS *****/
+
+  private static void wait(int millis){
     try {
       Thread.sleep(millis);
     }
@@ -61,49 +50,47 @@ public class Maze{
     }
   }
 
-  public void setAnimate(boolean b){
-    animate = b;
-  }
-
-  public static void clearTerminal(){
+  private static void clearTerminal(){
     //erase terminal
     System.out.println("\033[2J");
   }
-  public static void gotoTop(){
+
+  private static void gotoTop(){
     //go to top left of screen
     System.out.println("\033[1;1H");
   }
 
-  /*Return the string that represents the maze.
-  It should look like the text file with some characters replaced.
-  */
-  public String toString(){
-    String output = "";
-    for (int i = 0; i < maze.length; i++) {
-      for (int k = 0; k < maze[0].length; k++) {
-        output += maze[i][k];
-      }
-      if (i != maze.length - 1) {
-        output += '\n';
-      }
-    }
-
-    return output;
+  private static boolean coinFlip() {
+    //(not a fair coinflip)
+    return randInt(0, 4) != 0;
   }
 
-  /*Wrapper Solve Function returns the helper function
-  Note the helper function has the same name, but different parameters.
-  Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-  */
-  // public int solve(){
-  //   //only clear the terminal if you are running animation
-  //   if(animate){
-  //     clearTerminal();
-  //   }
-  //   //start solving at the location of the s.
-  //   return solve(startRow,startCol);
-  //
-  // }
+  private static int randInt(int lower, int upper) {
+    //both inclusive
+    return (int)(Math.random() * (upper - lower + 1) + lower);
+  }
+
+  private boolean invalid(int row, int col) {
+    return (maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
+  }
+
+  private boolean safeToCarve(int row, int col) {
+    //before carving, there are fewer than 2 ways to step in
+    //quick and dirty solution
+    try {
+      int count = 0; //keeps track of empty spaces leading into the wall
+      count += maze[row + 1][col] == ' ' ? 1 : 0; //see i told you this was gonna be dirty
+      count += maze[row][col + 1] == ' ' ? 1 : 0; //EDIT: JAVA DID NOT LET ME CAST BOOL TO INT AND NOT IM MAD
+      count += maze[row - 1][col] == ' ' ? 1 : 0; //I WANT MY 1 + TRUE = 2 BACK STUPID LANGUAGE THAT THINKS ITS SOO COOL
+      count += maze[row][col - 1] == ' ' ? 1 : 0; //BECAUSE ITS STRONGLY TYPED AND EVERYTHING BUT ITS STILL SLOWER THAN C++
+
+      return count < 2;
+    } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
+      return false;
+    }
+  }
+
+  /***** ~THE IMPORTANT PART~ *****/
 
   /*
   Recursive Solve function:
@@ -156,11 +143,43 @@ public class Maze{
     }
   }
 
-  private boolean invalid(int row, int col) {
-    return (maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
+  //proposed generate algorithm:
+  //1: fill array with # and ' ' at random
+  //2: let solve method carve walls such that:
+  //   only carve walls with less than two ways in
+  //   random chance to carve wall or not
+  //precondition: array is filled only with #s
+  public void generate(int row, int col, int count) {
+    if (maze[row][col] == '#' && safeToCarve(row, col)) {
+      maze[row][col] = ' '; //carve
+      //call self on surrounding rows
+      if (coinFlip()) generate(row + 1, col, count + 1);
+      if (coinFlip()) generate(row, col + 1, count + 1);
+      if (coinFlip()) generate(row - 1, col, count + 1);
+      if (coinFlip()) generate(row, col - 1, count + 1);
+    }
   }
 
-  //wrapper method
+  /***** PUBLIC METHODS *****/
+
+  public void setAnimate(boolean b){
+    animate = b;
+  }
+
+  public String toString(){
+    String output = "";
+    for (int i = 0; i < maze.length; i++) {
+      for (int k = 0; k < maze[0].length; k++) {
+        output += maze[i][k];
+      }
+      if (i != maze.length - 1) {
+        output += '\n';
+      }
+    }
+
+    return output;
+  }
+
   public int solve() {
     //loop through the maze to find the start
     int row = -1;
@@ -180,42 +199,6 @@ public class Maze{
     return solve(row, col);
   }
 
-
-  //proposed generate algorithm:
-  //1: fill array with # and ' ' at random
-  //2: let solve method carve walls such that:
-  //   only carve walls with less than two ways in
-  //   random chance to carve wall or not
-  //precondition: array is filled only with #s
-  public void generate(int row, int col, int count) {
-    if (maze[row][col] == '#' && safeToCarve(row, col)) {
-      maze[row][col] = ' '; //carve
-      //call self on surrounding rows
-      if (coinFlip()) generate(row + 1, col, count + 1);
-      if (coinFlip()) generate(row, col + 1, count + 1);
-      if (coinFlip()) generate(row - 1, col, count + 1);
-      if (coinFlip()) generate(row, col - 1, count + 1);
-    }
-  }
-
-  public void generatec(int row, int col, int count) {
-    wait(100);
-    clearTerminal();
-    gotoTop();
-    System.out.println(this);
-
-    if (count < 10) {
-      if (maze[row][col] == '#' && safeToCarve(row, col)) {
-        maze[row][col] = ' '; //carve
-        //call self on surrounding rows
-        if (coinFlip()) generate(row + 1, col, count + 1);
-        if (coinFlip()) generate(row, col + 1, count + 1);
-        if (coinFlip()) generate(row - 1, col, count + 1);
-        if (coinFlip()) generate(row, col - 1, count + 1);
-      }
-    }
-  }
-
   public void generate() {
     //start from middle
     int row = maze.length / 2;
@@ -225,8 +208,6 @@ public class Maze{
     generate(row, col + 1, 0);
     generate(row - 1, col, 0);
     generate(row, col - 1, 0);
-
-    System.out.println(this);
 
     //look for place to put start, starting from bottom row
     for (int i = maze.length - 2; i >= 0; i--) {
@@ -238,8 +219,6 @@ public class Maze{
         }
       }
     }
-
-    System.out.println(this);
 
     //look for place to put end, starting from top row
     for (int i = 1; i < maze.length; i++) {
@@ -253,33 +232,9 @@ public class Maze{
     }
   }
 
-  // (not a fair coinflip)
-  private static boolean coinFlip() {
-    return randInt(0, 4) != 0;
-  }
+  /***** MAIN *****/
 
-  //both inclusive
-  private static int randInt(int lower, int upper) {
-    return (int)(Math.random() * (upper - lower + 1) + lower);
-  }
-
-  //before carving, there are fewer than 2 ways to step in
-  private boolean safeToCarve(int row, int col) {
-    //quick and dirty solution
-    try {
-      int count = 0; //keeps track of empty spaces leading into the wall
-      count += maze[row + 1][col] == ' ' ? 1 : 0; //see i told you this was gonna be dirty
-      count += maze[row][col + 1] == ' ' ? 1 : 0; //EDIT: JAVA DID NOT LET ME CAST BOOL TO INT AND NOT IM MAD
-      count += maze[row - 1][col] == ' ' ? 1 : 0; //I WANT MY 1 + TRUE = 2 BACK STUPID LANGUAGE THAT THINKS ITS SOO COOL
-      count += maze[row][col - 1] == ' ' ? 1 : 0; //BECAUSE ITS STRONGLY TYPED AND EVERYTHING BUT ITS STILL SLOWER THAN C++
-
-      return count < 2;
-    } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
-      return false;
-    }
-  }
-
-  public static void main0(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
     List<Maze> mazes = new LinkedList<Maze>();
     for (int i = 1; i <= 5; i++) {
       mazes.add(new Maze("mazes/maze" + i));
@@ -291,11 +246,5 @@ public class Maze{
       mazes.get(0).solve();
       mazes.remove(0);
     }
-  }
-
-  public static void main(String[] args) {
-    Maze maze = new Maze(20, 10);
-    maze.generate();
-    System.out.println(maze);
   }
 }
