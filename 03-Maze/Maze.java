@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-public class Maze{
+public class Maze {
   /***** FIELDS *****/
   private char[][] maze;
   private boolean animate = false; //false by default
@@ -236,15 +236,25 @@ public class Maze{
 
   public static void main(String[] args) throws Exception {
     List<Maze> mazes = new LinkedList<Maze>();
-    for (int i = 1; i <= 5; i++) {
-      mazes.add(new Maze("mazes/maze" + i));
+    for (int i = 0; i < 100; i++) {
+      mazes.add(new Maze(randInt(3, 20), randInt(3, 20)));
     }
-    assert mazes.size() == 5;
 
+    BufferedWriter Bob;
+    int i = 0;
     while (mazes.size() > 0) {
-      mazes.get(0).setAnimate(true);
+      File f = new File("idk/" + i);
+      f.createNewFile();
+      Bob = new BufferedWriter(new FileWriter(f));
+
+      mazes.get(0).generate();
       mazes.get(0).solve();
+
+      String mazeFile = mazes.get(0).toString();
+      Bob.write(mazeFile, 0, mazeFile.length());
       mazes.remove(0);
+      Bob.close();
+      i++;
     }
   }
 }
