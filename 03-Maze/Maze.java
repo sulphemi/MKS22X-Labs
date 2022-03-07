@@ -193,13 +193,15 @@ public class Maze{
     gotoTop();
     System.out.println(this);
 
-    if (maze[row][col] == '#' && safeToCarve(row, col) && count < 10) {
-      maze[row][col] = ' '; //carve
-      //call self on surrounding rows
-      generate(row + 1, col, count + 1);
-      generate(row, col + 1, count + 1);
-      generate(row - 1, col, count + 1);
-      generate(row, col - 1, count + 1);
+    if (count < 10) {
+      if (maze[row][col] == '#' && safeToCarve(row, col)) {
+        maze[row][col] = ' '; //carve
+        //call self on surrounding rows
+        if (coinFlip()) generate(row + 1, col, count + 1);
+        if (coinFlip()) generate(row, col + 1, count + 1);
+        if (coinFlip()) generate(row - 1, col, count + 1);
+        if (coinFlip()) generate(row, col - 1, count + 1);
+      }
     }
   }
 
@@ -211,6 +213,10 @@ public class Maze{
     generate(row, col + 1, 0);
     generate(row - 1, col, 0);
     generate(row, col - 1, 0);
+  }
+
+  private static boolean coinFlip() {
+    return randInt(0, 1) == 0;
   }
 
   //both inclusive
