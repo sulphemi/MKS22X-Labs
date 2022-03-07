@@ -194,13 +194,23 @@ public class Maze{
     System.out.println(this);
 
     if (maze[row][col] == '#' && safeToCarve(row, col)) {
+      maze[row][col] = ' '; //carve
       //call self on surrounding rows
-      maze[row][col] = 'X';
       generate(row + 1, col);
       generate(row, col + 1);
       generate(row - 1, col);
       generate(row, col - 1);
     }
+  }
+
+  public void generate() {
+    int row = 10;
+    int col = 10;
+    maze[row][col] = ' ';
+    generate(row + 1, col);
+    generate(row, col + 1);
+    generate(row - 1, col);
+    generate(row, col - 1);
   }
 
   //both inclusive
