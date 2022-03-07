@@ -187,19 +187,19 @@ public class Maze{
   //   only carve walls with less than two ways in
   //   random chance to carve wall or not
   //precondition: array is filled only with #s
-  public void generate(int row, int col) {
+  public void generate(int row, int col, int count) {
     wait(100);
     clearTerminal();
     gotoTop();
     System.out.println(this);
 
-    if (maze[row][col] == '#' && safeToCarve(row, col)) {
+    if (maze[row][col] == '#' && safeToCarve(row, col) && count < 10) {
       maze[row][col] = ' '; //carve
       //call self on surrounding rows
-      generate(row + 1, col);
-      generate(row, col + 1);
-      generate(row - 1, col);
-      generate(row, col - 1);
+      generate(row + 1, col, count + 1);
+      generate(row, col + 1, count + 1);
+      generate(row - 1, col, count + 1);
+      generate(row, col - 1, count + 1);
     }
   }
 
@@ -207,10 +207,10 @@ public class Maze{
     int row = 10;
     int col = 10;
     maze[row][col] = ' ';
-    generate(row + 1, col);
-    generate(row, col + 1);
-    generate(row - 1, col);
-    generate(row, col - 1);
+    generate(row + 1, col, 0);
+    generate(row, col + 1, 0);
+    generate(row - 1, col, 0);
+    generate(row, col - 1, 0);
   }
 
   //both inclusive
@@ -218,6 +218,7 @@ public class Maze{
     return (int) Math.random() * (upper - lower + 1) + lower;
   }
 
+  //before carving, there are fewer than 2 ways to step in
   private boolean safeToCarve(int row, int col) {
     //quick and dirty solution
     try {
@@ -227,7 +228,7 @@ public class Maze{
       count += maze[row - 1][col] == ' ' ? 1 : 0; //I WANT MY 1 + TRUE = 2 BACK STUPID LANGUAGE THAT THINKS ITS SOO COOL
       count += maze[row][col - 1] == ' ' ? 1 : 0; //BECAUSE ITS STRONGLY TYPED AND EVERYTHING BUT ITS STILL SLOWER THAN C++
 
-      return count <= 2;
+      return count < 2;
     } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
       return false;
     }
