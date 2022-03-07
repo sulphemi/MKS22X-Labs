@@ -193,10 +193,11 @@ public class Maze {
       }
     }
 
-    assert row != -1;
-    assert col != -1;
-
-    return solve(row, col);
+    if (row != -1 && col != -1) {
+      return solve(row, col);
+    } else {
+      throw new IllegalStateException("Can't find Start in maze");
+    }
   }
 
   public void generate() {
