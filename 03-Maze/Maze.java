@@ -222,7 +222,7 @@ public class Maze {
 
     //look for place to put end, starting from top row
     for (int i = 1; i < maze.length; i++) {
-      for (int k = 0; k < maze[i].length; k++) {
+      for (int k = maze[i].length - 1; k >= 0; k--) {
         if (maze[i][k] == ' ') {
           maze[i][k] = 'E';
           i = maze.length; //bargain bin break
