@@ -226,26 +226,28 @@ public class Maze{
     generate(row - 1, col, 0);
     generate(row, col - 1, 0);
 
+    System.out.println(this);
+
     //look for place to put start, starting from bottom row
-    for (int i = maze.length - 2; i >= 0; i++) {
+    for (int i = maze.length - 2; i >= 0; i--) {
       for (int k = 0; k < maze[i].length; k++) {
         if (maze[i][k] == ' ') {
           maze[i][k] = 'S';
-          //bargain bin break
-          i = -1;
-          k = maze[i].length;
+          i = -1; //bargain bin break
+          break;
         }
       }
     }
+
+    System.out.println(this);
 
     //look for place to put end, starting from top row
     for (int i = 1; i < maze.length; i++) {
       for (int k = 0; k < maze[i].length; k++) {
         if (maze[i][k] == ' ') {
           maze[i][k] = 'E';
-          //bargain bin break
-          i = maze.length;
-          k = maze[i].length;
+          i = maze.length; //bargain bin break
+          break;
         }
       }
     }
