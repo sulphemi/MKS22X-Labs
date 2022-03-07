@@ -188,18 +188,22 @@ public class Maze{
 
     maze[row][col] = 'X';
 
-    //call self on surrounding rows
-    generate(row + 1, col);
-    generate(row, col + 1);
-    generate(row - 1, col);
-    generate(row, col - 1);
-      }
+    if (maze[row][col] == '#' || safeToCarve(row, col)) {
+      //call self on surrounding rows
+      generate(row + 1, col);
+      generate(row, col + 1);
+      generate(row - 1, col);
+      generate(row, col - 1);
     }
   }
 
   //both inclusive
   private static int randInt(int lower, int upper) {
     return (int) Math.random() * (upper - lower + 1) + lower;
+  }
+
+  private static boolean safeToCarve(int row, int col) {
+    
   }
 
   public static void main0(String[] args) throws Exception {
