@@ -41,6 +41,10 @@ public class Maze{
     }
   }
 
+  public Maze(int rows, int cols) {
+    maze = new char[rows][cols];
+  }
+
   private void wait(int millis){
     try {
       Thread.sleep(millis);
@@ -169,43 +173,43 @@ public class Maze{
     return solve(row, col);
   }
 
-  public static void generate(char[][] array, int row, int col) {
-    //automatic animation! You are welcome.
-    if(animate){
-      clearTerminal();
-      gotoTop();
-      System.out.println(this);
-      wait(50);
+
+  //proposed generate algorithm:
+  //1: fill array with # and ' ' at random
+  //2: let solve method carve walls such that:
+  //   only carve walla with less than two ways in
+  //precondition: array is filled only with #s
+  public void generate(int row, int col) {
+    wait(100);
+    clearTerminal();
+    gotoTop();
+    System.out.println(this);
+
+    maze[row][col] = 'X';
+    if (true) {
+      switch (randInt(1, 4)) {
+        case 1:
+          generate(row + 1, col);
+          break;
+        case 2:
+          generate(row, col + 1);
+          break;
+        case 3:
+          generate(row - 1, col);
+          break;
+        case 4:
+          generate(row, col - 1);
+          break;
+      }
     }
-
-    if (maze[row][col] == 'E') {
-      //base case: reached end
-      return 0;
-    } else if (invalid(row, col)){
-      //base case: we are standing on a bad bad square and this child must die
-      return -1;
-    } else {
-      maze[row][col] = '@';
-      //recursive case: try to call self on surrounding squares
-      int moves;
-      moves = solve(row + 1, col);
-      if (moves > -1) {return moves + 1;}
-
-      moves = solve(row, col + 1);
-      if (moves > -1) {return moves + 1;}
-
-      moves = solve(row - 1, col);
-      if (moves > -1) {return moves + 1;}
-
-      moves = solve(row, col - 1);
-      if (moves > -1) {return moves + 1;}
-
-      //when we get to this point it means we have run out of places to go (dead end)
-      maze[row][col] = '.'; //mark as dead end
-      return -1; //didnt find solution
   }
 
-  public static void main(String[] args) throws Exception {
+  //both inclusive
+  private static int randInt(int lower, int upper) {
+    return (int) Math.random() * (upper - lower + 1) + lower;
+  }
+
+  public static void main0(String[] args) throws Exception {
     List<Maze> mazes = new LinkedList<Maze>();
     for (int i = 1; i <= 5; i++) {
       mazes.add(new Maze("mazes/maze" + i));
@@ -217,5 +221,10 @@ public class Maze{
       mazes.get(0).solve();
       mazes.remove(0);
     }
+  }
+
+  public static void main(String[] args) {
+    Maze maze = new Maze(20, 20);
+    maze.generate(10, 10);
   }
 }
