@@ -188,7 +188,7 @@ public class Maze{
 
     maze[row][col] = 'X';
 
-    if (maze[row][col] == '#' || safeToCarve(row, col)) {
+    if (maze[row][col] == '#' && safeToCarve(row, col)) {
       //call self on surrounding rows
       generate(row + 1, col);
       generate(row, col + 1);
@@ -202,8 +202,17 @@ public class Maze{
     return (int) Math.random() * (upper - lower + 1) + lower;
   }
 
-  private static boolean safeToCarve(int row, int col) {
-    
+  private boolean safeToCarve(int row, int col) {
+    //quick and dirty solution
+    try {
+      int count = 0; //keeps track of empty spaces leading into the wall
+      count += (int)(maze[row + 1][col] == ' '); //see i told you this was gonna be dirty
+      count += (int)(maze[row][col + 1] == ' ');
+      count += (int)(maze[row - 1][col] == ' ');
+      count += (int)(maze[row][col - 1] == ' ');
+    } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
+      return false;
+    }
   }
 
   public static void main0(String[] args) throws Exception {
