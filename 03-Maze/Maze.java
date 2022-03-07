@@ -210,6 +210,8 @@ public class Maze{
       count += (int)(maze[row][col + 1] == ' ');
       count += (int)(maze[row - 1][col] == ' ');
       count += (int)(maze[row][col - 1] == ' ');
+
+      return count >= 2;
     } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
       return false;
     }
