@@ -43,6 +43,13 @@ public class Maze{
 
   public Maze(int rows, int cols) {
     maze = new char[rows][cols];
+
+    //fill maze with #s
+    for (int i = 0; i < rows; i++) {
+      for (int k = 0; k < cols; k++) {
+        maze[i][k] = '#';
+      }
+    }
   }
 
   private void wait(int millis){
