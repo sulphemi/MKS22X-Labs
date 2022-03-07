@@ -227,7 +227,7 @@ public class Maze{
       count += maze[row - 1][col] == ' ' ? 1 : 0; //I WANT MY 1 + TRUE = 2 BACK STUPID LANGUAGE THAT THINKS ITS SOO COOL
       count += maze[row][col - 1] == ' ' ? 1 : 0; //BECAUSE ITS STRONGLY TYPED AND EVERYTHING BUT ITS STILL SLOWER THAN C++
 
-      return count >= 2;
+      return count <= 2;
     } catch (ArrayIndexOutOfBoundsException E) { //...and it gets even dirtier
       return false;
     }
@@ -249,6 +249,6 @@ public class Maze{
 
   public static void main(String[] args) {
     Maze maze = new Maze(20, 20);
-    maze.generate(10, 10);
+    maze.generate();
   }
 }
