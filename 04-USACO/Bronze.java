@@ -10,5 +10,12 @@ public class Bronze {
     final int N = Pumpkin.nextInt();
 
     int[][] map = new int[R][C];
+
+    //read into int[][]
+    for (int i = 0; i < R; i++) {
+      for (int k = 0; k < C; k++) {
+        map[i][k] = Pumpkin.nextInt();
+      }
+    }
   }
 }
