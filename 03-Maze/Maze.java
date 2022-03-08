@@ -39,6 +39,10 @@ public class Maze {
     }
   }
 
+  public Maze(char[][] map) {
+    maze = map;
+  }
+
   /***** PRIVATE HELPERS *****/
 
   private static void wait(int millis){
@@ -74,7 +78,7 @@ public class Maze {
     return (maze[row][col] == '@' || maze[row][col] == '#' || maze[row][col] == '.');
   }
 
-  private boolean safeToCarve(int row, int col) {
+  private static boolean safeToCarve(char[][] maze, int row, int col) {
     //before carving, there are fewer than 2 ways to step in
     //quick and dirty solution
     try {
@@ -153,14 +157,14 @@ public class Maze {
   //upon which the program will no longer attempt call itself
   //this algorithm also has a chance-of-working complexity of 152587890624 in 152587890625
   //(which is far better than my O(1) sorting algo, which had 1 in n!)
-  public void generate(int row, int col, int count) {
-    if (maze[row][col] == '#' && safeToCarve(row, col)) {
+  public static void generate(char[][] maze, int row, int col, int count) {
+    if (maze[row][col] == '#' && safeToCarve(maze, row, col)) {
       maze[row][col] = ' '; //carve
       //call self on surrounding rows
-      if (coinFlip()) generate(row + 1, col, count + 1);
-      if (coinFlip()) generate(row, col + 1, count + 1);
-      if (coinFlip()) generate(row - 1, col, count + 1);
-      if (coinFlip()) generate(row, col - 1, count + 1);
+      if (coinFlip()) generate(maze, row + 1, col, count + 1);
+      if (coinFlip()) generate(maze, row, col + 1, count + 1);
+      if (coinFlip()) generate(maze, row - 1, col, count + 1);
+      if (coinFlip()) generate(maze, row, col - 1, count + 1);
     }
   }
 
@@ -204,15 +208,18 @@ public class Maze {
     }
   }
 
-  public void generate() {
-    //start from middle
-    int row = maze.length / 2;
-    int col = maze[0].length / 2;
+  public static void generate(char[][] maze, int row, int col) {
+    for (char[] a : maze) {
+      for (int i = 0; i < a.length; i++) {
+        a[i] = '#';
+      }
+    }
+
     maze[row][col] = ' ';
-    generate(row + 1, col, 0);
-    generate(row, col + 1, 0);
-    generate(row - 1, col, 0);
-    generate(row, col - 1, 0);
+    generate(maze, row + 1, col, 0);
+    generate(maze, row, col + 1, 0);
+    generate(maze, row - 1, col, 0);
+    generate(maze, row, col - 1, 0);
 
     //look for place to put start, starting from bottom row
     for (int i = maze.length - 2; i >= 0; i--) {
@@ -252,7 +259,7 @@ public class Maze {
       f.createNewFile();
       Bob = new BufferedWriter(new FileWriter(f));
 
-      mazes.get(0).generate();
+      //mazes.get(0).generate();
       mazes.get(0).solve();
 
       String mazeFile = mazes.get(0).toString();
