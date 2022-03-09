@@ -4,10 +4,10 @@ public class Bronze {
   public static void main(String[] args) throws Exception {
     Scanner Pumpkin = new Scanner(System.in);
 
-    final int R = Pumpkin.nextInt();
-    final int C = Pumpkin.nextInt();
-    final int E = Pumpkin.nextInt();
-    final int N = Pumpkin.nextInt();
+    final int R = Pumpkin.nextInt(); //rows
+    final int C = Pumpkin.nextInt(); //cols
+    final int E = Pumpkin.nextInt(); //elevation
+    final int N = Pumpkin.nextInt(); //instructions
 
     int[][] map = new int[R][C];
 
@@ -16,6 +16,14 @@ public class Bronze {
       for (int k = 0; k < C; k++) {
         map[i][k] = Pumpkin.nextInt();
       }
+    }
+
+    for (int i = 0; i < N; i++) {
+      int targetRow = Pumpkin.nextInt();
+      int targetCol = Pumpkin.nextInt();
+      int strength = Pumpkin.nextInt();
+
+      stomp(map, targetRow, targetCol, strength);
     }
   }
 
