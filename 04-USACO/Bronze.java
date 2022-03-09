@@ -18,4 +18,8 @@ public class Bronze {
       }
     }
   }
+
+  public static void stomp(int[][] map, int row, int col, int depth) {
+    
+  }
 }
