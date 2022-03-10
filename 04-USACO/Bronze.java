@@ -30,15 +30,8 @@ public class Bronze {
       }
     }
 
-    depthMask(map, E);
-
-    int sum = 0;
-    for (int[] row : map) {
-      for (int i = 0; i < row.length; i++) {
-        sum += row[i];
-      }
-    }
-    System.out.println(sum * 72 * 72);
+    int sum = depthMask(map, E);
+    System.out.println(sum * 5814); //1 sqyd = 5814sqin
   }
 
   public static void stomp(int[][] map, int row, int col) {
@@ -62,7 +55,8 @@ public class Bronze {
     }
   }
 
-  public static void depthMask(int[][] map, int depth) {
+  public static int depthMask(int[][] map, int depth) { //returns the aggregated depth
+    int sum = 0;
     for (int[] row : map) {
       for (int i = 0; i < row.length; i++) {
         if (row[i] < depth) {
@@ -70,6 +64,7 @@ public class Bronze {
         } else {
           row[i] = 0;
         }
+        sum += row[i];
       }
     }
   }
