@@ -32,13 +32,6 @@ public class Bronze {
 
     depthMask(map, E);
 
-    for (int[] row : map) {
-      for (int i = 0; i < row.length; i++) {
-        System.out.print(row[i] + " ");
-      }
-      System.out.println();
-    }
-
     int sum = 0;
     for (int[] row : map) {
       for (int i = 0; i < row.length; i++) {
@@ -59,8 +52,6 @@ public class Bronze {
       }
     }
 
-    System.out.println("highest: " + highest);
-
     //iterate through
     for (int i = row; i < row + 3; i++) {
       for (int k = col; k < col + 3; k++) {
@@ -68,14 +59,6 @@ public class Bronze {
           map[i][k] -= 1; //lower
         }
       }
-    }
-
-    System.out.println();
-    for (int[] r : map) {
-      for (int i = 0; i < r.length; i++) {
-        System.out.print(r[i] + " ");
-      }
-      System.out.println();
     }
   }
 
