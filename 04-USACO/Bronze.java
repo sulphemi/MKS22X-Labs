@@ -1,3 +1,4 @@
+import java.util.*;
 import java.io.*;
 
 public class Bronze {
@@ -25,13 +26,15 @@ public class Bronze {
 
       stomp(map, targetRow, targetCol, strength);
     }
+
+    depthMask(map, E);
   }
 
   public static void stomp(int[][] map, int row, int col, int depth) {
     //find highest elevation by iterating through
     int highest = map[row][col];
-    for (int i = row; i < row + 3; i++) {
-      for (int k = col; k < col + 3; k++) {
+    for (int i = row; i < row + 2; i++) {
+      for (int k = col; k < col + 2; k++) {
         if (map[i][k] > highest) {
           highest = map[i][k];
         }
@@ -39,10 +42,22 @@ public class Bronze {
     }
 
     //iterate through
-    for (int i = row; i < row + 3; i++) {
-      for (int k = col; k < col + 3; k++) {
+    for (int i = row; i < row + 2; i++) {
+      for (int k = col; k < col + 2; k++) {
         if (map[i][k] == highest) {
-          map[i][k] -= depth;//lower
+          map[i][k] -= depth; //lower
+        }
+      }
+    }
+  }
+
+  public static void depthMask(int[][] map, int depth) {
+    for (int[] row : map) {
+      for (int i = 0; i < row.length; i++) {
+        if (row[i] < depth) {
+          row[i] = depth - row[i];
+        } else {
+          row[i] = 0;
         }
       }
     }
