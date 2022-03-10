@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Bronze {
   public static void main(String[] args) throws Exception {
-    Scanner Pumpkin = new Scanner(System.in);
+    Scanner Pumpkin = new Scanner(new File("makelake.in"));
 
     final int R = Pumpkin.nextInt(); //rows
     final int C = Pumpkin.nextInt(); //cols
@@ -19,15 +19,24 @@ public class Bronze {
       }
     }
 
+    ////
+    for (int[] row : map) {
+      for (int i = 0; i < row.length; i++) {
+        System.out.print(row[i] + " ");
+      }
+      System.out.println();
+    }
+    ////
+
     for (int i = 0; i < N; i++) {
-      int targetRow = Pumpkin.nextInt();
-      int targetCol = Pumpkin.nextInt();
+      int targetRow = Pumpkin.nextInt() - 1;
+      int targetCol = Pumpkin.nextInt() - 1;
       int strength = Pumpkin.nextInt();
 
       stomp(map, targetRow, targetCol, strength);
     }
 
-    depthMask(map, E);
+    //depthMask(map, E);
   }
 
   public static void stomp(int[][] map, int row, int col, int depth) {
@@ -41,6 +50,8 @@ public class Bronze {
       }
     }
 
+    System.out.println("highest: " + highest);
+
     //iterate through
     for (int i = row; i < row + 2; i++) {
       for (int k = col; k < col + 2; k++) {
@@ -48,6 +59,14 @@ public class Bronze {
           map[i][k] -= depth; //lower
         }
       }
+    }
+
+    System.out.println();
+    for (int[] r : map) {
+      for (int i = 0; i < r.length; i++) {
+        System.out.print(r[i] + " ");
+      }
+      System.out.println();
     }
   }
 
