@@ -19,15 +19,6 @@ public class Bronze {
       }
     }
 
-    ////
-    for (int[] row : map) {
-      for (int i = 0; i < row.length; i++) {
-        System.out.print(row[i] + " ");
-      }
-      System.out.println();
-    }
-    ////
-
     for (int i = 0; i < N; i++) {
       int targetRow = Pumpkin.nextInt() - 1;
       int targetCol = Pumpkin.nextInt() - 1;
@@ -39,7 +30,22 @@ public class Bronze {
       }
     }
 
-    //depthMask(map, E);
+    depthMask(map, E);
+
+    for (int[] row : map) {
+      for (int i = 0; i < row.length; i++) {
+        System.out.print(row[i] + " ");
+      }
+      System.out.println();
+    }
+
+    int sum = 0;
+    for (int[] row : map) {
+      for (int i = 0; i < row.length; i++) {
+        sum += row[i];
+      }
+    }
+    System.out.println(sum * 72 * 72);
   }
 
   public static void stomp(int[][] map, int row, int col) {
