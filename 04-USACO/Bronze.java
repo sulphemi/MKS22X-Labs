@@ -67,5 +67,6 @@ public class Bronze {
         sum += row[i];
       }
     }
+    return sum;
   }
 }
