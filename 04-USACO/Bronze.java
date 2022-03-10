@@ -31,19 +31,22 @@ public class Bronze {
     for (int i = 0; i < N; i++) {
       int targetRow = Pumpkin.nextInt() - 1;
       int targetCol = Pumpkin.nextInt() - 1;
-      int strength = Pumpkin.nextInt();
+      int times = Pumpkin.nextInt();
 
-      stomp(map, targetRow, targetCol, strength);
+      while (times > 0) {
+        stomp(map, targetRow, targetCol);
+        times--;
+      }
     }
 
     //depthMask(map, E);
   }
 
-  public static void stomp(int[][] map, int row, int col, int depth) {
+  public static void stomp(int[][] map, int row, int col) {
     //find highest elevation by iterating through
     int highest = map[row][col];
-    for (int i = row; i < row + 2; i++) {
-      for (int k = col; k < col + 2; k++) {
+    for (int i = row; i < row + 3; i++) {
+      for (int k = col; k < col + 3; k++) {
         if (map[i][k] > highest) {
           highest = map[i][k];
         }
@@ -53,10 +56,10 @@ public class Bronze {
     System.out.println("highest: " + highest);
 
     //iterate through
-    for (int i = row; i < row + 2; i++) {
-      for (int k = col; k < col + 2; k++) {
+    for (int i = row; i < row + 3; i++) {
+      for (int k = col; k < col + 3; k++) {
         if (map[i][k] == highest) {
-          map[i][k] -= depth; //lower
+          map[i][k] -= 1; //lower
         }
       }
     }
