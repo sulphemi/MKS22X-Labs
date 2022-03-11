@@ -45,10 +45,10 @@ public class Silver {
           newMap[i][k] = -1; //transfer tree over
         } else { //if not a tree, transfer the number of ways to step into the square
           int sum = 0;
-          if (onBoard(array, i + 1, k)) {sum += array[i + 1][k];}
-          if (onBoard(array, i, k + 1)) {sum += array[i][k + 1];}
-          if (onBoard(array, i - 1, k)) {sum += array[i - 1][k];}
-          if (onBoard(array, i, k - 1)) {sum += array[i][k - 1];}
+          if (valid(array, i + 1, k)) {sum += array[i + 1][k];}
+          if (valid(array, i, k + 1)) {sum += array[i][k + 1];}
+          if (valid(array, i - 1, k)) {sum += array[i - 1][k];}
+          if (valid(array, i, k - 1)) {sum += array[i][k - 1];}
           newMap[i][k] = sum;
         }
       }
@@ -56,7 +56,8 @@ public class Silver {
     array = newMap; //overwrite memory address
   }
 
-  public static boolean onBoard(int[][] array, int row, int col) {
-    return (row >= 0 && col >= 0 && row < array.length && col < array[row].length);
+  public static boolean valid(int[][] array, int row, int col) {
+    //pray that short circuiting wont fail me
+    return (row >= 0 && col >= 0 && row < array.length && col < array[row].length) && (array[row][col] != -1);
   }
 }
