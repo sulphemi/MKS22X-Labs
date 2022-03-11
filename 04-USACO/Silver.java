@@ -29,7 +29,7 @@ public class Silver {
 
     map[R1][C1] = 1; //the position of the elephant
     for (int i = 0; i < T; i++) {
-      advance(map);
+      map = advance(map);
       print2DArray(map);
     }
 
@@ -38,7 +38,7 @@ public class Silver {
     System.out.println(map[R1][C1]);
   }
 
-  public static void advance(int[][] array) {
+  public static int[][] advance(int[][] array) {
     int[][] newMap = new int[array.length][array[0].length];
     for (int i = 0; i < array.length; i++) {
       for (int k = 0; k < array[i].length; k++) {
@@ -55,7 +55,7 @@ public class Silver {
         }
       }
     }
-    array = newMap; //overwrite memory address
+    return newMap;
   }
 
   public static boolean valid(int[][] array, int row, int col) {
