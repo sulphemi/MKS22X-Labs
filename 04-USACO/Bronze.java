@@ -49,7 +49,7 @@ public class Bronze {
     for (int i = row; i < row + 3; i++) {
       for (int k = col; k < col + 3; k++) {
         if (map[i][k] == highest) {
-          map[i][k] -= 1; //lower
+          map[i][k]--; //lower
         }
       }
     }
