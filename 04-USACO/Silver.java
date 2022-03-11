@@ -35,8 +35,17 @@ public class Silver {
           newMap[i][k] = -1; //transfer tree over
         } else {
           int sum = 0;
+          if (onBoard(array, i + 1, k)) {sum += array[i + 1][k]}
+          if (onBoard(array, i, k + 1)) {sum += array[i][k + 1]}
+          if (onBoard(array, i - 1, k)) {sum += array[i - 1][k]}
+          if (onBoard(array, i, k - 1)) {sum += array[i][k - 1]}
+          newMap[i][k] = sum;
         }
       }
     }
+  }
+
+  public static boolean onBoard(int[][] array, int row, int col) {
+    return (row >= 0 && col >= 0 && row < array.length && col < array[row].length);
   }
 }
