@@ -25,20 +25,22 @@ public class Silver {
     }
 
     System.out.println(Arrays.deepToString(map));
+    advance(map);
+    System.out.println(Arrays.deepToString(map));
   }
 
-  public static advance(int[][] array) {
-    int[][] newMap;
+  public static void advance(int[][] array) {
+    int[][] newMap = new int[array.length][array[0].length];
     for (int i = 0; i < array.length; i++) {
       for (int k = 0; i < array[i].length; k++) {
         if (array[i][k] == -1) { //if it is a tree
           newMap[i][k] = -1; //transfer tree over
         } else {
           int sum = 0;
-          if (onBoard(array, i + 1, k)) {sum += array[i + 1][k]}
-          if (onBoard(array, i, k + 1)) {sum += array[i][k + 1]}
-          if (onBoard(array, i - 1, k)) {sum += array[i - 1][k]}
-          if (onBoard(array, i, k - 1)) {sum += array[i][k - 1]}
+          if (onBoard(array, i + 1, k)) {sum += array[i + 1][k];}
+          if (onBoard(array, i, k + 1)) {sum += array[i][k + 1];}
+          if (onBoard(array, i - 1, k)) {sum += array[i - 1][k];}
+          if (onBoard(array, i, k - 1)) {sum += array[i][k - 1];}
           newMap[i][k] = sum;
         }
       }
