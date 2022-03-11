@@ -24,9 +24,17 @@ public class Silver {
       }
     }
 
-    System.out.println(Arrays.deepToString(map));
-    advance(map);
-    System.out.println(Arrays.deepToString(map));
+    final int R1 = Pudding.nextInt();
+    final int C1 = Pudding.nextInt();
+
+    map[R1][C1] = 1; //the position of the elephant
+    for (int i = 0; i < T; i++) {
+      advance(map);
+    }
+
+    final int R2 = Pudding.nextInt();
+    final int C2 = Pudding.nextInt();
+    System.out.println(map[R1][C1]);
   }
 
   public static void advance(int[][] array) {
