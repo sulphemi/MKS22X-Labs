@@ -26,4 +26,17 @@ public class Silver {
 
     System.out.println(Arrays.deepToString(map));
   }
+
+  public static advance(int[][] array) {
+    int[][] newMap;
+    for (int i = 0; i < array.length; i++) {
+      for (int k = 0; i < array[i].length; k++) {
+        if (array[i][k] == -1) { //if it is a tree
+          newMap[i][k] = -1; //transfer tree over
+        } else {
+          int sum = 0;
+        }
+      }
+    }
+  }
 }
