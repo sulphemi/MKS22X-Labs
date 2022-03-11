@@ -5,7 +5,7 @@ public class Silver {
   public static void main(String[] args) throws Exception {
     String input = args.length == 0 ? "ctravel.in" : args[0]; //default to ctravel.in
     Scanner Pudding = new Scanner(new File(input)); //Pudding, the trusty file parser!
-    char[][] map; //2d array representing the map
+    int[][] map; //2d array representing the map
     //map details:
     //-1 means upsteppable
     //int >= 0 means steppable
@@ -16,10 +16,12 @@ public class Silver {
 
     //scan into map
     Pudding.nextLine(); //extract newLine
-    map = new char[N][M];
+    map = new int[N][M];
     for (int i = 0; i < N; i++) {
-      String line = Pudding.nextLine();
-      map[i] = line.toCharArray();
+      String oowoo = Pudding.readLine();
+      for (int k = 0; k < M; k++) {
+        map[i][k] = oowoo.charAt() == '*' ? -1 : 0;
+      }
     }
 
     System.out.println(Arrays.deepToString(map));
