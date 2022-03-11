@@ -18,9 +18,9 @@ public class Silver {
     Pudding.nextLine(); //extract newLine
     map = new int[N][M];
     for (int i = 0; i < N; i++) {
-      String oowoo = Pudding.readLine();
+      String line = Pudding.nextLine();
       for (int k = 0; k < M; k++) {
-        map[i][k] = oowoo.charAt() == '*' ? -1 : 0;
+        map[i][k] = line.charAt(k) == '*' ? -1 : 0;
       }
     }
 
