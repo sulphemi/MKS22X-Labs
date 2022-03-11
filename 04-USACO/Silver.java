@@ -30,6 +30,7 @@ public class Silver {
     map[R1][C1] = 1; //the position of the elephant
     for (int i = 0; i < T; i++) {
       advance(map);
+      print2DArray(map);
     }
 
     final int R2 = Pudding.nextInt();
@@ -50,6 +51,7 @@ public class Silver {
           if (valid(array, i - 1, k)) {sum += array[i - 1][k];}
           if (valid(array, i, k - 1)) {sum += array[i][k - 1];}
           newMap[i][k] = sum;
+          System.out.println(sum);
         }
       }
     }
@@ -59,5 +61,13 @@ public class Silver {
   public static boolean valid(int[][] array, int row, int col) {
     //pray that short circuiting wont fail me
     return (row >= 0 && col >= 0 && row < array.length && col < array[row].length) && (array[row][col] != -1);
+  }
+
+  public static void print2DArray(int[][] array) {
+    for (int[] row : array) {
+      System.out.println(Arrays.toString(row));
+      System.out.println('\n');
+    }
+    System.out.println('\n');
   }
 }
