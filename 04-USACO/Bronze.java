@@ -3,8 +3,9 @@ import java.io.*;
 
 public class Bronze {
   public static int solve(String filename) {
+    Scanner Pumpkin;
     try {
-      Scanner Pumpkin = new Scanner(new File(filename));
+      Pumpkin = new Scanner(new File(filename));
     } catch (FileNotFoundException E) {
       return -1;
     }
@@ -35,7 +36,7 @@ public class Bronze {
     }
 
     int sum = depthMask(map, E);
-    return (sum * 5814); //1 sqyd = 5814sqin
+    return (sum * 5184); //1 sqyd = 5184sqin
   }
 
   public static void stomp(int[][] map, int row, int col) {
