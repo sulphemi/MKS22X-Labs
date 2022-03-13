@@ -2,8 +2,12 @@ import java.util.*;
 import java.io.*;
 
 public class Bronze {
-  public static void main(String[] args) throws Exception {
-    Scanner Pumpkin = new Scanner(new File("makelake.in"));
+  public static int solve(String filename) {
+    try {
+      Scanner Pumpkin = new Scanner(new File(filename));
+    } catch (FileNotFoundException E) {
+      return -1;
+    }
 
     final int R = Pumpkin.nextInt(); //rows
     final int C = Pumpkin.nextInt(); //cols
@@ -31,7 +35,7 @@ public class Bronze {
     }
 
     int sum = depthMask(map, E);
-    System.out.println(sum * 5814); //1 sqyd = 5814sqin
+    return (sum * 5814); //1 sqyd = 5814sqin
   }
 
   public static void stomp(int[][] map, int row, int col) {

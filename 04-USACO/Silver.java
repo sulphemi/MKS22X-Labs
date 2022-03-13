@@ -2,9 +2,12 @@ import java.util.*;
 import java.io.*;
 
 public class Silver {
-  public static void main(String[] args) throws Exception {
-    String input = args.length == 0 ? "ctravel.in" : args[0]; //default to ctravel.in
-    Scanner Pudding = new Scanner(new File(input)); //Pudding, the trusty file parser!
+  public static int solve(String filename) {
+    try {
+      Scanner Pudding = new Scanner(new File(filename)); //Pudding, the trusty file parser!
+    } catch (FileNotFoundException E) {
+      return -1;
+    }
     int[][] map; //2d array representing the map
     //map details:
     //-1 means upsteppable
@@ -30,12 +33,11 @@ public class Silver {
     map[R1][C1] = 1; //the position of the elephant
     for (int i = 0; i < T; i++) {
       map = advance(map);
-      print2DArray(map);
     }
 
     final int R2 = Pudding.nextInt();
     final int C2 = Pudding.nextInt();
-    System.out.println(map[R1][C1]);
+    return map[R1][C1];
   }
 
   public static int[][] advance(int[][] array) {
@@ -51,7 +53,6 @@ public class Silver {
           if (valid(array, i - 1, k)) {sum += array[i - 1][k];}
           if (valid(array, i, k - 1)) {sum += array[i][k - 1];}
           newMap[i][k] = sum;
-          System.out.println(sum);
         }
       }
     }
