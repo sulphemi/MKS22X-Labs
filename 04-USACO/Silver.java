@@ -57,7 +57,6 @@ public class Silver {
         }
       }
     }
-    print2DArray(newMap);
     return newMap;
   }
 
