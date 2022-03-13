@@ -3,8 +3,9 @@ import java.io.*;
 
 public class Silver {
   public static long solve(String filename) {
+    Scanner Pudding;
     try {
-      Scanner Pudding = new Scanner(new File(filename)); //Pudding, the trusty file parser!
+      Pudding = new Scanner(new File(filename)); //Pudding, the trusty file parser!
     } catch (FileNotFoundException E) {
       return -1;
     }
@@ -27,17 +28,17 @@ public class Silver {
       }
     }
 
-    final int R1 = Pudding.nextInt();
-    final int C1 = Pudding.nextInt();
+    final int R1 = Pudding.nextInt() - 1;
+    final int C1 = Pudding.nextInt() - 1;
 
     map[R1][C1] = 1; //the position of the elephant
     for (int i = 0; i < T; i++) {
       map = advance(map);
     }
 
-    final int R2 = Pudding.nextInt();
-    final int C2 = Pudding.nextInt();
-    return map[R1][C1];
+    final int R2 = Pudding.nextInt() - 1;
+    final int C2 = Pudding.nextInt() - 1;
+    return map[R2][C2];
   }
 
   public static long[][] advance(long[][] array) {
@@ -56,6 +57,7 @@ public class Silver {
         }
       }
     }
+    print2DArray(newMap);
     return newMap;
   }
 
@@ -66,9 +68,19 @@ public class Silver {
 
   public static void print2DArray(long[][] array) {
     for (long[] row : array) {
-      System.out.println(Arrays.toString(row));
-      System.out.println('\n');
+      for (long x : row) {
+        System.out.print(pad(x, 3) + " ");
+      }
+      System.out.println();
     }
-    System.out.println('\n');
+    System.out.println();
+  }
+
+  public static String pad(long n, int targetSpaces) {
+    String output = "" + n;
+    while (output.length() < targetSpaces) {
+      output = " " + output;
+    }
+    return output;
   }
 }
