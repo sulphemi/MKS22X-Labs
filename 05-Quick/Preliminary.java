@@ -47,9 +47,16 @@ public class Preliminary {
 
     //leftPointer now == rightPointer
     //put pivot in its place
-    //that means swap pivot with leftPointer
-    int swapped = array[leftPointer];
-    array[leftPointer] = array[pivotIndex];
-    array[pivotIndex] = array[leftPointer];
+    //that means swap pivot with index before center OR index after center
+    //depending on which represents which half
+    if (array[leftPointer] < array[pivotIndex]) {
+      int swapped = array[leftPointer + 1];
+      array[leftPointer + 1] = array[pivotIndex];
+      array[pivotIndex] = swapped;
+    } else {
+      int swapped = array[leftPointer];
+      array[leftPointer] = array[pivotIndex];
+      array[pivotIndex] = swapped;
+    }
   }
 }
