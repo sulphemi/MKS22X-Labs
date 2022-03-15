@@ -11,7 +11,7 @@ public class Preliminary {
 
     for (int[] a : testcases) {
       System.out.println(Arrays.toString(a));
-      pivot(a);
+      partition(a, 0, a.length);
       System.out.println(Arrays.toString(a));
       System.out.println();
     }
@@ -32,10 +32,10 @@ public class Preliminary {
     return (int)(Math.random() * (upper - lower) + lower);
   }
 
-  public static void pivot(int[] array) {
-    int pivotIndex = 0;
-    int leftPointer = 1;
-    int rightPointer = array.length - 1;
+  public static void partition(int[] array, int start, int end) {
+    int pivotIndex = start;
+    int leftPointer = start + 1;
+    int rightPointer = end - 1;
 
     while (leftPointer != rightPointer) { //stops when leftPointer == rightPointer
       if (array[leftPointer] <= array[pivotIndex]) { //NTS: should i include <= or <?
