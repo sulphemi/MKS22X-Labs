@@ -37,7 +37,7 @@ public class Preliminary {
     int leftPointer = 1;
     int rightPointer = array.length - 1;
 
-    while (leftPointer != rightPointer - 1) { //stops when leftPointer == rightPointer - 1
+    while (leftPointer != rightPointer) { //stops when leftPointer == rightPointer
       if (array[leftPointer] <= array[pivotIndex]) { //NTS: should i include <= or <?
         //no action needed. advance left pointer.
         leftPointer++;
@@ -60,8 +60,16 @@ public class Preliminary {
     //put pivot in its place
     //that means swap pivot with index before center OR index after center
     //depending on which represents which half
-    int swapped = array[leftPointer - 1];
-    array[leftPointer - 1] = array[pivotIndex];
-    array[pivotIndex] = swapped;
+    if (array[leftPointer] < array[pivotIndex]) {
+      //if center value is less than the pivot, we can swap
+      int swapped = array[leftPointer];
+      array[leftPointer] = array[pivotIndex];
+      array[pivotIndex] = swapped;
+    } else {
+      //else put the pivot before the center
+      int swapped = array[leftPointer - 1];
+      array[leftPointer - 1] = array[pivotIndex];
+      array[pivotIndex] = swapped;
+    }
   }
 }
