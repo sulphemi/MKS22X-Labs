@@ -49,11 +49,6 @@ public class Preliminary {
         array[leftPointer] = swapped;
         rightPointer--;
       }
-
-      System.out.println("leftPointer = " + leftPointer);
-      System.out.println("rightPointer = " + rightPointer);
-      System.out.println(Arrays.toString(array));
-      System.out.println();
     }
 
     //leftPointer now == rightPointer
