@@ -2,11 +2,19 @@ import java.util.*;
 
 public class Preliminary {
   public static void main(String[] args) {
-    int[] a = randomArray(10);
-    System.out.println(Arrays.toString(a));
+    int[][] testcases = {
+      {9, 8, 7, 6, 5},
+      {999, 4, 3, 2, 1, 999},
+      {1, 2, 3, 4},
+      {5, 1, 2, 3, 4, 6, 7, 7}
+    };
 
-    pivot(a);
-    System.out.println(Arrays.toString(a));
+    for (int[] a : testcases) {
+      System.out.println(Arrays.toString(a));
+      pivot(a);
+      System.out.println(Arrays.toString(a));
+      System.out.println();
+    }
   }
 
   public static int[] randomArray(int length) {
@@ -29,7 +37,7 @@ public class Preliminary {
     int leftPointer = 1;
     int rightPointer = array.length - 1;
 
-    while (leftPointer != rightPointer) {
+    while (leftPointer != rightPointer - 1) { //stops when leftPointer == rightPointer - 1
       if (array[leftPointer] <= array[pivotIndex]) { //NTS: should i include <= or <?
         //no action needed. advance left pointer.
         leftPointer++;
@@ -42,21 +50,18 @@ public class Preliminary {
         rightPointer--;
       }
 
+      System.out.println("leftPointer = " + leftPointer);
+      System.out.println("rightPointer = " + rightPointer);
       System.out.println(Arrays.toString(array));
+      System.out.println();
     }
 
     //leftPointer now == rightPointer
     //put pivot in its place
     //that means swap pivot with index before center OR index after center
     //depending on which represents which half
-    if (array[leftPointer] < array[pivotIndex]) {
-      int swapped = array[leftPointer + 1];
-      array[leftPointer + 1] = array[pivotIndex];
-      array[pivotIndex] = swapped;
-    } else {
-      int swapped = array[leftPointer];
-      array[leftPointer] = array[pivotIndex];
-      array[pivotIndex] = swapped;
-    }
+    int swapped = array[leftPointer - 1];
+    array[leftPointer - 1] = array[pivotIndex];
+    array[pivotIndex] = swapped;
   }
 }
