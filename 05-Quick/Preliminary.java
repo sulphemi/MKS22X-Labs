@@ -32,7 +32,7 @@ public class Preliminary {
     return (int)(Math.random() * (upper - lower) + lower);
   }
 
-  public static void partition(int[] array, int start, int end) {
+  public static int partition(int[] array, int start, int end) {
     int pivotIndex = start;
     int leftPointer = start + 1;
     int rightPointer = end - 1;
@@ -56,15 +56,19 @@ public class Preliminary {
     //that means swap pivot with index before center OR index after center
     //depending on which represents which half
     if (array[leftPointer] < array[pivotIndex]) {
-      //if center value is less than the pivot, we can swap
+      //if center value is less than the pivot, we can swap center with pivot
       int swapped = array[leftPointer];
       array[leftPointer] = array[pivotIndex];
       array[pivotIndex] = swapped;
+      pivotIndex = leftPointer;
     } else {
       //else put the pivot before the center
       int swapped = array[leftPointer - 1];
       array[leftPointer - 1] = array[pivotIndex];
       array[pivotIndex] = swapped;
+      pivotIndex = leftPointer - 1;
     }
+
+    return pivotIndex;
   }
 }
