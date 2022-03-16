@@ -103,18 +103,23 @@ public class Quick {
   }
 
   public static void main(String[] args) {
-    int[] array = randomArray(10);
-    int[] sorted = copyArray(array);
-    Arrays.sort(sorted);
+    int passes = 0;
+    for (int k = 0; k < 100; k++) {
+      int[] array = randomArray(10);
+      int[] sorted = copyArray(array);
+      Arrays.sort(sorted);
 
-    System.out.println("ORIGINAL: " + Arrays.toString(array));
-    System.out.println("SORTED: " + Arrays.toString(sorted));
+      System.out.println("ORIGINAL: " + Arrays.toString(array));
+      System.out.println("SORTED: " + Arrays.toString(sorted));
 
-    for (int i = 0; i < array.length; i++) {
-      int qSel = quickselect(copyArray(array), i);
-      System.out.print((sorted[i] == qSel) ? "PASSED | " : "FAILED | ");
-      System.out.println("Index " + i + ": " + qSel);
+      for (int i = 0; i < array.length; i++) {
+        int qSel = quickselect(copyArray(array), i);
+        if (sorted[i] != qSel) {System.out.print("FAILED | "); System.out.println("Index " + i + ": " + qSel);}
+        else {passes++;};
+      }
     }
+
+    System.out.println("PASSES: " + passes);
   }
 
   public static int[] copyArray(int[] a) {
