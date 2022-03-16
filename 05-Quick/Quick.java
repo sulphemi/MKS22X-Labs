@@ -85,7 +85,14 @@ public class Quick {
     return pivotIndex;
   }
 
-  public static void quickselect(int[] data, int index) {
-
+  public static int quickselect(int[] data, int index) {
+    int pivotIndex = partition(data, 0, data.length - 1);
+    if (pivotIndex == index) {
+      return data[index];
+    } else (pivotIndex > index) {
+      quickselect();
+    } else {
+      quickselect();
+    }
   }
 }
