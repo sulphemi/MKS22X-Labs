@@ -36,9 +36,22 @@ public class Preliminary {
     int pivotIndex = start;
     int leftPointer = start + 1;
     int rightPointer = end - 1;
+    boolean bonk = true; //keeps track of where to put equal values
 
     while (leftPointer != rightPointer) { //stops when leftPointer == rightPointer
-      if (array[leftPointer] <= array[pivotIndex]) { //NTS: should i include <= or <?
+      if (array[leftPointer] == array[pivotIndex]) {
+        if (bonk) {
+          //do the code for placing to left
+          leftPointer++;
+        } else {
+          //do the code for placing to right
+          int swapped = array[rightPointer];
+          array[rightPointer] = array[leftPointer];
+          array[leftPointer] = swapped;
+          rightPointer--;
+        }
+        bonk = !bonk; //flip boolean
+      } else if (array[leftPointer] < array[pivotIndex]) { //
         //no action needed. advance left pointer.
         leftPointer++;
       } else {
