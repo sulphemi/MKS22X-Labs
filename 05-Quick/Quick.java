@@ -101,7 +101,6 @@ public class Quick {
   }
 
   public static int quickselect(int[] data, int index) {
-    System.out.println("STARTING: " + Arrays.toString(data));
     return quickselect(data, index, 0, data.length - 1);
   }
 
