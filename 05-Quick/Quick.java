@@ -84,4 +84,8 @@ public class Quick {
 
     return pivotIndex;
   }
+
+  public static void quickselect(int[] data, int index) {
+    
+  }
 }
