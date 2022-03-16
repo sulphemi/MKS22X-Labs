@@ -11,7 +11,7 @@ public class Quick {
 
     for (int[] a : testcases) {
       System.out.println(Arrays.toString(a));
-      partition(a, 0, a.length);
+      partition(a, 0, a.length - 1);
       System.out.println(Arrays.toString(a));
       System.out.println();
     }
@@ -35,7 +35,7 @@ public class Quick {
   public static int partition(int[] array, int start, int end) {
     int pivotIndex = start;
     int leftPointer = start + 1;
-    int rightPointer = end - 1;
+    int rightPointer = end;
     boolean bonk = true; //keeps track of where to put equal values
 
     while (leftPointer != rightPointer) { //stops when leftPointer == rightPointer
@@ -86,6 +86,6 @@ public class Quick {
   }
 
   public static void quickselect(int[] data, int index) {
-    
+
   }
 }
