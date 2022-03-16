@@ -85,14 +85,14 @@ public class Quick {
     return pivotIndex;
   }
 
-  public static int quickselect(int[] data, int index) {
-    int pivotIndex = partition(data, 0, data.length - 1);
+  public static int quickselect(int[] data, int index, int partitionLowerBound, int partitionUpperBound) {
+    int pivotIndex = partition(data, partitionLowerBound, partitionUpperBound);
     if (pivotIndex == index) {
       return data[index];
     } else (pivotIndex > index) {
-      quickselect();
+      quickselect(data, index, pivotIndex, partitionUpperBound); //search in right half of array
     } else {
-      quickselect();
+      quickselect(data, index, partitionLowerBound, pivotIndex); //search in left half of array
     }
   }
 }
