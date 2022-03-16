@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Quick {
-  public static void main(String[] args) {
+  public static void main0(String[] args) {
     int[][] testcases = {
       {9, 8, 7, 6, 5},
       {999, 4, 3, 2, 1, 999},
@@ -86,14 +86,18 @@ public class Quick {
   }
 
   public static int quickselect(int[] data, int index, int partitionLowerBound, int partitionUpperBound) {
-    int pivotIndex = partition(data, partitionLowerBound, partitionUpperBound);
-    if (pivotIndex == index) {
-      return data[index];
-    } else if (pivotIndex < index) {
-      return quickselect(data, index, pivotIndex, partitionUpperBound); //search in right half of array
-    } else {
-      return quickselect(data, index, partitionLowerBound, pivotIndex); //search in left half of array
+    int pivotIndex;
+    while (partitionLowerBound != partitionUpperBound) {
+      pivotIndex = partition(data, partitionLowerBound, partitionUpperBound);
+
+      if (pivotIndex < index) {
+        partitionLowerBound = pivotIndex + 1;
+      } else {
+        partitionUpperBound = pivotIndex;
+      }
     }
+
+    return data[partitionLowerBound];
   }
 
   public static int quickselect(int[] data, int index) {
@@ -101,7 +105,7 @@ public class Quick {
     return quickselect(data, index, 0, data.length - 1);
   }
 
-  public static void main0(String[] args) {
+  public static void main(String[] args) {
     for (int i = 0; i < 10; i++) {
       int[] array = randomArray(10);
 
