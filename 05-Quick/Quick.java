@@ -85,7 +85,9 @@ public class Quick {
     return pivotIndex;
   }
 
-  public static int quickselect(int[] data, int index, int partitionLowerBound, int partitionUpperBound) {
+  public static int quickselect(int[] data, int index) {
+    int partitionLowerBound = 0;
+    int partitionUpperBound = data.length - 1;
     int pivotIndex;
     while (partitionLowerBound != partitionUpperBound) {
       pivotIndex = partition(data, partitionLowerBound, partitionUpperBound);
@@ -98,10 +100,6 @@ public class Quick {
     }
 
     return data[partitionLowerBound];
-  }
-
-  public static int quickselect(int[] data, int index) {
-    return quickselect(data, index, 0, data.length - 1);
   }
 
   public static void main(String[] args) {
