@@ -104,14 +104,38 @@ public class Quick {
 
   //recursive method
   public static void quicksort(int[] data, int start, int end) {
-    //base case: subarray is length 1
-    if (! start == end) {
-      //code and random bs go here
+    System.out.println(Arrays.toString(data));
+    //base case: subarray is length 2, which is trivial to solve
+    if (end - start == 1) {
+      //if they are in reverse order, swap them
+      if (data[end] > data[start]) {
+        int swapped = data[end];
+        data[end] = data[start];
+        data[start] = swapped;
+      }
+    } else if (start != end) {
+      //partition the array
+      int pivotIndex = partition(data, start, end);
+      //call self on both sides of partition
+      quicksort(data, start, pivotIndex);
+      quicksort(data, pivotIndex, end);
     }
+
+    //sinon, il n'y a rien à faire.
   }
 
   public static void main(String[] args) {
-
+    try {
+      int[] array = randomArray(10);
+      System.out.println(Arrays.toString(array));
+      quicksort(array, 0, array.length - 1);
+      System.out.println("SORTED: " + Arrays.toString(array));
+      if (! checkSorted(array)) {System.out.println("WARNING: NOT SORTED! (wait then wtf did your sort do...)");}
+    } catch (StackOverflowError E) {
+      System.out.println("OH NOES! YOUR STACK WENT BOOM!");
+    } catch (Exception E) {
+      E.printStackTrace();
+    }
   }
 
   public static int[] copyArray(int[] a) {
@@ -120,5 +144,16 @@ public class Quick {
       b[k] = a[k];
     }
     return b;
+  }
+
+  public static boolean checkSorted(int[] array) {
+    int val = array[0];
+    for (int x : array) {
+      if (x < val) {
+        return false;
+      }
+      val = x;
+    }
+    return true;
   }
 }
