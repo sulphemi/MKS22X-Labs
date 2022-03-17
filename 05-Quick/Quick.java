@@ -102,10 +102,16 @@ public class Quick {
     return data[partitionLowerBound];
   }
 
+  //recursive method
+  public static void quicksort(int[] data, int start, int end) {
+    //base case: subarray is length 1
+    if (! start == end) {
+      //code and random bs go here
+    }
+  }
+
   public static void main(String[] args) {
-      int[] array = randomArray((int)1e6);
-      quickselect(array, 10);
-      System.out.println("REACHED EOF"); //WILL NOT FINISH IF QUICKSELECT RUNS IN QUADRATIC
+
   }
 
   public static int[] copyArray(int[] a) {
