@@ -118,7 +118,7 @@ public class Quick {
       int pivotIndex = partition(data, start, end);
       //call self on both sides of partition
       quicksort(data, start, pivotIndex);
-      quicksort(data, pivotIndex, end);
+      quicksort(data, pivotIndex, end - 1);
     }
 
     //sinon, il n'y a rien à faire.
