@@ -75,7 +75,7 @@ public class Quick {
   public static void quicksort(int[] data, int start, int end) {
     if (start < end) {
       //partition the array
-      int pivotIndex = partition(data, start, end);
+      int pivotIndex = partitionDutch(data, start, end);
       //call self on both sides of partition
       quicksort(data, start, pivotIndex - 1);
       quicksort(data, pivotIndex + 1, end);
@@ -88,6 +88,7 @@ public class Quick {
   }
 
   public static int partitionDutch(int[] array, int start, int end) {
+    System.out.println(Arrays.toString(array));
     int pivotIndex = start;
     int leftPointer = start + 1;
     int rightPointer = end;
@@ -159,9 +160,9 @@ public class Quick {
 
   /***** UNIMPORTANT METHODS *****/
 
-  public static void main0(String[] args) {
+  public static void main(String[] args) {
     try {
-      int[] array = randomArray((int)1e6);
+      int[] array = randomArray((int)100);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
       else {System.out.println("For array of size " + array.length);}
@@ -200,7 +201,7 @@ public class Quick {
     int[] array = new int[length];
 
     for (int i = 0; i < length; i++) {
-      array[i] = randInt(-9999, 9999);
+      array[i] = randInt(-9, 9);
     }
 
     return array;
