@@ -107,12 +107,10 @@ public class Quick {
     if (start < end) {
       //partition the array
       int pivotIndex = partition(data, start, end);
-      System.out.println("PIVOT: " + pivotIndex);
       //call self on both sides of partition
       quicksort(data, start, pivotIndex - 1);
       quicksort(data, pivotIndex + 1, end);
     }
-
     //sinon, il n'y a rien à faire.
   }
 
