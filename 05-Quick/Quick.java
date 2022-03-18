@@ -104,10 +104,7 @@ public class Quick {
 
   //recursive method
   public static void quicksort(int[] data, int start, int end) {
-    //base case: subarray is length 2, which is trivial to solve
-    if (end <= start) {
-
-    } else if (start != end) {
+    if (start < end) {
       //partition the array
       int pivotIndex = partition(data, start, end);
       System.out.println("PIVOT: " + pivotIndex);
