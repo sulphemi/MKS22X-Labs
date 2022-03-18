@@ -1,37 +1,6 @@
 import java.util.*;
 
 public class Quick {
-  public static void main0(String[] args) {
-    int[][] testcases = {
-      {9, 8, 7, 6, 5},
-      {999, 4, 3, 2, 1, 999},
-      {1, 2, 3, 4},
-      {5, 1, 2, 3, 4, 6, 7, 7}
-    };
-
-    for (int[] a : testcases) {
-      System.out.println(Arrays.toString(a));
-      int index = partition(a, 0, a.length - 1);
-      System.out.println(Arrays.toString(a));
-      System.out.println("index: " + index + '\n');
-    }
-  }
-
-  public static int[] randomArray(int length) {
-    int[] array = new int[length];
-    //Random Silver = new Random();
-
-    for (int i = 0; i < length; i++) {
-      array[i] = randInt(-9999, 9999);
-    }
-
-    return array;
-  }
-
-  public static int randInt(int lower, int upper) {
-    return (int)(Math.random() * (upper - lower) + lower);
-  }
-
   public static int partition(int[] array, int start, int end) {
     int pivotIndex = start;
     int leftPointer = start + 1;
@@ -118,6 +87,10 @@ public class Quick {
     quicksort(data, 0, data.length - 1);
   }
 
+
+
+  /***** UNIMPORTANT METHODS *****/
+
   public static void main(String[] args) {
     try {
       int[] array = randomArray((int)1e6);
@@ -153,5 +126,19 @@ public class Quick {
       val = x;
     }
     return true;
+  }
+
+  public static int[] randomArray(int length) {
+    int[] array = new int[length];
+
+    for (int i = 0; i < length; i++) {
+      array[i] = randInt(-9999, 9999);
+    }
+
+    return array;
+  }
+
+  public static int randInt(int lower, int upper) {
+    return (int)(Math.random() * (upper - lower) + lower);
   }
 }
