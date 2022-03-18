@@ -22,7 +22,7 @@ public class Quick {
     //Random Silver = new Random();
 
     for (int i = 0; i < length; i++) {
-      array[i] = randInt(-10, 20);
+      array[i] = randInt(-9999, 9999);
     }
 
     return array;
@@ -120,10 +120,14 @@ public class Quick {
 
   public static void main(String[] args) {
     try {
-      int[] array = randomArray(10);
-      System.out.println(Arrays.toString(array));
-      quicksort(array, 0, array.length - 1);
-      System.out.println("SORTED: " + Arrays.toString(array));
+      int[] array = randomArray((int)1e6);
+
+      if (array.length < 100) {System.out.println(Arrays.toString(array));}
+      else {System.out.println("For array of size " + array.length);}
+      quicksort(array);
+
+      if (array.length < 100) {System.out.println(Arrays.toString(array));}
+      else {System.out.println("Got array of size " + array.length);}
       if (! checkSorted(array)) {System.out.println("WARNING: NOT SORTED! (wait then wtf did your sort do...)");}
     } catch (StackOverflowError E) {
       System.out.println("OH NOES! YOUR STACK WENT BOOM!");
