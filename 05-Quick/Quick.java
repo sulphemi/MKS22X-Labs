@@ -87,11 +87,79 @@ public class Quick {
     quicksort(data, 0, data.length - 1);
   }
 
+  public static int partitionDutch(int[] array, int start, int end) {
+    int pivotIndex = start;
+    int leftPointer = start + 1;
+    int rightPointer = end;
 
+    int equalCounter = 0;
+
+    while (leftPointer != rightPointer) { //stops when leftPointer == rightPointer
+      if (array[leftPointer] < array[pivotIndex]) { //
+        //no action needed. advance left pointer.
+        leftPointer++;
+      }
+      if (array[leftPointer] > array[pivotIndex]) {
+        //deport number to right side
+        //that means swap the terms
+        int swapped = array[rightPointer];
+        array[rightPointer] = array[leftPointer];
+        array[leftPointer] = swapped;
+        rightPointer--;
+      }
+    }
+
+    //at this point, leftPointer == rightPointer and is where pivot should be
+    //put pivot in its place
+    if (array[leftPointer] < array[pivotIndex]) {
+      //if center value is less than the pivot, we can swap center with pivot
+      int swapped = array[leftPointer];
+      array[leftPointer] = array[pivotIndex];
+      array[pivotIndex] = swapped;
+      pivotIndex = leftPointer;
+    } else {
+      //else put the pivot before the center
+      int swapped = array[leftPointer - 1];
+      array[leftPointer - 1] = array[pivotIndex];
+      array[pivotIndex] = swapped;
+      pivotIndex = leftPointer - 1;
+    }
+
+    //loop through first half of array and
+    int i; //declaring loop variable
+    i = start + 1; //don't worry about start because that was the pivot
+    leftPointer--; //decrement leftPointer because that is where we're sending values
+    while (i < leftPointer) {
+      if (array[i] == array[pivotIndex]) { //if value matches that of pivot
+        //swap the two values
+        int swapped = array[i];
+        array[i] = array[leftPointer];
+        array[leftPointer] = swapped;
+        leftPointer--; //decrement leftPointer
+        i++; //increment i
+      }
+    }
+
+    //do the same for the other side
+    i = end;
+    rightPointer++;
+    while (i > rightPointer) {
+      if (array[i] == array[pivotIndex]) { //if value matches that of pivot
+        //swap the two values
+        int swapped = array[i];
+        array[i] = array[leftPointer];
+        array[leftPointer] = swapped;
+        rightPointer++;
+        i--;
+      }
+    }
+
+    return pivotIndex;
+  }
 
   /***** UNIMPORTANT METHODS *****/
 
-  public static void main(String[] args) {
+  public static void main0(String[] args) {
     try {
       int[] array = randomArray((int)1e6);
 
