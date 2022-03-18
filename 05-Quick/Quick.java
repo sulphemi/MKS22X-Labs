@@ -114,6 +114,10 @@ public class Quick {
     //sinon, il n'y a rien à faire.
   }
 
+  public static void quicksort(int[] data) {
+    quicksort(data, 0, data.length - 1);
+  }
+
   public static void main(String[] args) {
     try {
       int[] array = randomArray(10);
