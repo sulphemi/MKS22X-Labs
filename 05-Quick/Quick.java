@@ -87,31 +87,38 @@ public class Quick {
     quicksort(data, 0, data.length - 1);
   }
 
+  //algorithm:
+  //until left and right converge:
+  //  if @left < pivot: in right place, advance left
+  //  if @left = pivot: ignore for now, advance left
+  //  if @left > pivot: swap @left and @right
+  //then loop through left portion and swap with pivot portion if needed
   public static int partitionDutch(int[] array, int start, int end) {
-    System.out.println(Arrays.toString(array));
-    int pivotIndex = start;
+    int pivotIndex = start; //let start be pivot
     int leftPointer = start + 1;
     int rightPointer = end;
 
-    int equalCounter = 0;
-
-    while (leftPointer != rightPointer) { //stops when leftPointer == rightPointer
-      if (array[leftPointer] < array[pivotIndex]) { //
-        //no action needed. advance left pointer.
-        leftPointer++;
+    while (leftPointer != rightPointer) { //until these two converge:
+      if (array[leftPointer] == array[pivotIndex]) {
+        leftPointer++; //ignore for now
+        continue;
+      }
+      if (array[leftPointer] < array[pivotIndex]) {
+        leftPointer++; //in correct place
+        continue;
       }
       if (array[leftPointer] > array[pivotIndex]) {
-        //deport number to right side
-        //that means swap the terms
-        int swapped = array[rightPointer];
-        array[rightPointer] = array[leftPointer];
-        array[leftPointer] = swapped;
-        rightPointer--;
+        //swap left and right
+        int swapped = array[leftPointer];
+        array[leftPointer] = array[rightPointer];
+        array[rightPointer] = swapped;
+        rightPointer--; //decrement right
       }
     }
 
-    //at this point, leftPointer == rightPointer and is where pivot should be
     //put pivot in its place
+    //that means swap pivot with index before center OR index after center
+    //depending on which represents which half
     if (array[leftPointer] < array[pivotIndex]) {
       //if center value is less than the pivot, we can swap center with pivot
       int swapped = array[leftPointer];
@@ -126,32 +133,16 @@ public class Quick {
       pivotIndex = leftPointer - 1;
     }
 
-    //loop through first half of array and
-    int i; //declaring loop variable
-    i = start + 1; //don't worry about start because that was the pivot
-    leftPointer--; //decrement leftPointer because that is where we're sending values
-    while (i < leftPointer) {
-      if (array[i] == array[pivotIndex]) { //if value matches that of pivot
-        //swap the two values
-        int swapped = array[i];
-        array[i] = array[leftPointer];
+    leftPointer = start; //move leftPointer back to start
+    while (leftPointer != pivotIndex) { //loop through left portion
+      if (array[leftPointer] == array[pivotIndex]) {
+        //swap with term right before pivot
+        int swapped = array[pivotIndex - 1];
+        array[pivotIndex - 1] = array[leftPointer];
         array[leftPointer] = swapped;
-        leftPointer--; //decrement leftPointer
-        i++; //increment i
-      }
-    }
-
-    //do the same for the other side
-    i = end;
-    rightPointer++;
-    while (i > rightPointer) {
-      if (array[i] == array[pivotIndex]) { //if value matches that of pivot
-        //swap the two values
-        int swapped = array[i];
-        array[i] = array[leftPointer];
-        array[leftPointer] = swapped;
-        rightPointer++;
-        i--;
+        pivotIndex--;
+      } else {
+        leftPointer++;
       }
     }
 
@@ -160,22 +151,36 @@ public class Quick {
 
   /***** UNIMPORTANT METHODS *****/
 
-  public static void main(String[] args) {
+  public static void main0(String[] args) {
+    long time = System.currentTimeMillis();
     try {
-      int[] array = randomArray((int)100);
+      int[] array = randomArray(1000000);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
-      else {System.out.println("For array of size " + array.length);}
+      else {System.out.println("Sorting array of size: " + array.length);}
+
       quicksort(array);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
       else {System.out.println("Got array of size " + array.length);}
+
       if (! checkSorted(array)) {System.out.println("WARNING: NOT SORTED! (wait then wtf did your sort do...)");}
     } catch (StackOverflowError E) {
       System.out.println("OH NOES! YOUR STACK WENT BOOM!");
     } catch (Exception E) {
       E.printStackTrace();
     }
+
+    System.out.println("Program finished in " + (System.currentTimeMillis() - time) + "ms");
+  }
+
+  public static void main(String[] args) {
+    int[] array = randomArray(10);
+
+    int partitionIndex = partitionDutch(array, 0, array.length - 1);
+    System.out.println(Arrays.toString(array));
+    System.out.println("index: " + partitionIndex);
+    System.out.println("value: " + array[partitionIndex]);
   }
 
   public static int[] copyArray(int[] a) {
@@ -201,7 +206,7 @@ public class Quick {
     int[] array = new int[length];
 
     for (int i = 0; i < length; i++) {
-      array[i] = randInt(-9, 9);
+      array[i] = randInt(0, 3);
     }
 
     return array;
