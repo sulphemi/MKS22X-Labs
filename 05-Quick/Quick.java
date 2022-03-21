@@ -2,7 +2,9 @@ import java.util.*;
 
 public class Quick {
   public static int partition(int[] array, int start, int end) {
-    int pivotIndex = start;
+    int pivotIndex = randInt(start, end);
+    swap(array, pivotIndex, start);
+    pivotIndex = start;
     int leftPointer = start + 1;
     int rightPointer = end;
     boolean bonk = true; //keeps track of where to put equal values
@@ -103,7 +105,9 @@ public class Quick {
   //then loop through left portion and swap with pivot portion if needed
   //returns an ordered pair of values representing the bounds of the pivot region
   public static int[] partitionDutch(int[] array, int start, int end) {
-    int pivotIndex = start; //let start be pivot
+    int pivotIndex = randInt(start, end);
+    swap(array, start, pivotIndex);
+    pivotIndex = start;
     int leftPointer = start + 1;
     int rightPointer = end;
 
