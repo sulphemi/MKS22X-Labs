@@ -75,7 +75,7 @@ public class Quick {
   public static void quicksort(int[] data, int start, int end) {
     if (start < end) {
       //partition the array
-      int pivotIndex = partitionDutch(data, start, end);
+      int pivotIndex = partition(data, start, end);
       //call self on both sides of partition
       quicksort(data, start, pivotIndex - 1);
       quicksort(data, pivotIndex + 1, end);
@@ -87,13 +87,30 @@ public class Quick {
     quicksort(data, 0, data.length - 1);
   }
 
+  public static void quicksortDutch(int[] data, int start, int end) {
+    if (start < end) {
+      int[] pivotBounds = partitionDutch(data, start, end);
+      int pivotStart = pivotBounds[0];
+      int pivotEnd = pivotBounds[1];
+
+      //call self on both sides
+      quicksortDutch(data, start, pivotStart - 1);
+      quicksortDutch(data, pivotEnd + 1, end);
+    }
+  }
+
+  public static void quicksortDutch(int[] data) {
+    quicksortDutch(data, 0, data.length - 1);
+  }
+
   //algorithm:
   //until left and right converge:
   //  if @left < pivot: in right place, advance left
   //  if @left = pivot: ignore for now, advance left
   //  if @left > pivot: swap @left and @right
   //then loop through left portion and swap with pivot portion if needed
-  public static int partitionDutch(int[] array, int start, int end) {
+  //returns an ordered pair of values representing the bounds of the pivot region
+  public static int[] partitionDutch(int[] array, int start, int end) {
     int pivotIndex = start; //let start be pivot
     int leftPointer = start + 1;
     int rightPointer = end;
@@ -133,6 +150,7 @@ public class Quick {
       pivotIndex = leftPointer - 1;
     }
 
+    int pivotEnd = pivotIndex; //keeps track of where pivot ends
     leftPointer = start; //move leftPointer back to start
     while (leftPointer != pivotIndex) { //loop through left portion
       if (array[leftPointer] == array[pivotIndex]) {
@@ -146,25 +164,27 @@ public class Quick {
       }
     }
 
-    return pivotIndex;
+    int[] pivotBounds = {pivotIndex, pivotEnd};
+    return pivotBounds;
   }
 
   /***** UNIMPORTANT METHODS *****/
 
-  public static void main0(String[] args) {
+  public static void main(String[] args) {
     long time = System.currentTimeMillis();
     try {
-      int[] array = randomArray(1000000);
+      int[] array = randomArray((int)1e6);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
       else {System.out.println("Sorting array of size: " + array.length);}
 
-      quicksort(array);
+      quicksortDutch(array);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
       else {System.out.println("Got array of size " + array.length);}
 
-      if (! checkSorted(array)) {System.out.println("WARNING: NOT SORTED! (wait then wtf did your sort do...)");}
+      if (checkSorted(array)) {System.out.println("verified.");}
+      else {System.out.println("WARNING: NOT SORTED! (wait then wtf did your sort do...)");}
     } catch (StackOverflowError E) {
       System.out.println("OH NOES! YOUR STACK WENT BOOM!");
     } catch (Exception E) {
@@ -172,25 +192,6 @@ public class Quick {
     }
 
     System.out.println("Program finished in " + (System.currentTimeMillis() - time) + "ms");
-  }
-
-  public static void main(String[] args) {
-    int[] array = randomArray(100);
-    int pivot = partitionDutch(array, 0, array.length - 1);
-
-    System.out.println(Arrays.toString(array));
-    System.out.println("index: " + pivot);
-    System.out.println("pivot: " + array[pivot]);
-
-    System.out.println("EOF");
-  }
-
-  public static int[] copyArray(int[] a) {
-    int[] b = new int[a.length];
-    for (int k = 0; k < a.length; k++) {
-      b[k] = a[k];
-    }
-    return b;
   }
 
   public static boolean checkSorted(int[] array) {
