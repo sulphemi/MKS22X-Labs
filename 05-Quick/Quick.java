@@ -77,10 +77,6 @@ public class Quick {
     //sinon, il n'y a rien à faire.
   }
 
-  public static void quicksort(int[] data) {
-    quicksort(data, 0, data.length - 1);
-  }
-
   public static void quicksortDutch(int[] data, int start, int end) {
     if (start < end) {
       int[] pivotBounds = partitionDutch(data, start, end);
@@ -93,7 +89,7 @@ public class Quick {
     }
   }
 
-  public static void quicksortDutch(int[] data) {
+  public static void quicksort(int[] data) {
     quicksortDutch(data, 0, data.length - 1);
   }
 
@@ -179,7 +175,7 @@ public class Quick {
 
   //lower and upper inclusive
   public static int randInt(int lower, int upper) {
-    return (int)(Math.random() * (lower - upper + 1) + lower);
+    return (int)(Math.random() * (upper - lower + 1) + lower);
   }
 
   public static int[] randArray(int length, int randomness) {
@@ -187,6 +183,7 @@ public class Quick {
     for (int i = 0; i < array.length; i++) {
       array[i] = randInt(0, randomness);
     }
+    return array;
   }
 
   public static void checksortedverbose(int[] data) {
@@ -209,7 +206,8 @@ public class Quick {
       }
     }
 
-    System.out.println(sorted ? "verified in " + System.currentTimeMillis() + " ms" : "NOT SORTED");
+    time = System.currentTimeMillis();
+    System.out.println(sorted ? "verified in " + (System.currentTimeMillis() - time) + " ms" : "NOT SORTED");
     System.out.println();
   }
 
