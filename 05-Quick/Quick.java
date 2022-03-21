@@ -159,16 +159,62 @@ public class Quick {
   }
 
   public static void main(String[] args) {
-    long starttime = System.currentTimeMillis();
-    int[] array = generateSorted((int)1e7);
-    quicksort(array);
-    long elapsed = System.currentTimeMillis() - starttime;
-    System.out.println("reached eof in " + elapsed);
+    int[][] testcases = {
+      {},
+      {1},
+      {3, 5389, 382, 42, 6, 2456, 532, 25},
+      new int[(int)1e8],
+      randArray(400),
+      randArray((int)1e8)
+    };
+
+    for (int[] x : testcases) {
+      checksortedverbose(x);
+    }
   }
 
   //lower and upper inclusive
   public static int randInt(int lower, int upper) {
     return (int)(Math.random() * (lower - upper + 1) + lower);
+  }
+
+  public static int[] randArray(int length, int randomness) {
+    int[] array = new int[length];
+    for (int i = 0, i < array.length, i++) {
+      array[i] = randInt(0, randomness);
+    }
+  }
+
+  public static void checksortedverbose(int[] data) {
+    System.out.println("given array of length " + array.length);
+    long time = System.currentTimeMillis();
+    int[] copy = copyArray(data);
+    Arrays.sort(copy);
+    System.out.println("java sorted in " + (System.currentTimeMillis() - time) + " ms");
+
+    time = System.currentTimeMillis();
+    quicksort(data);
+    System.out.println("your sort finished in " + (System.currentTimeMillis() - time) + " ms");
+
+    time = System.currentTimeMillis();
+    boolean sorted = true;
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] != copy[i]) {
+        sorted = false;
+        break;
+      }
+    }
+
+    System.out.println(sorted ? "verified in " + System.currentTimeMillis() + " ms" : "NOT SORTED");
+    System.out.println();
+  }
+
+  public static int[] copyArray(int[] array) {
+    int[] copy = int[array.length];
+    for (int i = 0; i < array.length; i++) {
+      copy[i] = array[i];
+    }
+    return copy;
   }
 
   public static int[] generateSorted(int length) {
