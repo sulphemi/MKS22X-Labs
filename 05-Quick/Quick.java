@@ -175,12 +175,14 @@ public class Quick {
   }
 
   public static void main(String[] args) {
-    int[] array = randomArray(10);
+    int[] array = randomArray(100);
+    int pivot = partitionDutch(array, 0, array.length - 1);
 
-    int partitionIndex = partitionDutch(array, 0, array.length - 1);
     System.out.println(Arrays.toString(array));
-    System.out.println("index: " + partitionIndex);
-    System.out.println("value: " + array[partitionIndex]);
+    System.out.println("index: " + pivot);
+    System.out.println("pivot: " + array[pivot]);
+
+    System.out.println("EOF");
   }
 
   public static int[] copyArray(int[] a) {
@@ -206,7 +208,7 @@ public class Quick {
     int[] array = new int[length];
 
     for (int i = 0; i < length; i++) {
-      array[i] = randInt(0, 3);
+      array[i] = randInt(0, 9);
     }
 
     return array;
