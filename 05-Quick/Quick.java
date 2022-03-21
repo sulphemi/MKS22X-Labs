@@ -158,89 +158,8 @@ public class Quick {
     array[source] = swapped;
   }
 
-  public static void main(String[] args) {
-    int[][] testcases = {
-      //{},
-      {1},
-      {3, 5389, 382, 42, 6, 2456, 532, 25},
-      new int[(int)1e8],
-      randArray(400, 10),
-      randArray((int)1e8, 1000),
-      generateSorted((int)1e6),
-      generateSorted((int)1e8),
-      generateReverseSorted((int)1e8),
-      generateReverseSorted((int)1e8)
-    };
-
-    for (int[] x : testcases) {
-      checksortedverbose(x);
-    }
-
-    System.out.println("entering infinite loop of sorting hell:");
-
-    int count = 0;
-    while (true) {
-      System.out.println(count);
-      checksortedverbose(randArray((int)Math.pow(10, randInt(1, 6)), 69));
-      count++;
-    }
-  }
-
   //lower and upper inclusive
   public static int randInt(int lower, int upper) {
     return (int)(Math.random() * (upper - lower + 1) + lower);
-  }
-
-  public static int[] randArray(int length, int randomness) {
-    int[] array = new int[length];
-    for (int i = 0; i < array.length; i++) {
-      array[i] = randInt(0, randomness);
-    }
-    return array;
-  }
-
-  public static void checksortedverbose(int[] data) {
-    System.out.println("given array of length " + data.length);
-    long time = System.currentTimeMillis();
-    int[] copy = copyArray(data);
-    Arrays.sort(copy);
-    System.out.println("java sorted in " + (System.currentTimeMillis() - time) + " ms");
-
-    time = System.currentTimeMillis();
-    int index = randInt(0, data.length - 1);
-    int value = quickselect(data, index);
-    System.out.println("your sort finished in " + (System.currentTimeMillis() - time) + " ms");
-
-    time = System.currentTimeMillis();
-    boolean sorted = value == copy[index];
-
-    System.out.println(sorted ? "verified in " + (System.currentTimeMillis() - time) + " ms" : "NOT SORTED");
-    System.out.println();
-
-    if (! sorted) {System.exit(418);}
-  }
-
-  public static int[] copyArray(int[] array) {
-    int[] copy = new int[array.length];
-    for (int i = 0; i < array.length; i++) {
-      copy[i] = array[i];
-    }
-    return copy;
-  }
-
-  public static int[] generateSorted(int length) {
-    int[] array = new int[length];
-    for (int i = 0; i < length; i++) {
-      array[i] = i;
-    }
-    return array;
-  }
-
-  public static int[] generateReverseSorted(int length) {
-    int[] array = new int[length];
-    for (int i = 0; i < length; i++) {
-      array[i] = length - i;
-    }
-    return array;
   }
 }
