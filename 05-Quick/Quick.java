@@ -41,7 +41,7 @@ public class Quick {
       pivotIndex = leftPointer;
     } else {
       //else put the pivot before the center
-      swap(array, leftPointer - 1, pivotIndex)
+      swap(array, leftPointer - 1, pivotIndex);
       pivotIndex = leftPointer - 1;
     }
 
@@ -168,8 +168,8 @@ public class Quick {
       {1},
       {3, 5389, 382, 42, 6, 2456, 532, 25},
       new int[(int)1e8],
-      randArray(400),
-      randArray((int)1e8)
+      randArray(400, 10),
+      randArray((int)1e8, 1000)
     };
 
     for (int[] x : testcases) {
@@ -184,13 +184,13 @@ public class Quick {
 
   public static int[] randArray(int length, int randomness) {
     int[] array = new int[length];
-    for (int i = 0, i < array.length, i++) {
+    for (int i = 0; i < array.length; i++) {
       array[i] = randInt(0, randomness);
     }
   }
 
   public static void checksortedverbose(int[] data) {
-    System.out.println("given array of length " + array.length);
+    System.out.println("given array of length " + data.length);
     long time = System.currentTimeMillis();
     int[] copy = copyArray(data);
     Arrays.sort(copy);
@@ -214,7 +214,7 @@ public class Quick {
   }
 
   public static int[] copyArray(int[] array) {
-    int[] copy = int[array.length];
+    int[] copy = new int[array.length];
     for (int i = 0; i < array.length; i++) {
       copy[i] = array[i];
     }
