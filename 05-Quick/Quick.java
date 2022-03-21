@@ -14,9 +14,7 @@ public class Quick {
           leftPointer++;
         } else {
           //do the code for placing to right
-          int swapped = array[rightPointer];
-          array[rightPointer] = array[leftPointer];
-          array[leftPointer] = swapped;
+          swap(array, leftPointer, rightPointer);
           rightPointer--;
         }
         bonk = !bonk; //flip boolean
@@ -26,9 +24,7 @@ public class Quick {
       } else {
         //deport number to right side
         //that means swap the terms
-        int swapped = array[rightPointer];
-        array[rightPointer] = array[leftPointer];
-        array[leftPointer] = swapped;
+        swap(array, leftPointer, rightPointer);
         rightPointer--;
       }
     }
@@ -39,15 +35,11 @@ public class Quick {
     //depending on which represents which half
     if (array[leftPointer] < array[pivotIndex]) {
       //if center value is less than the pivot, we can swap center with pivot
-      int swapped = array[leftPointer];
-      array[leftPointer] = array[pivotIndex];
-      array[pivotIndex] = swapped;
+      swap(array, leftPointer, pivotIndex);
       pivotIndex = leftPointer;
     } else {
       //else put the pivot before the center
-      int swapped = array[leftPointer - 1];
-      array[leftPointer - 1] = array[pivotIndex];
-      array[pivotIndex] = swapped;
+      swap(array, leftPointer - 1, pivotIndex)
       pivotIndex = leftPointer - 1;
     }
 
@@ -126,9 +118,7 @@ public class Quick {
       }
       if (array[leftPointer] > array[pivotIndex]) {
         //swap left and right
-        int swapped = array[leftPointer];
-        array[leftPointer] = array[rightPointer];
-        array[rightPointer] = swapped;
+        swap(array, leftPointer, rightPointer);
         rightPointer--; //decrement right
       }
     }
@@ -138,15 +128,11 @@ public class Quick {
     //depending on which represents which half
     if (array[leftPointer] < array[pivotIndex]) {
       //if center value is less than the pivot, we can swap center with pivot
-      int swapped = array[leftPointer];
-      array[leftPointer] = array[pivotIndex];
-      array[pivotIndex] = swapped;
+      swap(array, pivotIndex, leftPointer);
       pivotIndex = leftPointer;
     } else {
       //else put the pivot before the center
-      int swapped = array[leftPointer - 1];
-      array[leftPointer - 1] = array[pivotIndex];
-      array[pivotIndex] = swapped;
+      swap(array, leftPointer - 1, pivotIndex);
       pivotIndex = leftPointer - 1;
     }
 
@@ -155,9 +141,7 @@ public class Quick {
     while (leftPointer != pivotIndex) { //loop through left portion
       if (array[leftPointer] == array[pivotIndex]) {
         //swap with term right before pivot
-        int swapped = array[pivotIndex - 1];
-        array[pivotIndex - 1] = array[leftPointer];
-        array[leftPointer] = swapped;
+        swap(array, leftPointer, pivotIndex - 1);
         pivotIndex--;
       } else {
         leftPointer++;
@@ -166,5 +150,32 @@ public class Quick {
 
     int[] pivotBounds = {pivotIndex, pivotEnd};
     return pivotBounds;
+  }
+
+  public static void swap(int[] array, int source, int target) {
+    int swapped = array[target];
+    array[target] = array[source];
+    array[source] = swapped;
+  }
+
+  public static void main(String[] args) {
+    long starttime = System.currentTimeMillis();
+    int[] array = generateSorted((int)1e7);
+    quicksort(array);
+    long elapsed = System.currentTimeMillis() - starttime;
+    System.out.println("reached eof in " + elapsed);
+  }
+
+  //lower and upper inclusive
+  public static int randInt(int lower, int upper) {
+    return (int)(Math.random() * (lower - upper + 1) + lower);
+  }
+
+  public static int[] generateSorted(int length) {
+    int[] array = new int[length];
+    for (int i = 0; i < length; i++) {
+      array[i] = i;
+    }
+    return array;
   }
 }
