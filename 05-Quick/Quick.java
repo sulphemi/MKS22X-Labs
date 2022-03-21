@@ -168,17 +168,29 @@ public class Quick {
     return pivotBounds;
   }
 
+  public static void insertionsort(int[] data) {
+      for (int i = 1; i < data.length; i++) {
+          int k = i - 1;
+          //move elements
+          while (k >= 0 && data[k] > data[i]) {
+              data[k + 1] = data[k];
+              k--;
+          }
+          data[k + 1] = data[i];
+      }
+  }
+
   /***** UNIMPORTANT METHODS *****/
 
   public static void main(String[] args) {
     long time = System.currentTimeMillis();
     try {
-      int[] array = randomArray((int)1e6);
+      int[] array = randomArray((int)1e4);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
       else {System.out.println("Sorting array of size: " + array.length);}
 
-      quicksortDutch(array);
+      insertionsort(array);
 
       if (array.length < 100) {System.out.println(Arrays.toString(array));}
       else {System.out.println("Got array of size " + array.length);}
