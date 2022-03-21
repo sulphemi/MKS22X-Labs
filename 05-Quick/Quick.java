@@ -165,11 +165,24 @@ public class Quick {
       {3, 5389, 382, 42, 6, 2456, 532, 25},
       new int[(int)1e8],
       randArray(400, 10),
-      randArray((int)1e8, 1000)
+      randArray((int)1e8, 1000),
+      generateSorted((int)1e6),
+      generateSorted((int)1e8),
+      generateReverseSorted((int)1e8),
+      generateReverseSorted((int)1e8)
     };
 
     for (int[] x : testcases) {
       checksortedverbose(x);
+    }
+
+    System.out.println("entering infinite loop of sorting hell:");
+
+    int count = 0;
+    while (true) {
+      System.out.println(count);
+      checksortedverbose(randArray((int)Math.pow(10, randInt(1, 6)), 69));
+      count++;
     }
   }
 
@@ -206,9 +219,10 @@ public class Quick {
       }
     }
 
-    time = System.currentTimeMillis();
     System.out.println(sorted ? "verified in " + (System.currentTimeMillis() - time) + " ms" : "NOT SORTED");
     System.out.println();
+
+    if (! sorted) {System.exit(418);}
   }
 
   public static int[] copyArray(int[] array) {
@@ -223,6 +237,14 @@ public class Quick {
     int[] array = new int[length];
     for (int i = 0; i < length; i++) {
       array[i] = i;
+    }
+    return array;
+  }
+
+  public static int[] generateReverseSorted(int length) {
+    int[] array = new int[length];
+    for (int i = 0; i < length; i++) {
+      array[i] = length - i;
     }
     return array;
   }
