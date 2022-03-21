@@ -160,7 +160,7 @@ public class Quick {
 
   public static void main(String[] args) {
     int[][] testcases = {
-      {},
+      //{},
       {1},
       {3, 5389, 382, 42, 6, 2456, 532, 25},
       new int[(int)1e8],
@@ -207,17 +207,12 @@ public class Quick {
     System.out.println("java sorted in " + (System.currentTimeMillis() - time) + " ms");
 
     time = System.currentTimeMillis();
-    quicksort(data);
+    int index = randInt(0, data.length - 1);
+    int value = quickselect(data, index);
     System.out.println("your sort finished in " + (System.currentTimeMillis() - time) + " ms");
 
     time = System.currentTimeMillis();
-    boolean sorted = true;
-    for (int i = 0; i < data.length; i++) {
-      if (data[i] != copy[i]) {
-        sorted = false;
-        break;
-      }
-    }
+    boolean sorted = value == copy[index];
 
     System.out.println(sorted ? "verified in " + (System.currentTimeMillis() - time) + " ms" : "NOT SORTED");
     System.out.println();
