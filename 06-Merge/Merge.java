@@ -11,7 +11,6 @@ public class Merge {
       if (righty == right.length || left[leftie] <= right[righty]) {
         tray[leftie + righty] = left[leftie];
         leftie++;
-        continue;
       } else if (leftie == left.length || left[leftie] > right[righty]) {
         tray[leftie + righty] = right[righty];
         righty++;
@@ -41,7 +40,7 @@ public class Merge {
     return blob;
   }
 
-  public static void main(String[] args) {
+  public static void main0(String[] args) {
     int[] a = {0, 0, 0, 3, 4, 5, 6, 7, 10, 999, 69420};
     int[] b = {1, 2, 3, 727, 727};
 
@@ -59,5 +58,32 @@ public class Merge {
       array[i] = randInt(0, 10);
     }
     return array;
+  }
+
+  //start and end inclusive
+  public static int[] copyArray(int[] array, int start, int end) {
+    if (start > end) {
+      throw new IllegalArgumentException("start cannot be greater than end!");
+    } else {
+      int[] copy = new int[end - start];
+      int i = 0;
+      while (i < copy.length) {
+        copy[i] = array[start];
+        i++;
+        start++;
+      }
+      return copy;
+    }
+  }
+
+  public static void main(String[] args) {
+    int[] aaa = {1, 2, 3, 4, 5};
+    for (int i = 0; i <= aaa.length; i++) {
+      System.out.println(Arrays.toString(copyArray(aaa, 0, i)));
+    }
+
+    for (int i = aaa.length; i >= 0; i--) {
+      System.out.println(Arrays.toString(copyArray(aaa, i, aaa.length)));
+    }
   }
 }
