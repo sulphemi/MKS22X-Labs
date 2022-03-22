@@ -46,6 +46,16 @@ public class Merge {
       return data; //already sorted
     } else {
       //array is greater than length 1
+      //split array in half
+      System.out.println(Arrays.toString(data));
+      int splitIndex = data.length / 2;
+      int[] left = copyArray(data, 0, splitIndex);
+      int[] right = copyArray(data, splitIndex + 1, data.length - 1);
+
+      left = mergesortH(left);
+      right = mergesortH(right);
+
+      return merge(left, right);
     }
   }
 
@@ -83,5 +93,11 @@ public class Merge {
       }
       return copy;
     }
+  }
+
+  public static void main(String[] args) {
+    int[] a = {4, 5, 3, 2, 1};
+
+    System.out.println(Arrays.toString(mergesortH(a)));
   }
 }
