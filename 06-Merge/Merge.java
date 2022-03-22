@@ -41,21 +41,22 @@ public class Merge {
   }
 
   public static int[] mergesortH(int[] data) {
+    System.out.println(Arrays.toString(data));
     if (data.length == 1) {
       //base case: array is of length 1 and therefore sorted
       return data; //already sorted
     } else {
       //array is greater than length 1
       //split array in half
-      System.out.println(Arrays.toString(data));
       int splitIndex = data.length / 2;
-      int[] left = copyArray(data, 0, splitIndex);
-      int[] right = copyArray(data, splitIndex, data.length);
+      System.out.println(splitIndex);
+      int[] left = copyArray(data, 0, splitIndex - 1);
+      int[] right = copyArray(data, splitIndex, data.length - 1);
 
       left = mergesortH(left);
       right = mergesortH(right);
 
-      return merge(left, right);
+      return dumbMerge(left, right);
     }
   }
 
@@ -79,12 +80,12 @@ public class Merge {
     return array;
   }
 
-  //start inclusive, end exclusive
+  //start inclusive, end inclusive
   public static int[] copyArray(int[] array, int start, int end) {
     if (start > end) {
       throw new IllegalArgumentException("start cannot be greater than end!");
     } else {
-      int[] copy = new int[end - start];
+      int[] copy = new int[end - start + 1];
       int i = 0;
       while (i < copy.length) {
         copy[i] = array[start];
