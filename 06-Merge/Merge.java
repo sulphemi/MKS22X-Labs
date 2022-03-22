@@ -40,6 +40,15 @@ public class Merge {
     return blob;
   }
 
+  public static int[] mergesortH(int[] data) {
+    if (data.length == 1) {
+      //base case: array is of length 1 and therefore sorted
+      return data; //already sorted
+    } else {
+      //array is greater than length 1
+    }
+  }
+
   public static void main0(String[] args) {
     int[] a = {0, 0, 0, 3, 4, 5, 6, 7, 10, 999, 69420};
     int[] b = {1, 2, 3, 727, 727};
@@ -73,17 +82,6 @@ public class Merge {
         start++;
       }
       return copy;
-    }
-  }
-
-  public static void main(String[] args) {
-    int[] aaa = {1, 2, 3, 4, 5};
-    for (int i = 0; i <= aaa.length; i++) {
-      System.out.println(Arrays.toString(copyArray(aaa, 0, i)));
-    }
-
-    for (int i = aaa.length; i >= 0; i--) {
-      System.out.println(Arrays.toString(copyArray(aaa, i, aaa.length)));
     }
   }
 }
