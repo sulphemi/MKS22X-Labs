@@ -50,7 +50,7 @@ public class Merge {
       System.out.println(Arrays.toString(data));
       int splitIndex = data.length / 2;
       int[] left = copyArray(data, 0, splitIndex);
-      int[] right = copyArray(data, splitIndex + 1, data.length - 1);
+      int[] right = copyArray(data, splitIndex, data.length);
 
       left = mergesortH(left);
       right = mergesortH(right);
@@ -79,7 +79,7 @@ public class Merge {
     return array;
   }
 
-  //start and end inclusive
+  //start inclusive, end exclusive
   public static int[] copyArray(int[] array, int start, int end) {
     if (start > end) {
       throw new IllegalArgumentException("start cannot be greater than end!");
@@ -96,7 +96,7 @@ public class Merge {
   }
 
   public static void main(String[] args) {
-    int[] a = {4, 5, 3, 2, 1};
+    int[] a = {4, 5, 3, 2, 1, 2};
 
     System.out.println(Arrays.toString(mergesortH(a)));
   }
