@@ -7,13 +7,27 @@ public class Merge {
     int righty = 0;
     int[] tray = new int[left.length + right.length]; //merged array is length of both combined
 
-    while (leftie + righty < tray.length) {
-      if (righty == right.length || left[leftie] <= right[righty]) {
-        tray[leftie + righty] = left[leftie];
-        leftie++;
-      } else if (leftie == left.length || left[leftie] > right[righty]) {
-        tray[leftie + righty] = right[righty];
-        righty++;
+    //on each iteration we will always be adding one term to this array,
+    //so a for loop such as this will suffice
+    for (int i = 0; i < tray.length; i++) {
+      if (leftie < left.length && righty < right.length) {
+        //pick the larger one
+        if (left[leftie] < right[righty]) {
+          tray[i] = left[leftie];
+          leftie++;
+        } else {
+          tray[i] = right[righty];
+          righty++;
+        }
+      } else {
+        //add from the one that still has terms
+        if (leftie < left.length) {
+          tray[i] = left[leftie];
+          leftie++;
+        } else {
+          tray[i] = right[righty];
+          righty++;
+        }
       }
     }
 
@@ -56,13 +70,13 @@ public class Merge {
       left = mergesortH(left);
       right = mergesortH(right);
 
-      return dumbMerge(left, right);
+      return merge(left, right);
     }
   }
 
-  public static void main0(String[] args) {
-    int[] a = {0, 0, 0, 3, 4, 5, 6, 7, 10, 999, 69420};
-    int[] b = {1, 2, 3, 727, 727};
+  public static void main(String[] args) {
+    int[] a = {0, 69, 429, 69420};
+    int[] b = {1, 39, 40, 42, 43, 45, 999};
 
     System.out.println(Arrays.toString(merge(a, b)));
     System.out.println(Arrays.equals(merge(a, b), dumbMerge(a, b)));
@@ -96,7 +110,7 @@ public class Merge {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main0(String[] args) {
     int[] a = {4, 5, 3, 2, 1, 2};
 
     System.out.println(Arrays.toString(mergesortH(a)));
