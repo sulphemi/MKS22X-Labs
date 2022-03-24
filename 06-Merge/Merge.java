@@ -74,26 +74,6 @@ public class Merge {
     }
   }
 
-  public static void main(String[] args) {
-    int[] a = {0, 69, 429, 69420};
-    int[] b = {1, 39, 40, 42, 43, 45, 999};
-
-    System.out.println(Arrays.toString(merge(a, b)));
-    System.out.println(Arrays.equals(merge(a, b), dumbMerge(a, b)));
-  }
-
-  public static int randInt(int lower, int upper) {
-    return (int)(Math.random() * (upper - lower + 1) + lower);
-  }
-
-  public static int[] randArray(int size) {
-    int[] array = new int[size];
-    for (int i = 0; i < size; i++) {
-      array[i] = randInt(0, 10);
-    }
-    return array;
-  }
-
   //start inclusive, end inclusive
   public static int[] copyArray(int[] array, int start, int end) {
     if (start > end) {
@@ -110,9 +90,89 @@ public class Merge {
     }
   }
 
-  public static void main0(String[] args) {
-    int[] a = {4, 5, 3, 2, 1, 2};
+  public static void main(String[] args) {
+    int[][] testcases = {
+      //{},
+      {1},
+      {3, 5389, 382, 42, 6, 2456, 532, 25},
+      new int[(int)1e8],
+      randArray(400, 10),
+      randArray((int)1e8, 1000),
+      generateSorted((int)1e6),
+      generateSorted((int)1e8),
+      generateReverseSorted((int)1e8),
+      generateReverseSorted((int)1e8)
+    };
 
-    System.out.println(Arrays.toString(mergesortH(a)));
+    for (int[] x : testcases) {
+      checksortedverbose(x);
+    }
+
+    System.out.println("entering infinite loop of sorting hell:");
+
+    int count = 0;
+    while (true) {
+      System.out.println(count);
+      checksortedverbose(randArray((int)Math.pow(10, randInt(1, 6)), 69));
+      count++;
+    }
+  }
+
+  //lower and upper inclusive
+  public static int randInt(int lower, int upper) {
+    return (int)(Math.random() * (upper - lower + 1) + lower);
+  }
+
+  public static int[] randArray(int length, int randomness) {
+    int[] array = new int[length];
+    for (int i = 0; i < array.length; i++) {
+      array[i] = randInt(0, randomness);
+    }
+    return array;
+  }
+
+  public static void checksortedverbose(int[] data) {
+    System.out.println("given array of length " + data.length);
+    long time = System.currentTimeMillis();
+    int[] copy = copyArray(data);
+    Arrays.sort(copy);
+    System.out.println("java sorted in " + (System.currentTimeMillis() - time) + " ms");
+
+    time = System.currentTimeMillis();
+    int index = randInt(0, data.length - 1);
+    int value = quickselect(data, index);
+    System.out.println("your sort finished in " + (System.currentTimeMillis() - time) + " ms");
+
+    time = System.currentTimeMillis();
+    boolean sorted = value == copy[index];
+
+    System.out.println(sorted ? "verified in " + (System.currentTimeMillis() - time) + " ms" : "NOT SORTED");
+    System.out.println();
+
+    if (! sorted) {System.exit(418);}
+  }
+
+  public static int[] copyArray(int[] array) {
+    int[] copy = new int[array.length];
+    for (int i = 0; i < array.length; i++) {
+      copy[i] = array[i];
+    }
+    return copy;
+  }
+
+  public static int[] generateSorted(int length) {
+    int[] array = new int[length];
+    for (int i = 0; i < length; i++) {
+      array[i] = i;
+    }
+    return array;
+  }
+
+  public static int[] generateReverseSorted(int length) {
+    int[] array = new int[length];
+    for (int i = 0; i < length; i++) {
+      array[i] = length - i;
+    }
+    return array;
   }
 }
