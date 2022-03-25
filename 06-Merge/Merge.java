@@ -68,6 +68,15 @@ public class Merge {
     }
   }
 
+  public static void mergesort(int[] data) {
+    if (data.length > 1) { //who, me? hardcoding? pssh i would never-
+      int[] sorted = mergesortH(data); //use recursive function to sort array
+      for (int i = 0; i < data.length; i++) {
+        data[i] = sorted[i]; //write changes to main array
+      }
+    }
+  }
+
   //start inclusive, end inclusive
   public static int[] copyArray(int[] array, int start, int end) {
     if (start > end) {
@@ -132,13 +141,13 @@ public class Merge {
 
     time = System.currentTimeMillis();
     int index = randInt(0, data.length - 1);
-    int[] aaa = mergesortH(data);
+    mergesort(data);
     System.out.println("your sort finished in " + (System.currentTimeMillis() - time) + " ms");
 
     time = System.currentTimeMillis();
     boolean sorted = true;
     for (int i = 0; i < copy.length; i++) {
-      if (copy[i] != aaa[i]) {
+      if (copy[i] != data[i]) {
         sorted = false;
         break;
       }
