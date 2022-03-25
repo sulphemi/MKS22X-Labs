@@ -51,7 +51,7 @@ public class Merge {
   }
 
   public static int[] mergesortH(int[] data) {
-    if (data.length == 1) {
+    if (data.length <= 1) {
       //base case: array is of length 1 and therefore sorted
       return data; //already sorted
     } else {
