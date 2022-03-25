@@ -34,10 +34,6 @@ public class Merge {
     return tray;
   }
 
-  public static void merge(int[] destination, int[] left, int[] right) {
-
-  }
-
   public static int[] dumbMerge(int[] left, int[] right) {
     int[] blob = new int[left.length + right.length];
 
@@ -55,7 +51,6 @@ public class Merge {
   }
 
   public static int[] mergesortH(int[] data) {
-    System.out.println(Arrays.toString(data));
     if (data.length == 1) {
       //base case: array is of length 1 and therefore sorted
       return data; //already sorted
@@ -63,7 +58,6 @@ public class Merge {
       //array is greater than length 1
       //split array in half
       int splitIndex = data.length / 2;
-      System.out.println(splitIndex);
       int[] left = copyArray(data, 0, splitIndex - 1);
       int[] right = copyArray(data, splitIndex, data.length - 1);
 
@@ -92,15 +86,13 @@ public class Merge {
 
   public static void main(String[] args) {
     int[][] testcases = {
-      //{},
+      {},
       {1},
       {3, 5389, 382, 42, 6, 2456, 532, 25},
       new int[(int)1e8],
       randArray(400, 10),
       randArray((int)1e8, 1000),
       generateSorted((int)1e6),
-      generateSorted((int)1e8),
-      generateReverseSorted((int)1e8),
       generateReverseSorted((int)1e8)
     };
 
@@ -113,7 +105,7 @@ public class Merge {
     int count = 0;
     while (true) {
       System.out.println(count);
-      checksortedverbose(randArray((int)Math.pow(10, randInt(1, 6)), 69));
+      checksortedverbose(randArray(randInt(0, 300), 69));
       count++;
     }
   }
@@ -140,11 +132,17 @@ public class Merge {
 
     time = System.currentTimeMillis();
     int index = randInt(0, data.length - 1);
-    int value = quickselect(data, index);
+    int[] aaa = mergesortH(data);
     System.out.println("your sort finished in " + (System.currentTimeMillis() - time) + " ms");
 
     time = System.currentTimeMillis();
-    boolean sorted = value == copy[index];
+    boolean sorted = true;
+    for (int i = 0; i < copy.length; i++) {
+      if (copy[i] != aaa[i]) {
+        sorted = false;
+        break;
+      }
+    }
 
     System.out.println(sorted ? "verified in " + (System.currentTimeMillis() - time) + " ms" : "NOT SORTED");
     System.out.println();
