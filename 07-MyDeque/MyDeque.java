@@ -4,7 +4,12 @@ public class MyDeque<E> {
   private int start, end;
 
   // public MyDeque(){  }
-  // public MyDeque(int initialCapacity){  }
+  public MyDeque(int initialCapacity) {
+    size = initialCapacity;
+    @SuppressWarnings("unchecked")
+    E[] weirdObjectArray = (E[])new Object[initialCapacity];
+    data = weirdObjectArray;
+  }
   // public int size(){ }
   // public String toString(){ }
   // public void addFirst(E element){ }
