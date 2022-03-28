@@ -13,7 +13,11 @@ public class MyDeque<E> {
     E[] weirdObjectArray = (E[])new Object[initialCapacity];
     data = weirdObjectArray;
   }
-  // public int size(){ }
+
+  public int size() {
+    return size;
+  }
+  
   // public String toString(){ }
   // public void addFirst(E element){ }
   // public void addLast(E element){ }
