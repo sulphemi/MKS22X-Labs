@@ -3,7 +3,10 @@ public class MyDeque<E> {
   private int size;
   private int start, end;
 
-  // public MyDeque(){  }
+  public MyDeque() {
+    this(64); //initialCapacity defaults to 64
+  }
+
   public MyDeque(int initialCapacity) {
     size = initialCapacity;
     @SuppressWarnings("unchecked")
