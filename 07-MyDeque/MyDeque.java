@@ -8,16 +8,16 @@ public class MyDeque<E> {
   }
 
   public MyDeque(int initialCapacity) {
-    size = initialCapacity;
     @SuppressWarnings("unchecked")
     E[] weirdObjectArray = (E[])new Object[initialCapacity];
     data = weirdObjectArray;
+    size = 0;
   }
 
   public int size() {
     return size;
   }
-  
+
   // public String toString(){ }
   // public void addFirst(E element){ }
   // public void addLast(E element){ }
