@@ -45,7 +45,7 @@ public class MyDeque<E> {
     int perceivedIndex = -1;
     data[getIndex(perceivedIndex)] = element;
     size++;
-    start--;
+    decrementStart();
     if (start == end) {
       resize();
     }
@@ -56,7 +56,7 @@ public class MyDeque<E> {
     int perceivedIndex = size;
     data[getIndex(perceivedIndex)] = element;
     size++;
-    end++;
+    incrementEnd();
     if (start == end) {
       resize();
     }
@@ -91,6 +91,27 @@ public class MyDeque<E> {
       index -= data.length;
     }
     return index;
+  }
+
+  //hopefully these methods wont go spoom too hard
+  private void decrementStart() {
+    start--;
+    if (start < 0) {start = data.length - 1;} //start wraps to end of array
+  }
+
+  private void incrementStart() {
+    start++;
+    if (start >= data.length) {start = 0;} //wraps to start
+  }
+
+  private void decrementEnd() {
+    end--;
+    if (end < 0) {end = data.length - 1;} //wraps to end
+  }
+
+  private void incrementEnd() {
+    end++;
+    if (end >= data.length) {end = 0;} //end wraps to beginning of array
   }
 
   public static void main(String[] args) {
