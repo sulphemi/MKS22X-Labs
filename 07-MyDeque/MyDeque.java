@@ -44,16 +44,22 @@ public class MyDeque<E> {
     //where the element is supposed to go in terms of the data structure
     int perceivedIndex = -1;
     data[getIndex(perceivedIndex)] = element;
-    start--;
     size++;
+    start--;
+    if (start == end) {
+      resize();
+    }
   }
 
   public void addLast(E element) {
     //where the element is supposed to go in terms of the data structure
     int perceivedIndex = size;
     data[getIndex(perceivedIndex)] = element;
-    end++;
     size++;
+    end++;
+    if (start == end) {
+      resize();
+    }
   }
   // public E removeFirst(){ }
   // public E removeLast(){ }
@@ -64,6 +70,16 @@ public class MyDeque<E> {
   private void resize() {
     @SuppressWarnings("unchecked")
     E[] newThingy = (E[])new Object[data.length * 2];
+
+    //fill the array from index 0 to whatever
+    for (int i = 0; i < size; i++) {
+      newThingy[i] = data[getIndex(i)];
+    }
+    //at this point, newThingy is an array filled with elements from the deque
+    //from index 0 to size() - 1
+    start = newThingy.length - 1; //the next space is at end
+    end = size; //next space is at size
+    data = newThingy; //overwrite memory address
   }
 
   //abstraction go brrrr
