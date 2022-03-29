@@ -61,8 +61,26 @@ public class MyDeque<E> {
       resize();
     }
   }
-  // public E removeFirst(){ }
-  // public E removeLast(){ }
+
+  public E removeFirst() {
+    int perceivedIndex = 0;
+    E removed = data[getIndex(perceivedIndex)]; //store reference so it doesnt get deleted (yet)
+    data[getIndex(perceivedIndex)] = null; //remove reference to object from array
+    size--;
+    incrementStart();
+    //no need to resize
+    return removed;
+  }
+
+  public E removeLast() {
+    int perceivedIndex = size - 1;
+    E removed = data[getIndex(perceivedIndex)]; //store reference
+    data[getIndex(perceivedIndex)] = null; //remove reference
+    size--;
+    decrementEnd();
+    //resize unneeded
+    return removed;
+  }
 
   //holy crap getIndex is so revolutionary
   public E getFirst() {
@@ -138,12 +156,16 @@ public class MyDeque<E> {
 
   public static void main(String[] args) {
     MyDeque<String> aaaa = new MyDeque<String>(2);
-    for (int i = 0; ++i<15;) {
+    for (int i = 0; ++i<3;) {
       aaaa.addLast("" + i);
     }
     System.out.println(aaaa);
-    for (int i = 0; ++i<4;) {
+    for (int i = 0; ++i<40;) {
       aaaa.addFirst("" + i);
+    }
+    System.out.println(aaaa);
+    for (int i = 0; ++i<20;) {
+      aaaa.removeFirst();
     }
     System.out.println(aaaa);
   }
