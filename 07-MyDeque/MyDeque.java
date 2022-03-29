@@ -121,7 +121,7 @@ public class MyDeque<E> {
     if (end >= data.length) {end = 0;} //end wraps to beginning of array
   }
 
-  public static void main(String[] args) {
+  public static void main0(String[] args) {
     MyDeque<String> aaaa = new MyDeque<String>(10);
     String[] aa = {"3", "4", null, null, "1", "2"};
     aaaa.data = aa;
@@ -134,5 +134,17 @@ public class MyDeque<E> {
     System.out.println(aaaa.toString());
     System.out.println("start: " + aaaa.start);
     System.out.println("end:   " + aaaa.end);
+  }
+
+  public static void main(String[] args) {
+    MyDeque<String> aaaa = new MyDeque<String>(2);
+    for (int i = 0; ++i<15;) {
+      aaaa.addLast("" + i);
+    }
+    System.out.println(aaaa);
+    for (int i = 0; ++i<4;) {
+      aaaa.addFirst("" + i);
+    }
+    System.out.println(aaaa);
   }
 }
