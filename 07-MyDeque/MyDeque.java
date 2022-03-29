@@ -4,7 +4,7 @@ public class MyDeque<E> {
   private int start, end; //these both point to empty space
 
   public MyDeque() {
-    this(64); //initialCapacity defaults to 64
+    this(32); //initialCapacity defaults to 32
   }
 
   public MyDeque(int initialCapacity) {
