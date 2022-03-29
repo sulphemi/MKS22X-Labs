@@ -41,10 +41,11 @@ public class MyDeque<E> {
 
   //NTS: NEED A RESIZE THINGY
   public void addFirst(E element) {
-    data[start] = element;
+    //where the element is supposed to go in terms of the data structure
+    int perceivedIndex = -1;
+    data[getIndex(perceivedIndex)] = element;
     start--;
     size++;
-    //if start == end resize
   }
 
   // public void addLast(E element){ }
@@ -77,6 +78,7 @@ public class MyDeque<E> {
     aaaa.start = 3;
     aaaa.end = 2;
     aaaa.size = 4;
+    aaaa.addFirst("0");
     System.out.println(aaaa.toStringDebug());
     System.out.println(aaaa.toString());
     System.out.println("start: " + aaaa.start);
