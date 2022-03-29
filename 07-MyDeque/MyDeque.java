@@ -48,7 +48,13 @@ public class MyDeque<E> {
     size++;
   }
 
-  // public void addLast(E element){ }
+  public void addLast(E element) {
+    //where the element is supposed to go in terms of the data structure
+    int perceivedIndex = size;
+    data[getIndex(perceivedIndex)] = element;
+    end++;
+    size++;
+  }
   // public E removeFirst(){ }
   // public E removeLast(){ }
   // public E getFirst(){ }
@@ -79,6 +85,7 @@ public class MyDeque<E> {
     aaaa.end = 2;
     aaaa.size = 4;
     aaaa.addFirst("0");
+    aaaa.addLast("5");
     System.out.println(aaaa.toStringDebug());
     System.out.println(aaaa.toString());
     System.out.println("start: " + aaaa.start);
