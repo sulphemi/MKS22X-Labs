@@ -41,7 +41,14 @@ public class MyDeque<E> {
     }
     return output;
   }
-  // public void addFirst(E element){ }
+
+  //NTS: NEED A RESIZE THINGY
+  public void addFirst(E element) {
+    data[start] = element; //
+    start--;
+    size++;
+  }
+
   // public void addLast(E element){ }
   // public E removeFirst(){ }
   // public E removeLast(){ }
