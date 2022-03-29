@@ -47,6 +47,7 @@ public class MyDeque<E> {
     data[start] = element; //
     start--;
     size++;
+    //if start == end resize
   }
 
   // public void addLast(E element){ }
@@ -54,6 +55,25 @@ public class MyDeque<E> {
   // public E removeLast(){ }
   // public E getFirst(){ }
   // public E getLast(){ }
+
+  //doubles the size of data
+  private void resize() {
+    @SuppressWarnings("unchecked")
+    E[] newThingy = (E[])new Object[data.length * 2];
+
+    int i = 0; //original array pointer
+    int k = 0; //new array pointer
+    //copy from arraystart to middle
+    while (i < start) {
+      newThingy[k] = data[i];
+      i++;
+      k++;
+    }
+    //now i points to a null
+    i++; //increment i so it points to something again
+    //copy from middle to 
+    while (i < )
+  }
 
   public static void main(String[] args) {
     MyDeque<Object> aaaa = new MyDeque<Object>(10);
