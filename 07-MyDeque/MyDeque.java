@@ -63,8 +63,15 @@ public class MyDeque<E> {
   }
   // public E removeFirst(){ }
   // public E removeLast(){ }
-  // public E getFirst(){ }
-  // public E getLast(){ }
+
+  //holy crap getIndex is so revolutionary
+  public E getFirst() {
+    return data[getIndex(0)];
+  }
+
+  public E getLast() {
+    return data[getIndex(size - 1)];
+  }
 
   //doubles the size of data
   private void resize() {
