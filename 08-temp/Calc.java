@@ -12,21 +12,25 @@ public class Calc {
     for (String thingy : Potato) {
       switch (thingy) {
         case "+":
+          if (Deck.size() < 2) {throw new IllegalArgumentException("too many operators!");}
           double Jack = Deck.pop();
           double Jill = Deck.pop();
           Deck.add(Jack + Jill);
           break;
         case "-":
+          if (Deck.size() < 2) {throw new IllegalArgumentException("trop beaucoup d'operators!");}
           double Romeo = Deck.pop();
           double Juliet = Deck.pop();
           Deck.add(Romeo - Juliet); //the irony
           break;
         case "*":
+          if (Deck.size() < 2) {throw new IllegalArgumentException("mucho operators!");}
           double Bonnie = Deck.pop();
           double Clyde = Deck.pop();
           Deck.add(Bonnie * Clyde);
           break;
         case "/":
+          if (Deck.size() < 2) {throw new IllegalArgumentException("tai duo operators!");}
           double Jessie = Deck.pop();
           double James = Deck.pop();
           Deck.add(Jessie / James);
@@ -43,6 +47,7 @@ public class Calc {
       }
     }
 
+    if (Deck.size() != 1) {throw new IllegalArgumentException("too little operands!");}
     System.out.println(Deck);
     System.out.println(Deck.peek());
   }
