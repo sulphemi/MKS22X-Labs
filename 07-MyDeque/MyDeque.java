@@ -14,6 +14,12 @@ public class MyDeque<E> {
   }
 
   public MyDeque(int initialCapacity) {
+    if (initialCapacity < 0) {
+      throw new IllegalArgumentException("aaaaa starting capacity cannot be negative!");
+    } else if (initialCapacity < 2) {
+      initialCapacity = 2; //to avoid errors, just set initialCapacity to 2
+    }
+
     @SuppressWarnings("unchecked")
     E[] weirdObjectArray = (E[])new Object[initialCapacity];
     data = weirdObjectArray;
@@ -122,6 +128,7 @@ public class MyDeque<E> {
   }
 
   public E removeFirst() {
+    if (size < 1) {throw new IllegalStateException("error: nothing to remuwu :3");}
     int perceivedIndex = 0;
     E removed = data[getIndex(perceivedIndex)]; //store reference so it doesnt get deleted (yet)
     data[getIndex(perceivedIndex)] = null; //remove reference to object from array
@@ -132,6 +139,7 @@ public class MyDeque<E> {
   }
 
   public E removeLast() {
+    if (size < 1) {throw new IllegalStateException("error: nothing to remuwu :3");}
     int perceivedIndex = size - 1;
     E removed = data[getIndex(perceivedIndex)]; //store reference
     data[getIndex(perceivedIndex)] = null; //remove reference
@@ -143,10 +151,12 @@ public class MyDeque<E> {
 
   //holy crap getIndex is so revolutionary
   public E getFirst() {
+    if (size < 1) {throw new IllegalStateException("oh noe oh woe your deque is empty your program is no!");}
     return data[getIndex(0)];
   }
 
   public E getLast() {
+    if (size < 1) {throw new IllegalStateException("oh noe oh woe your deque is empty your program is no!");}
     return data[getIndex(size - 1)];
   }
 }
