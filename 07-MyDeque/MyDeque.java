@@ -89,6 +89,7 @@ public class MyDeque<E> {
   }
 
   public String toString() {
+    if (size == 0) {return "[]";}
     String output = "[";
     for (int i = 0; i < size(); i++) {
       output += data[getIndex(i)];
