@@ -106,6 +106,7 @@ public class MyDeque<E> {
 
   //NTS: NEED A RESIZE THINGY
   public void addFirst(E element) {
+    if (element == null) {throw new NullPointerException("donut put nulls in this donut! bad!");}
     //where the element is supposed to go in terms of the data structure
     int perceivedIndex = -1;
     data[getIndex(perceivedIndex)] = element;
@@ -117,6 +118,7 @@ public class MyDeque<E> {
   }
 
   public void addLast(E element) {
+    if (element == null) {throw new NullPointerException("donut put nulls in this donut! bad!");}
     //where the element is supposed to go in terms of the data structure
     int perceivedIndex = size;
     data[getIndex(perceivedIndex)] = element;
@@ -128,7 +130,7 @@ public class MyDeque<E> {
   }
 
   public E removeFirst() {
-    if (size < 1) {throw new IllegalStateException("error: nothing to remuwu :3");}
+    if (size < 1) {throw new NoSuchElementException("error: nothing to remuwu :3");}
     int perceivedIndex = 0;
     E removed = data[getIndex(perceivedIndex)]; //store reference so it doesnt get deleted (yet)
     data[getIndex(perceivedIndex)] = null; //remove reference to object from array
@@ -139,7 +141,7 @@ public class MyDeque<E> {
   }
 
   public E removeLast() {
-    if (size < 1) {throw new IllegalStateException("error: nothing to remuwu :3");}
+    if (size < 1) {throw new NoSuchElementException("error: nothing to remuwu :3");}
     int perceivedIndex = size - 1;
     E removed = data[getIndex(perceivedIndex)]; //store reference
     data[getIndex(perceivedIndex)] = null; //remove reference
@@ -151,12 +153,12 @@ public class MyDeque<E> {
 
   //holy crap getIndex is so revolutionary
   public E getFirst() {
-    if (size < 1) {throw new IllegalStateException("oh noe oh woe your deque is empty your program is no!");}
+    if (size < 1) {throw new NoSuchElementException("oh noe oh woe your deque is empty your program is no!");}
     return data[getIndex(0)];
   }
 
   public E getLast() {
-    if (size < 1) {throw new IllegalStateException("oh noe oh woe your deque is empty your program is no!");}
+    if (size < 1) {throw new NoSuchElementException("oh noe oh woe your deque is empty your program is no!");}
     return data[getIndex(size - 1)];
   }
 }
