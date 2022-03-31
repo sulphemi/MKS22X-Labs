@@ -1,9 +1,9 @@
-import java.util.Stack;
+import java.util.*;
 import java.util.HashMap;
 
 public class Calculator {
   public static double eval(String expression) {
-    Stack<Double> Deck = new Stack<Double>();
+    Deque<Double> Deck = new ArrayDeque<Double>();
     String[] arrayified = expression.split(" ");
 
     for (String thingy : arrayified) {
@@ -12,25 +12,25 @@ public class Calculator {
           if (Deck.size() < 2) {throw new IllegalArgumentException("too many operators!");}
           double Jack = Deck.pop();
           double Jill = Deck.pop();
-          Deck.add(Jack + Jill);
+          Deck.push(Jack + Jill);
           break;
         case "-":
           if (Deck.size() < 2) {throw new IllegalArgumentException("trop beaucoup d'operators!");}
           double Romeo = Deck.pop();
           double Juliet = Deck.pop();
-          Deck.add(Juliet - Romeo); //the irony
+          Deck.push(Juliet - Romeo); //the irony
           break;
         case "*":
           if (Deck.size() < 2) {throw new IllegalArgumentException("mucho operators!");}
           double Bonnie = Deck.pop();
           double Clyde = Deck.pop();
-          Deck.add(Bonnie * Clyde);
+          Deck.push(Bonnie * Clyde);
           break;
         case "/":
           if (Deck.size() < 2) {throw new IllegalArgumentException("tai duo operators!");}
           double Jessie = Deck.pop();
           double James = Deck.pop();
-          Deck.add(James / Jessie);
+          Deck.push(James / Jessie);
           break;
         default:
           double Card = 727; //default value, will be overwritten
@@ -39,7 +39,7 @@ public class Calculator {
           } catch (NumberFormatException E) {
             throw new IllegalArgumentException("\"" + thingy + "\"? thats a weird looking number never seen it ever in my life");
           }
-          Deck.add(Card);
+          Deck.push(Card);
           break;
       }
     }
