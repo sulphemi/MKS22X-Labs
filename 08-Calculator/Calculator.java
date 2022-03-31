@@ -18,7 +18,7 @@ public class Calculator {
           if (Deck.size() < 2) {throw new IllegalArgumentException("trop beaucoup d'operators!");}
           double Romeo = Deck.pop();
           double Juliet = Deck.pop();
-          Deck.add(Romeo - Juliet); //the irony
+          Deck.add(Juliet - Romeo); //the irony
           break;
         case "*":
           if (Deck.size() < 2) {throw new IllegalArgumentException("mucho operators!");}
@@ -30,7 +30,7 @@ public class Calculator {
           if (Deck.size() < 2) {throw new IllegalArgumentException("tai duo operators!");}
           double Jessie = Deck.pop();
           double James = Deck.pop();
-          Deck.add(Jessie / James);
+          Deck.add(James / Jessie);
           break;
         default:
           double Card = 727; //default value, will be overwritten
