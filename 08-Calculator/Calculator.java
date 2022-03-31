@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.HashMap;
 
 public class Calculator {
   public static double eval(String expression) {
@@ -45,5 +46,24 @@ public class Calculator {
 
     if (Deck.size() != 1) {throw new IllegalArgumentException("too little operands!");}
     return Deck.peek();
+  }
+
+  public static void main(String[] args) {
+    HashMap<String, Double> testcases = new HashMap<String, Double>();
+    testcases.put("4 5 7 2 + - *", -16.0);
+    testcases.put("3 4 + 2 * 7 /", 2.0);
+    testcases.put("5 7 + 6 2 - *", 48.0);
+    testcases.put("4 2 + 3 5 1 - * +", 18.0);
+
+    for (String expression : testcases.keySet()) {
+      double val = eval(expression);
+      if (val == testcases.get(expression)) {
+        System.out.println("PASSED: " + expression);
+      } else {
+        System.out.println("FAILED: " + expression);
+        System.out.println("\tExpected: " + testcases.get(expression));
+        System.out.println("\tGot: " + val);
+      }
+    }
   }
 }
