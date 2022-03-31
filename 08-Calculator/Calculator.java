@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.HashMap;
 
 public class Calculator {
   public static double eval(String expression) {
@@ -74,6 +73,26 @@ public class Calculator {
         System.out.println("FAILED: " + expression);
         System.out.println("\tExpected: " + testcases.get(expression));
         System.out.println("\tGot: " + val);
+      }
+    }
+
+    testExceptions();
+  }
+
+  public static void testExceptions() {
+    String[] testcases = {
+      "4 2 3 5 1 - + * / -",
+      "3 4 5",
+      "* * *",
+      "uwu"
+    };
+
+    for (String expression : testcases) {
+      try {
+        eval(expression);
+        System.out.println("NO EXCEPTION: " + expression);
+      } catch (IllegalArgumentException E) {
+        System.out.println(E.toString() + ": " + expression);
       }
     }
   }
