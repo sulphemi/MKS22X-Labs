@@ -32,6 +32,12 @@ public class Calculator {
           double James = Deck.pop();
           Deck.push(James / Jessie);
           break;
+        case "%":
+          if (Deck.size() < 2) {throw new IllegalArgumentException("demasio operato");}
+          double Solo = Deck.pop();
+          double Chewie = Deck.pop();
+          Deck.push(Chewie % Solo);
+          break;
         default:
           double Card = 727; //default value, will be overwritten
           try {
@@ -54,6 +60,11 @@ public class Calculator {
     testcases.put("3 4 + 2 * 7 /", 2.0);
     testcases.put("5 7 + 6 2 - *", 48.0);
     testcases.put("4 2 + 3 5 1 - * +", 18.0);
+    testcases.put("11 3 - 4 + 2.5 *", 30.0);
+    testcases.put("10 2.0 +", 12.0);
+    testcases.put("8 2 + 99 9 - * 2 + 9 -", 893.0);
+    testcases.put("1 2 3 4 5 + * - -", 26.0);
+    testcases.put("3 4 %", 3);
 
     for (String expression : testcases.keySet()) {
       double val = eval(expression);
