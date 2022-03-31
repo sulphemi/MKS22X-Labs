@@ -49,7 +49,7 @@ public class Calculator {
       }
     }
 
-    if (Deck.size() != 1) {throw new IllegalArgumentException("too little operands!");}
+    if (Deck.size() != 1) {throw new IllegalArgumentException("too many operands!");}
     return Deck.peek();
   }
 
