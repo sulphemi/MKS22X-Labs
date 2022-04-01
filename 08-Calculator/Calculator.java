@@ -5,34 +5,35 @@ public class Calculator {
     Deque<Double> Deck = new ArrayDeque<Double>();
     String[] arrayified = expression.split(" ");
 
-    for (String thingy : arrayified) {
+    for (int i = 0; i < arrayified.length; i++) {
+      String thingy = arrayified[i];
       switch (thingy) {
         case "+":
-          if (Deck.size() < 2) {throw new IllegalArgumentException("too many operators!");}
+          if (Deck.size() < 2) {throw new IllegalArgumentException("too few operands! (+ at index " + i + ")");}
           double Jack = Deck.pop();
           double Jill = Deck.pop();
           Deck.push(Jack + Jill);
           break;
         case "-":
-          if (Deck.size() < 2) {throw new IllegalArgumentException("trop beaucoup d'operators!");}
+          if (Deck.size() < 2) {throw new IllegalArgumentException("too few operands! (- at index " + i + ")");}
           double Romeo = Deck.pop();
           double Juliet = Deck.pop();
           Deck.push(Juliet - Romeo); //the irony
           break;
         case "*":
-          if (Deck.size() < 2) {throw new IllegalArgumentException("mucho operators!");}
+          if (Deck.size() < 2) {throw new IllegalArgumentException("too few operands! (* at index " + i + ")");}
           double Bonnie = Deck.pop();
           double Clyde = Deck.pop();
           Deck.push(Bonnie * Clyde);
           break;
         case "/":
-          if (Deck.size() < 2) {throw new IllegalArgumentException("tai duo operators!");}
+          if (Deck.size() < 2) {throw new IllegalArgumentException("too few operands! (/ at index " + i + ")");}
           double Jessie = Deck.pop();
           double James = Deck.pop();
           Deck.push(James / Jessie);
           break;
         case "%":
-          if (Deck.size() < 2) {throw new IllegalArgumentException("demasio operato");}
+          if (Deck.size() < 2) {throw new IllegalArgumentException("too few operands! (% at index " + i + ")");}
           double Solo = Deck.pop();
           double Chewie = Deck.pop();
           Deck.push(Chewie % Solo);
@@ -84,7 +85,9 @@ public class Calculator {
       "4 2 3 5 1 - + * / -",
       "3 4 5",
       "* * *",
-      "uwu"
+      "uwu",
+      "1 1 1 +",
+      "1 1 1 - * +"
     };
 
     for (String expression : testcases) {
