@@ -65,6 +65,8 @@ public class Calculator {
     testcases.put("8 2 + 99 9 - * 2 + 9 -", 893.0);
     testcases.put("1 2 3 4 5 + * - -", 26.0);
     testcases.put("3 4 %", 3.0);
+    testcases.put("99 3 %", 0.0);
+    testcases.put("99 3 3 % *", 0);
 
     for (String expression : testcases.keySet()) {
       double val = eval(expression);
@@ -87,7 +89,8 @@ public class Calculator {
       "* * *",
       "uwu",
       "1 1 1 +",
-      "1 1 1 - * +"
+      "1 1 1 - * +",
+      ""
     };
 
     for (String expression : testcases) {
