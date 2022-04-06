@@ -23,9 +23,41 @@ public class BurnTrees{
    *new fires should remain fire, and not spread.
    */
   public void tick(){
+    //there is a more efficient way to do this but wheeeeeeeee
+    Frontier newFrontier = new Frontier(); //stores the next set of trees that are on fire
+    while (frontier.size() > 0) {
+      int[] coords = frontier.remove(); //store pointer, this is an int[] of size 2 representing (x, y)
+      //try to set all four directions on fire
+      setOnFire(coords[0] - 1, coords[1], newFrontier);
+      setOnFire(coords[0], coords[1] - 1, newFrontier);
+      setOnFire(coords[0] + 1, coords[1], newFrontier);
+      setOnFire(coords[0], coords[1] + 1, newFrontier);
+    }
     ticks++;//leave this here.
-    //YOU MUST IMPLEMENT THE REST OF THIS METHOD
-    //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
+  }
+
+  private boolean onBoard(int x, int y) {
+    //lazy implementation, feel free to fight me
+    try {
+      map[x][y]; //will except if x y not on board
+      return true;
+    } catch (ArrayIndexOutOfBoundsException E) {
+      return false;
+    }
+  }
+
+  private boolean spreadable(int x, int y) { //returns if fire is able to spread to this square
+    return onBoard(x, y) && map[x][y] == TREE;
+  }
+
+  private boolean setOnFire(int x, int y, Frontier naughtyList) {
+    if (spreadable(x, y)) {
+      map[x][y] = FIRE;
+      naughtyList.add(x, y);
+      return true;
+    } else {
+      return false; //this code is dumb but it works so im keeping it
+    }
   }
 
   /***********************YOU MIGHT UPDATE THIS**************************/
