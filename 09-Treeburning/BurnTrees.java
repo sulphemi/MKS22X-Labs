@@ -101,7 +101,7 @@ public class BurnTrees{
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
-      double DENSITY = .4;
+      double DENSITY = 1;
       if(args.length > 1){
         WIDTH = Integer.parseInt(args[0]);
         HEIGHT = Integer.parseInt(args[1]);
