@@ -24,17 +24,16 @@ public class BurnTrees{
    */
   public void tick(){
     //there is a more efficient way to do this but wheeeeeeeee
-    Frontier newFrontier = new Frontier(); //stores the next set of trees that are on fire
-    while (frontier.size() > 0) {
+    int fires = frontier.size();
+    for (int i = 0; i < fires; i++) {
       int[] coords = frontier.remove(); //store pointer, this is an int[] of size 2 representing (x, y)
       //try to set all four directions on fire
-      setOnFire(coords[0] - 1, coords[1], newFrontier);
-      setOnFire(coords[0], coords[1] - 1, newFrontier);
-      setOnFire(coords[0] + 1, coords[1], newFrontier);
-      setOnFire(coords[0], coords[1] + 1, newFrontier);
+      setOnFire(coords[0] - 1, coords[1]);
+      setOnFire(coords[0], coords[1] - 1);
+      setOnFire(coords[0] + 1, coords[1]);
+      setOnFire(coords[0], coords[1] + 1);
 
       map[coords[0]][coords[1]] = ASH;
-      frontier = newFrontier; //overwrite memory address
     }
     ticks++;//leave this here.
   }
@@ -53,10 +52,10 @@ public class BurnTrees{
     return onBoard(x, y) && map[x][y] == TREE;
   }
 
-  private boolean setOnFire(int x, int y, Frontier naughtyList) {
+  private boolean setOnFire(int x, int y) {
     if (spreadable(x, y)) {
       map[x][y] = FIRE;
-      naughtyList.add(x, y);
+      frontier.add(x, y);
       return true;
     } else {
       return false; //this code is dumb
