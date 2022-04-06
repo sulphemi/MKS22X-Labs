@@ -7,11 +7,13 @@ public class BurnTrees{
   private static final int ASH = 3;
   private static final int SPACE = 0;
 
+  private Frontier frontier;
+
 
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
    */
-  public boolean done(){
+  public boolean done(){ //return if there is stuff in the stuff and the stuff (THE QUEUE!!!)
     //YOU MUST IMPLEMENT THIS METHOD
     //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
     //HINT: do not check the board for fire which is an n^2 operation
@@ -57,6 +59,7 @@ public class BurnTrees{
     for(int i = 0; i < map.length; i++){
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
+        frontier.add(i, 0); //add the fwooshy fire to the fwooshy frontier
       }
     }
   }
@@ -127,18 +130,24 @@ public class BurnTrees{
   }
 
   /*DO NOT UPDATE THIS*/
-  public String toStringColor(){
+  public String toStringColor(){ //haha i updated it
     StringBuilder builder = new StringBuilder();
     for (int i = 0; i < map.length; i++) {
       for (int c = 0; c < map[i].length; c++) {
         if(map[i][c]==0)
-          builder.append(" ");
-        else if(map[i][c]==2)
-          builder.append(Text.color(Text.GREEN)+"@");
-        else if(map[i][c]==1)
-          builder.append(Text.color(Text.RED)+"w");
-        else if(map[i][c]==3)
-          builder.append(Text.color(Text.DARK)+".");
+          builder.append(' ');
+        else if(map[i][c]==2) {
+          builder.append(Text.color(Text.GREEN));
+          builder.append('@');
+        }
+        else if(map[i][c]==1) {
+          builder.append(Text.color(Text.RED));
+          builder.append('w');
+        }
+        else if(map[i][c]==3) {
+          builder.append(Text.color(Text.DARK));
+          builder.append('.');
+        }
       }
       builder.append("\n"+Text.RESET);
     }
