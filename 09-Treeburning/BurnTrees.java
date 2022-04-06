@@ -7,7 +7,7 @@ public class BurnTrees{
   private static final int ASH = 3;
   private static final int SPACE = 0;
 
-  private Frontier frontier;
+  private Frontier frontier = new Frontier();
 
 
   /*Determine if the simulation is still burning
@@ -32,6 +32,9 @@ public class BurnTrees{
       setOnFire(coords[0], coords[1] - 1, newFrontier);
       setOnFire(coords[0] + 1, coords[1], newFrontier);
       setOnFire(coords[0], coords[1] + 1, newFrontier);
+
+      map[coords[0]][coords[1]] = ASH;
+      frontier = newFrontier; //overwrite memory address
     }
     ticks++;//leave this here.
   }
@@ -39,7 +42,7 @@ public class BurnTrees{
   private boolean onBoard(int x, int y) {
     //lazy implementation, feel free to fight me
     try {
-      map[x][y]; //will except if x y not on board
+      int thing = map[x][y]; //will except if x y not on board
       return true;
     } catch (ArrayIndexOutOfBoundsException E) {
       return false;
@@ -56,7 +59,7 @@ public class BurnTrees{
       naughtyList.add(x, y);
       return true;
     } else {
-      return false; //this code is dumb but it works so im keeping it
+      return false; //this code is dumb
     }
   }
 
@@ -95,11 +98,11 @@ public class BurnTrees{
 
 
 
-    public static void main(String[]args){
+    public static void main(String[]args) throws Exception {
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
-      double DENSITY = .7;
+      double DENSITY = .4;
       if(args.length > 1){
         WIDTH = Integer.parseInt(args[0]);
         HEIGHT = Integer.parseInt(args[1]);
@@ -109,10 +112,15 @@ public class BurnTrees{
         DELAY = Integer.parseInt(args[3]);
       }
       BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
+      System.out.println(b.toString());
+      for (;;) {
+        System.in.read();
+        b.tick();
+        System.out.println(b.toString());
+      }
 
-
-      int ans = b.animate(DELAY);//animate all screens
-      System.out.println(ans);//print the final answer
+      //int ans = b.animate(DELAY);//animate all screens
+      //System.out.println(ans);//print the final answer
 
       //int ans = b.outputAll();//print all screens one after another
       //System.out.println(ans);//print the final answer

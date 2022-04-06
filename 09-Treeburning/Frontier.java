@@ -12,7 +12,7 @@ public class Frontier {
   }
 
   public void add(int[] location) {
-    assert location.size == 2; //location is an ordered pair
+    assert location.length == 2; //location is an ordered pair
     frontier.add(location);
   }
 
