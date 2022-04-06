@@ -14,10 +14,7 @@ public class BurnTrees{
    *@return false if any fires are still burning, true otherwise
    */
   public boolean done(){ //return if there is stuff in the stuff and the stuff (THE QUEUE!!!)
-    //YOU MUST IMPLEMENT THIS METHOD
-    //(BEFORE WRITING ANY CODE READ ALL OF THE CODE AND SEE HOW IT FITS TOGETHER)
-    //HINT: do not check the board for fire which is an n^2 operation
-    return false;//placeholder for compilation purposes
+    return frontier.size() == 0;
   }
 
 
