@@ -7,14 +7,14 @@ public class BurnTrees{
   private static final int ASH = 3;
   private static final int SPACE = 0;
 
-  private Frontier frontier = new Frontier();
+  private Frontier burnyList = new Frontier();
 
 
   /*Determine if the simulation is still burning
    *@return false if any fires are still burning, true otherwise
    */
   public boolean done(){ //return if there is stuff in the stuff and the stuff (THE QUEUE!!!)
-    return frontier.size() == 0;
+    return burnyList.size() == 0;
   }
 
 
@@ -24,16 +24,16 @@ public class BurnTrees{
    */
   public void tick(){
     //there is a more efficient way to do this but wheeeeeeeee
-    int fires = frontier.size();
+    int fires = burnyList.size();
     for (int i = 0; i < fires; i++) {
-      int[] coords = frontier.remove(); //store pointer, this is an int[] of size 2 representing (x, y)
+      int[] coords = burnyList.remove(); //store pointer, this is an int[] of size 2 representing (x, y)
       //try to set all four directions on fire
       setOnFire(coords[0] - 1, coords[1]);
       setOnFire(coords[0], coords[1] - 1);
       setOnFire(coords[0] + 1, coords[1]);
       setOnFire(coords[0], coords[1] + 1);
 
-      map[coords[0]][coords[1]] = ASH;
+      map[coords[0]][coords[1]] = ASH; //set previously burning spot to ash
     }
     ticks++;//leave this here.
   }
@@ -55,7 +55,7 @@ public class BurnTrees{
   private boolean setOnFire(int x, int y) {
     if (spreadable(x, y)) {
       map[x][y] = FIRE;
-      frontier.add(x, y);
+      burnyList.add(x, y);
       return true;
     } else {
       return false; //this code is dumb
@@ -90,7 +90,7 @@ public class BurnTrees{
     for(int i = 0; i < map.length; i++){
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
-        frontier.add(i, 0); //add the fwooshy fire to the fwooshy frontier
+        burnyList.add(i, 0); //add the fwooshy fire to the fwooshy burnyList
       }
     }
   }
