@@ -101,7 +101,7 @@ public class BurnTrees{
     }
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void testSpiral() throws Exception {
     int[][] spiralOfDeath = {
       {TREE , TREE , TREE , TREE , TREE , TREE , TREE },
       {SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, TREE },
@@ -121,7 +121,7 @@ public class BurnTrees{
     }
   }
 
-    public static void mainmainmain(String[]args) throws Exception {
+    public static void main(String[]args) throws Exception {
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
@@ -135,11 +135,12 @@ public class BurnTrees{
         DELAY = Integer.parseInt(args[3]);
       }
       BurnTrees b = new BurnTrees(WIDTH,HEIGHT,DENSITY);
-      System.out.println(b.toString());
+      System.out.print(b.toStringColor());
       for (;;) {
         System.in.read();
+        if (b.done()) {break;}
         b.tick();
-        System.out.println(b.toString());
+        System.out.print(b.toStringColor());
       }
 
       //int ans = b.animate(DELAY);//animate all screens
@@ -149,7 +150,11 @@ public class BurnTrees{
       //System.out.println(ans);//print the final answer
     }
 
-
+  //runs a single simulation with given parameters and return ticks
+  public static int runSimulation(int N, int M, int density) {
+    BurnTrees Arson = new BurnTrees(N, M, density);
+    return Arson.run();
+  }
 
 
   /***********************DO NOT UPDATE THINGS BELOW HERE**************************/
