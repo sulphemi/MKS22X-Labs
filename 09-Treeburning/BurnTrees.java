@@ -12,20 +12,33 @@ public class BurnTrees{
 
   private Frontier burnyList;
 
+  /***** CONSTRUCTORS *****/
+  public BurnTrees(int width, int height, double density){
+    map = new int[height][width];
+    for(int r = 0; r < map.length; r++){
+      for(int c = 0; c < map[r].length; c++){
+        if(Math.random() < density){
+          map[r][c] = TREE;
+        }
+      }
+    }
+    start(); //set the left column on fire
+  }
 
-  /*Determine if the simulation is still burning
-   *@return false if any fires are still burning, true otherwise
-   */
-  public boolean done(){ //return if there is stuff in the stuff and the stuff (THE QUEUE!!!)
+  public BurnTrees(int[][] map) { //create from existing map
+    this.map = map;
+    start();
+  }
+
+  /***** REQUIRED METHODS *****/
+
+  public boolean done() { //return if there is stuff in the stuff and the stuff (THE QUEUE!!!)
     return burnyList.size() == 0;
   }
 
 
-  /*This is the core of the simulation. All of the logic for advancing to the next round goes here.
-   *All existing fires spread new fires, and turn to ash
-   *new fires should remain fire, and not spread.
-   */
-  public void tick(){
+  //core of simulation, advances simulation by one tick
+  public void tick() {
     //there is a more efficient way to do this but wheeeeeeeee
     int fires = burnyList.size();
     for (int i = 0; i < fires; i++) {
@@ -40,6 +53,8 @@ public class BurnTrees{
     }
     ticks++;//leave this here.
   }
+
+  /***** HELPER METHODS *****/
 
   private boolean onBoard(int x, int y) {
     //lazy implementation, feel free to fight me
@@ -65,33 +80,7 @@ public class BurnTrees{
     }
   }
 
-  /***********************YOU MIGHT UPDATE THIS**************************/
-
-  public BurnTrees(int[][] map) { //create from existing map
-    this.map = map;
-    start();
-  }
-
-  /*Initialize the simulation.
-   *If you add more instance variables you can add more here,
-   *otherwise it is complete
-   */
-  public BurnTrees(int width,int height, double density){
-    map = new int[height][width];
-    for(int r=0; r<map.length; r++ ){
-      for(int c=0; c<map[r].length; c++ ){
-        if(Math.random() < density){
-           map[r][c]=TREE;
-         }
-       }
-     }
-     start();//set the left column on fire.
-  }
-
-
-  /*
-   *Sets the trees in the left column of the forest on fire
-   */
+  //sets the trees in the left column of the forest on fire
   public void start(){
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
@@ -103,6 +92,41 @@ public class BurnTrees{
       }
     }
   }
+
+  /***** DATA COLLECTION METHODS *****/
+
+  //runs a single simulation with given parameters and return ticks
+  public static int runSimulation(int N, int M, double density) {
+    BurnTrees Arson = new BurnTrees(N, M, density);
+    return Arson.run();
+  }
+
+  //repeats times and returns the average
+  public static double repeatSimulation(int N, int M, double density, int times) {
+    double sum = 0;
+    for (int i = 0; i < times; i++) {
+      sum += runSimulation(N, M, density);
+    }
+    return sum / times;
+  }
+
+  public static void writeResultsToFile(int N, int M, double density, int times) throws IOException {
+    FileWriter Fred = new FileWriter(new File("results.csv"), true);
+    for (int i = 0; i < times; i++) {
+      int result = runSimulation(N, M, density);
+      String line = "" + N + ", " + M + ", " + density + ", " + result + '\n';
+      Fred.append(line);
+    }
+    Fred.close();
+  }
+
+  /***** MAIN *****/
+
+  public static void main(String[] args) throws Throwable {
+    writeResultsToFile(100, 100, 0.1, 10);
+  }
+
+  /***** GARBAGE ERM I MEAN- TESTS!! *****/
 
   public static void testSpiral() throws Exception {
     int[][] spiralOfDeath = {
@@ -153,34 +177,10 @@ public class BurnTrees{
       //System.out.println(ans);//print the final answer
     }
 
-  //runs a single simulation with given parameters and return ticks
-  public static int runSimulation(int N, int M, double density) {
-    BurnTrees Arson = new BurnTrees(N, M, density);
-    return Arson.run();
-  }
 
-  //repeats times and returns the average
-  public static double repeatSimulation(int N, int M, double density, int times) {
-    double sum = 0;
-    for (int i = 0; i < times; i++) {
-      sum += runSimulation(N, M, density);
-    }
-    return sum / times;
-  }
 
-  public static void writeResultsToFile(int N, int M, double density, int times) throws IOException {
-    FileWriter Fred = new FileWriter(new File("results.csv"), true);
-    for (int i = 0; i < times; i++) {
-      int result = runSimulation(N, M, density);
-      String line = "" + N + ", " + M + ", " + density + ", " + result + '\n';
-      Fred.append(line);
-    }
-    Fred.close();
-  }
 
-  public static void main(String[] args) throws Throwable {
-    writeResultsToFile(100, 100, 0.1, 10);
-  }
+
 
   /***********************DO NOT UPDATE THINGS BELOW HERE**************************/
 
