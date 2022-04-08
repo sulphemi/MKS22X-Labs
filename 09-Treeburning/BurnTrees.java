@@ -156,6 +156,15 @@ public class BurnTrees{
     return Arson.run();
   }
 
+  //repeats times and returns the average
+  public static double repeatSimulation(int N, int M, int density, int times) {
+    double sum = 0;
+    for (int i = 0; i < times; i++) {
+      sum += runSimulation(N, M, density);
+    }
+    return sum / times;
+  }
+
 
   /***********************DO NOT UPDATE THINGS BELOW HERE**************************/
 
