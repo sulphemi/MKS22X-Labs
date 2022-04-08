@@ -7,7 +7,7 @@ public class BurnTrees{
   private static final int ASH = 3;
   private static final int SPACE = 0;
 
-  private Frontier burnyList = new Frontier();
+  private Frontier burnyList;
 
 
   /*Determine if the simulation is still burning
@@ -92,6 +92,7 @@ public class BurnTrees{
   public void start(){
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
+    burnyList = new Frontier(); //init burnyList
     for(int i = 0; i < map.length; i++){
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
