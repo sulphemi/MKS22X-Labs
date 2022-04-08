@@ -190,29 +190,23 @@ public class BurnTrees{
   }
 
   /*DO NOT UPDATE THIS*/
-  public String toStringColor(){ //haha i updated it
-    StringBuilder builder = new StringBuilder();
-    for (int i = 0; i < map.length; i++) {
-      for (int c = 0; c < map[i].length; c++) {
-        if(map[i][c]==0)
-          builder.append(' ');
-        else if(map[i][c]==2) {
-          builder.append(Text.color(Text.GREEN));
-          builder.append('@');
-        }
-        else if(map[i][c]==1) {
-          builder.append(Text.color(Text.RED));
-          builder.append('w');
-        }
-        else if(map[i][c]==3) {
-          builder.append(Text.color(Text.DARK));
-          builder.append('.');
-        }
-      }
-      builder.append("\n"+Text.RESET);
-    }
-    return builder.toString()+ticks+"\n";
-  }
+   public String toStringColor(){
+     StringBuilder builder = new StringBuilder();
+     for (int i = 0; i < map.length; i++) {
+       for (int c = 0; c < map[i].length; c++) {
+         if(map[i][c]==0)
+           builder.append(" ");
+         else if(map[i][c]==2)
+           builder.append(Text.color(Text.GREEN)+"@");
+         else if(map[i][c]==1)
+           builder.append(Text.color(Text.RED)+"w");
+         else if(map[i][c]==3)
+           builder.append(Text.color(Text.DARK)+".");
+       }
+       builder.append("\n"+Text.RESET);
+     }
+     return builder.toString()+ticks+"\n";
+   }
 
   /*DO NOT UPDATE THIS*/
   public int animate(int delay) {
