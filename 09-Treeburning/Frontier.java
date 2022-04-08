@@ -6,21 +6,11 @@ public class Frontier extends ArrayDeque<int[]> {
 
   public boolean add(int x, int y) {
     int[] coords = {x, y};
-    super.add(coords);
-    return true;
+    return super.add(coords);
   }
 
   public boolean add(int[] coords) {
-    assert coords.length > 2;
-    super.add(coords);
-    return true;
-  }
-
-  public int getX(int index) {
-    return get(index)[0];
-  }
-
-  public int getY(int index) {
-    return get(index)[1];
+    assert coords.length == 2;
+    return super.add(coords);
   }
 }
