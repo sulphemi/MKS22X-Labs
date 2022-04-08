@@ -131,7 +131,12 @@ public class BurnTrees{
   /***** MAIN *****/
 
   public static void main(String[] args) throws Throwable {
-    writeResultsToFile(100, 100, 0.1, 10);
+    final int N = Integer.parseInt(args[0]);
+    final int M = Integer.parseInt(args[1]);
+    final int times = Integer.parseInt(args[2]);
+    for (int density = 1; density <= 10; density++) {
+      writeResultsToFile(N, M, density / 10.0, times);
+    }
   }
 
   /***** GARBAGE ERM I MEAN- TESTS!! *****/
