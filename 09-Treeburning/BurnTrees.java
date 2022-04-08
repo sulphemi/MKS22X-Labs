@@ -64,6 +64,11 @@ public class BurnTrees{
 
   /***********************YOU MIGHT UPDATE THIS**************************/
 
+  public BurnTrees(int[][] map) { //create from existing map
+    this.map = map;
+    start();
+  }
+
   /*Initialize the simulation.
    *If you add more instance variables you can add more here,
    *otherwise it is complete
@@ -95,9 +100,27 @@ public class BurnTrees{
     }
   }
 
+  public static void main(String[] args) throws Exception {
+    int[][] spiralOfDeath = {
+      {TREE , TREE , TREE , TREE , TREE , TREE , TREE },
+      {SPACE, SPACE, SPACE, SPACE, SPACE, SPACE, TREE },
+      {SPACE, TREE , TREE , TREE , TREE , SPACE, TREE },
+      {SPACE, TREE , SPACE, SPACE, TREE , SPACE, TREE },
+      {SPACE, TREE , SPACE, TREE , TREE , SPACE, TREE },
+      {SPACE, TREE , SPACE, SPACE, SPACE, SPACE, TREE },
+      {SPACE, TREE , TREE , TREE , TREE , TREE , TREE }
+    };
 
+    BurnTrees b = new BurnTrees(spiralOfDeath);
+    System.out.println(b.toString());
+    for (;;) {
+      System.in.read();
+      b.tick();
+      System.out.println(b.toString());
+    }
+  }
 
-    public static void main(String[]args) throws Exception {
+    public static void mainmainmain(String[]args) throws Exception {
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
