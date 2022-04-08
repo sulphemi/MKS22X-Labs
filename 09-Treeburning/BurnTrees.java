@@ -1,4 +1,7 @@
 import java.util.*;
+
+import java.io.*;
+
 public class BurnTrees{
   private int[][]map;
   private int ticks;
@@ -121,7 +124,7 @@ public class BurnTrees{
     }
   }
 
-    public static void main(String[]args) throws Exception {
+    public static void testblock(String[]args) throws Exception {
       int WIDTH = 20;
       int HEIGHT = 20;
       int DELAY = 200;
@@ -151,13 +154,13 @@ public class BurnTrees{
     }
 
   //runs a single simulation with given parameters and return ticks
-  public static int runSimulation(int N, int M, int density) {
+  public static int runSimulation(int N, int M, double density) {
     BurnTrees Arson = new BurnTrees(N, M, density);
     return Arson.run();
   }
 
   //repeats times and returns the average
-  public static double repeatSimulation(int N, int M, int density, int times) {
+  public static double repeatSimulation(int N, int M, double density, int times) {
     double sum = 0;
     for (int i = 0; i < times; i++) {
       sum += runSimulation(N, M, density);
@@ -165,6 +168,19 @@ public class BurnTrees{
     return sum / times;
   }
 
+  public static void writeResultsToFile(int N, int M, double density, int times) throws IOException {
+    FileWriter Fred = new FileWriter(new File("results.csv"), true);
+    for (int i = 0; i < times; i++) {
+      int result = runSimulation(N, M, density);
+      String line = "" + N + ", " + M + ", " + density + ", " + result + '\n';
+      Fred.append(line);
+    }
+    Fred.close();
+  }
+
+  public static void main(String[] args) throws Throwable {
+    writeResultsToFile(100, 100, 0.1, 10);
+  }
 
   /***********************DO NOT UPDATE THINGS BELOW HERE**************************/
 
