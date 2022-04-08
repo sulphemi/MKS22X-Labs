@@ -120,6 +120,14 @@ public class BurnTrees{
     Fred.close();
   }
 
+  public static void outputResultsAsMD(int N, int M, double density, int times) throws IOException {
+    System.out.println();
+    for (int i = 0; i < times; i++) {
+      int result = runSimulation(N, M, density);
+      String line = "" + N + " | " + M + " | " + density + " | " + result;
+    }
+  }
+
   /***** MAIN *****/
 
   public static void main(String[] args) throws Throwable {
