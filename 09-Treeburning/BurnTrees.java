@@ -130,16 +130,21 @@ public class BurnTrees{
 
   public static void outputAverageAsMD(int N, int M, double densityIncrement, int repetitions) {
     for (double density = 0; density <= 1; density += densityIncrement) {
+      density = roundToPlace(density, 2); //fix any rounding errors with density
       double result = repeatSimulation(N, M, density, repetitions);
       String line = "" + N + " | " + M + " | " + density + " | " + result;
       System.out.println(line);
     }
   }
 
+  private static double roundToPlace(double n, int places) {
+    return Math.round(n * Math.pow(10, places)) / Math.pow(10, places);
+  }
+
   /***** MAIN *****/
 
   public static void main(String[] args) throws Throwable {
-    outputAverageAsMD(100, 100, 0.1, 10);
+    outputAverageAsMD(100, 100, 0.05, 10);
   }
 
   /***** GARBAGE ERM I MEAN- TESTS!! *****/
