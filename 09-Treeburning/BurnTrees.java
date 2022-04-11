@@ -57,7 +57,7 @@ public class BurnTrees{
   /***** HELPER METHODS *****/
 
   private boolean onBoard(int x, int y) {
-    //lazy implementation, feel free to fight me
+    //lazy implementation aaaaaaa
     try {
       int thing = map[x][y]; //will except if x y not on board
       return true;
@@ -66,17 +66,10 @@ public class BurnTrees{
     }
   }
 
-  private boolean spreadable(int x, int y) { //returns if fire is able to spread to this square
-    return onBoard(x, y) && map[x][y] == TREE;
-  }
-
-  private boolean setOnFire(int x, int y) {
-    if (spreadable(x, y)) {
+  private void setOnFire(int x, int y) {
+    if (onBoard(x, y) && map[x][y] == TREE) { //if fire is able to spread to this square
       map[x][y] = FIRE;
       burnyList.add(x, y);
-      return true;
-    } else {
-      return false; //this code is dumb
     }
   }
 
