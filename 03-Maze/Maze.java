@@ -247,7 +247,7 @@ public class Maze {
   /***** MAIN *****/
 
   public static void main(String[] args) throws Exception {
-    List<Maze> mazes = new LinkedList<Maze>();
+    Queue<Maze> mazes = new LinkedList<Maze>();
     for (int i = 0; i < 100; i++) {
       mazes.add(new Maze(randInt(3, 20), randInt(3, 20)));
     }
@@ -259,10 +259,11 @@ public class Maze {
       f.createNewFile();
       Bob = new BufferedWriter(new FileWriter(f));
 
-      //mazes.get(0).generate();
-      mazes.get(0).solve();
 
-      String mazeFile = mazes.get(0).toString();
+      Maze M = mazes.remove();
+      M.solve();
+
+      String mazeFile = M.toString();
       Bob.write(mazeFile, 0, mazeFile.length());
       mazes.remove(0);
       Bob.close();

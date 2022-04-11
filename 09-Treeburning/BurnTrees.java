@@ -139,7 +139,7 @@ public class BurnTrees{
   public static void main(String[] args) throws Throwable {
     outputAverageAsMD(100, 100, 0.05, 0.0, 1.0, 100);
     System.out.println(); //blank space
-    outputAverageAsMD(100, 100, 0.01, 0.6, 0.7, 100);
+    outputAverageAsMD(100, 100, 0.01, 0.55, 0.7, 100);
   }
 
   /***** GARBAGE ERM I MEAN- TESTS!! *****/
