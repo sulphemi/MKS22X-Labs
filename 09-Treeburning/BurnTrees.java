@@ -93,6 +93,10 @@ public class BurnTrees{
     }
   }
 
+  private static double roundToPlace(double n, int places) {
+    return Math.round(n * Math.pow(10, places)) / Math.pow(10, places);
+  }
+
   /***** DATA COLLECTION METHODS *****/
 
   //runs a single simulation with given parameters and return ticks
@@ -128,8 +132,8 @@ public class BurnTrees{
     }
   }
 
-  public static void outputAverageAsMD(int N, int M, double densityIncrement, int repetitions) {
-    for (double density = 0; density <= 1; density += densityIncrement) {
+  public static void outputAverageAsMD(int N, int M, double densityIncrement, double densityStart, double densityEnd, int repetitions) {
+    for (double density = densityStart; density <= densityEnd; density += densityIncrement) {
       density = roundToPlace(density, 2); //fix any rounding errors with density
       double result = repeatSimulation(N, M, density, repetitions);
       String line = "" + N + " | " + M + " | " + density + " | " + result;
@@ -137,14 +141,12 @@ public class BurnTrees{
     }
   }
 
-  private static double roundToPlace(double n, int places) {
-    return Math.round(n * Math.pow(10, places)) / Math.pow(10, places);
-  }
-
   /***** MAIN *****/
 
   public static void main(String[] args) throws Throwable {
-    outputAverageAsMD(100, 100, 0.05, 10);
+    outputAverageAsMD(100, 100, 0.05, 0.0, 1.0, 100);
+    System.out.println(); //blank space
+    outputAverageAsMD(100, 100, 0.01, 0.6, 0.7, 100);
   }
 
   /***** GARBAGE ERM I MEAN- TESTS!! *****/
