@@ -118,6 +118,7 @@ public class BurnTrees{
   }
 
   public static void outputResultsAsMD(int N, int M, double density, int times) throws IOException {
+    System.out.println("width | height | density | result");
     for (int i = 0; i < times; i++) {
       double result = runSimulation(N, M, density);
       String line = "" + N + " | " + M + " | " + density + " | " + result;
@@ -126,6 +127,7 @@ public class BurnTrees{
   }
 
   public static void outputAverageAsMD(int N, int M, double densityIncrement, double densityStart, double densityEnd, int repetitions) {
+    System.out.println("width | height | density | result");
     for (double density = densityStart; density <= densityEnd; density += densityIncrement) {
       density = roundToPlace(density, 2); //fix any rounding errors with density
       double result = repeatSimulation(N, M, density, repetitions);
