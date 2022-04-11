@@ -110,7 +110,7 @@ public class BurnTrees{
     return sum / times;
   }
 
-  public static void writeResultsToFile(int N, int M, double density, int times) throws IOException {
+  public static void writeResultsToCSV(int N, int M, double density, int times) throws IOException {
     FileWriter Fred = new FileWriter(new File("results.csv"), true);
     for (int i = 0; i < times; i++) {
       int result = runSimulation(N, M, density);
@@ -121,22 +121,25 @@ public class BurnTrees{
   }
 
   public static void outputResultsAsMD(int N, int M, double density, int times) throws IOException {
-    System.out.println();
     for (int i = 0; i < times; i++) {
-      int result = runSimulation(N, M, density);
+      double result = runSimulation(N, M, density);
       String line = "" + N + " | " + M + " | " + density + " | " + result;
+      System.out.println(line);
+    }
+  }
+
+  public static void outputAverageAsMD(int N, int M, double densityIncrement, int repetitions) {
+    for (double density = 0; density <= 1; density += densityIncrement) {
+      double result = repeatSimulation(N, M, density, repetitions);
+      String line = "" + N + " | " + M + " | " + density + " | " + result;
+      System.out.println(line);
     }
   }
 
   /***** MAIN *****/
 
   public static void main(String[] args) throws Throwable {
-    final int N = Integer.parseInt(args[0]);
-    final int M = Integer.parseInt(args[1]);
-    final int times = Integer.parseInt(args[2]);
-    for (int density = 1; density <= 10; density++) {
-      writeResultsToFile(N, M, density / 10.0, times);
-    }
+    outputAverageAsMD(100, 100, 0.1, 10);
   }
 
   /***** GARBAGE ERM I MEAN- TESTS!! *****/
