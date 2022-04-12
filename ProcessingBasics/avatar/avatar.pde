@@ -3,10 +3,8 @@ import java.util.Random;
 int x,y;
 int MODE;
 
-final int SIZE = 800;
-
 void setup() {
-         size(SIZE, SIZE);
+         size(800, 800);
          MODE = 1;
          x = width/2;
          y = height/2;
@@ -28,11 +26,11 @@ int change(int value){
 
   switch(MODE){
    case 1:
-     return 0;
+     return RNGesus.nextInt(width + 1);
    case 2:
-     return 0;
+     return RNGesus.nextInt(3) - 2;
    case 3:
-     return 0;
+     return ++value < width ? value : value - 1;
    default:
      return width/2;
   }
