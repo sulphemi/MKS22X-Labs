@@ -5,7 +5,7 @@ int MODE;
 
 void setup() {
          size(800, 800);
-         MODE = 1;
+         MODE = 3;
          x = width/2;
          y = height/2;
 }
@@ -30,7 +30,11 @@ int change(int value){
    case 2:
      return RNGesus.nextInt(3) - 2;
    case 3:
-     return ++value < width ? value : value - 1;
+     if (value < width && value > 0) {
+       return value + 1;
+     } else {
+       return value;
+     }
    default:
      return width/2;
   }
