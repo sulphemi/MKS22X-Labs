@@ -57,3 +57,7 @@ void avatar(int x, int y) {
     triangle(xcor[i], ycor[i], xcor[i + 1], ycor[i + 1], xcor[i + 2], ycor[i + 2]);
   }
 }
+
+void mouseClicked() {
+  MODE = MODE >= 3 ? 0 : MODE + 1;
+}
