@@ -7,3 +7,6 @@
 
 # hahaha MacOS bad
 .DS_Store
+
+# processing autosave file
+*.autosave
