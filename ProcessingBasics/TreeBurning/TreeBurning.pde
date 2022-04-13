@@ -16,7 +16,7 @@
      *At this point you have initialized width, height,ROWS,COLS. You can change these values
      *to alter the screen size, but you cannot just change one value!
      *What must be true about the ratio of these values in order for this simulation to display squares?
-     *ANSWER HERE:
+     *ANSWER HERE: The values must share a common factor, the size of the squares
      */
 
     DENSITY = .61;
@@ -24,7 +24,7 @@
     /**question 2 *********************************
      *Given that you can change the size() and the number of ROWS and COLS,
      *How do you calculate the SQUARESIZE (size of each square you draw) using an expression?
-     *ANSWER : replace squareSize = 8; with the correct square size.
+     *ANSWER : The dimensions of the window should be the size of the square times the number of rows/columns, so squaresize = size / columns
      * DO NOT just write a number, it must work when you change the size() command or the ROWS and COLS
      */
     SQUARESIZE = 8;//side length
@@ -45,7 +45,7 @@
      *(The print statement is NOT part of the simulation, it is to help you answer this question)
      *hint:  If you cannot figure this out analytically, experiment to test
      *       the difference by changing the code. A print statement is commented out to facilitate testing.
-     *ANSWER HERE:
+     *ANSWER HERE: The processing window runs at either 30 or 60 frames per second. By only running the simulation on frameCounts that are divisible by 10, the program would tick 3 or 6 times per second, as opposed to 30/60 times per second
      */
 
     String[]lines = treeSim.toString().split("\n");
@@ -70,7 +70,7 @@
      *Please use the same values that it was initialized with in the setup.
      * ANSWER: UPDATE THE NEXT LINE
      */
-    treeSim = null;
+    setup();
   }
 
 
