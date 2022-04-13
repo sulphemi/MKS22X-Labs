@@ -100,9 +100,9 @@
      *2. Decide how to fill them in using the String[] parameter
      *   Colors: Fire = RED, Tree = GREEN, SPACE = WHITE, ASH = GREY
      */
-     
+
      int r, c;
-     
+
      for (int i = 0; i < lines.length; i++) {
        for (int k = 0; k < lines[i].length(); k++) {
          switch (lines[i].charAt(k)) {
@@ -121,7 +121,7 @@
            default:
              break;
        }
-       
+
        rect(k * SQUARESIZE, i * SQUARESIZE, SQUARESIZE, SQUARESIZE);
      }
     }
