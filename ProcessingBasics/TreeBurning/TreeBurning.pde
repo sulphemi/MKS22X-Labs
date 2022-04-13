@@ -55,22 +55,9 @@
 
     //Output the resulting time and dimensions of the simulation
     if (treeSim.done()) {
-      /*
-      ORIGINAL CODE:
       fill(0);
       textSize(20);
       text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 20, 20);
-      */
-      //haha i updated your code
-      fill(0);
-      textSize(20);
-      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 21, 21);
-      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 22, 22);
-      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 19, 19);
-      fill(255);
-      textSize(20);
-      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 20, 20);
-      //end updates
     }
   }
 
@@ -101,22 +88,32 @@
      *   Colors: Fire = RED, Tree = GREEN, SPACE = WHITE, ASH = GREY
      */
 
+     if (SQUARESIZE > 2) {
+       stroke(1);
+     } else {
+       noStroke();
+     }
+
      int r, c;
 
      for (int i = 0; i < lines.length; i++) {
        for (int k = 0; k < lines[i].length(); k++) {
          switch (lines[i].charAt(k)) {
            case ' ': //SPACE
-             fill(#12130F);
+             //fill(#12130F); <- pretty color
+             fill(255); //ugly color
              break;
            case 'w': //FIRE
-             fill(#EF2D56);
+             //fill(#EF2D56); <- pretty color
+             fill(255, 0, 0); //ugly color
              break;
            case '@': //TREE
-             fill(#6BFFB8);
+             //fill(#6BFFB8); <- pretty color
+             fill(0, 255, 0); //ugly color
              break;
            case '.': //ASH
-             fill(#BFADA3);
+             //fill(#BFADA3); <- pretty color
+             fill(100); //ugly color
              break;
            default:
              break;
@@ -127,6 +124,39 @@
     }
   }
 
+
+  void stringToSquaresPRETTY(String[]lines) {
+    /**Complete this method.
+     *1. Break up your screen by drawing ROWSxCOLS squares of the same color.
+     *2. Decide how to fill them in using the String[] parameter
+     *   Colors: Fire = RED, Tree = GREEN, SPACE = WHITE, ASH = GREY
+     */
+
+     int r, c;
+
+     for (int i = 0; i < lines.length; i++) {
+       for (int k = 0; k < lines[i].length(); k++) {
+         switch (lines[i].charAt(k)) {
+           case ' ': //SPACE
+             fill(#12130F); //<- pretty color
+             break;
+           case 'w': //FIRE
+             fill(#EF2D56); //<- pretty color
+             break;
+           case '@': //TREE
+             fill(#6BFFB8); //<- pretty color
+             break;
+           case '.': //ASH
+             fill(#BFADA3); //<- pretty color
+             break;
+           default:
+             break;
+       }
+
+       rect(k * SQUARESIZE, i * SQUARESIZE, SQUARESIZE, SQUARESIZE);
+     }
+    }
+  }
 
   /***THIS IS YOUR PRIOR LAB (only a subset of methods)***/
 
