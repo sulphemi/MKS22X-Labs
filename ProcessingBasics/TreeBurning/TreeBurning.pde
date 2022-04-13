@@ -94,23 +94,18 @@
        for (int k = 0; k < lines[i].length(); k++) {
          switch (lines[i].charAt(k)) {
            case ' ': //SPACE
-             println("space");
              fill(#12130F);
              break;
            case 'w': //FIRE
-           println("fire");
              fill(#EF2D56);
              break;
            case '@': //TREE
-           println("tree");
              fill(#6BFFB8);
              break;
            case '.': //ASH
-           println("ash");
              fill(#BFADA3);
              break;
            default:
-           println("default");
              break;
        }
        
