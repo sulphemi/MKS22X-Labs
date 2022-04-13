@@ -55,9 +55,22 @@
 
     //Output the resulting time and dimensions of the simulation
     if (treeSim.done()) {
+      /*
+      ORIGINAL CODE:
       fill(0);
       textSize(20);
       text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 20, 20);
+      */
+      //haha i updated your code
+      fill(0);
+      textSize(20);
+      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 21, 21);
+      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 22, 22);
+      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 19, 19);
+      fill(255);
+      textSize(20);
+      text("Simulation of "+COLS+"by"+ROWS+" board lasted "+treeSim.getTicks()+" ticks", 20, 20);
+      //end updates
     }
   }
 
