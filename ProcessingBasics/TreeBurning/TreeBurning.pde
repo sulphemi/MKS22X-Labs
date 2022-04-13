@@ -27,7 +27,7 @@
      *ANSWER : The dimensions of the window should be the size of the square times the number of rows/columns, so squaresize = size / columns
      * DO NOT just write a number, it must work when you change the size() command or the ROWS and COLS
      */
-    SQUARESIZE = 8;//side length
+    SQUARESIZE = width / COLS;//side length
 
   }
 
@@ -87,7 +87,36 @@
      *2. Decide how to fill them in using the String[] parameter
      *   Colors: Fire = RED, Tree = GREEN, SPACE = WHITE, ASH = GREY
      */
-
+     
+     int r, c;
+     
+     for (int i = 0; i < lines.length; i++) {
+       for (int k = 0; k < lines[i].length(); k++) {
+         switch (lines[i].charAt(k)) {
+           case ' ': //SPACE
+             println("space");
+             fill(#12130F);
+             break;
+           case 'w': //FIRE
+           println("fire");
+             fill(#EF2D56);
+             break;
+           case '@': //TREE
+           println("tree");
+             fill(#6BFFB8);
+             break;
+           case '.': //ASH
+           println("ash");
+             fill(#BFADA3);
+             break;
+           default:
+           println("default");
+             break;
+       }
+       
+       rect(k * SQUARESIZE, i * SQUARESIZE, SQUARESIZE, SQUARESIZE);
+     }
+    }
   }
 
 
