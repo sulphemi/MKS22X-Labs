@@ -38,14 +38,14 @@ public class Orb {
 
     //if on bottom/top edge:
 
-    if (y < 0 || y > height) {
+    if (y - radius < 0 || y + radius > height) {
       ySpeed *= -1;
       y += ySpeed;
     }
 
     //if on left/right edge:
 
-    if (x < 0 || x > width) {
+    if (x - radius < 0 || x + radius > width) {
       xSpeed *= -1;
       x += xSpeed;
     }
