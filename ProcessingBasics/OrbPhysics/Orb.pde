@@ -11,7 +11,7 @@ public class Orb {
     ySpeed = ySpeed_;
     radius = radius_;
     //random color... why not.
-    c = color(random(255), random(255), random(255));
+    c = color(random(255), random(255), random(255), random(255));
   }
 
 
@@ -22,7 +22,7 @@ public class Orb {
     //make sure you read the parameters of ellipse, so that you have the correct size.
     //radius is NOT one of the parameters of ellipse by default.
     fill(c);
-    ellipse(x, y, radius, radius);
+    ellipse(x, y, radius * 2, radius * 2);
   }
 
   void move() {
@@ -54,7 +54,19 @@ public class Orb {
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
     //You don't need a variable for this if every object experiences the same
     //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
-    final float gravity = 2.0;
+    final float gravity = .20;
     ySpeed += gravity;
+  }
+  
+  boolean collidingWith(Orb other) {
+    return Math.sqrt(Math.pow((this.x - other.x), 2) + Math.pow((this.y - other.y), 2)) < (this.radius + other.radius);
+  }
+  
+  void collide() {
+    xSpeed *= -1;
+    x += xSpeed;
+    
+    ySpeed *= -1;
+    y += ySpeed;
   }
 }
