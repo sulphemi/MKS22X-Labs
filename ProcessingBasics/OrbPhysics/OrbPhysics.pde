@@ -27,7 +27,6 @@ void draw() {
   for (Orb o : orbList) {
     o.move();
     o.display();
-    o.bounceOnEdge();
   }
   
   if (orbitMode) {
@@ -35,7 +34,13 @@ void draw() {
     for (Orb o : orbList) {
       aaa.attract(o);
     }
+  } else {
+    for (Orb o : orbList) {
+      o.applyGravity();
+      o.bounceOnEdge();
+    }
   }
+  
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);

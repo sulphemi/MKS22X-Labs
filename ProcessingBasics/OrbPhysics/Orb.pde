@@ -40,9 +40,7 @@ public class Orb {
     //Part 4
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
     //You don't need a variable for this if every object experiences the same
-    //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
-    final float gravity = .20;
-    //ySpeed += gravity;
+    //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well)
   }
   
   boolean collidingWith(Orb other) {
@@ -82,5 +80,10 @@ public class Orb {
       xSpeed *= -1;
       x += xSpeed;
     }
+  }
+  
+  void applyGravity() {
+    final float gravity = .20;
+    ySpeed += gravity;
   }
 }
