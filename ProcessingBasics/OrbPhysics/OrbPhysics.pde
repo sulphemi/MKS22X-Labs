@@ -27,6 +27,7 @@ void draw() {
   for (Orb o : orbList) {
     o.move();
     o.display();
+    o.bounceOnEdge();
   }
   
   if (orbitMode) {

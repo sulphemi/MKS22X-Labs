@@ -35,24 +35,7 @@ public class Orb {
 
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
-
-    /*
-
-    //if on bottom/top edge:
-
-    if (y - radius < 0 || y + radius > height) {
-      ySpeed *= -1;
-      y += ySpeed;
-    }
-
-    //if on left/right edge:
-
-    if (x - radius < 0 || x + radius > width) {
-      xSpeed *= -1;
-      x += xSpeed;
-    }
     
-    */
 
     //Part 4
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
@@ -83,5 +66,21 @@ public class Orb {
   
   void drawStick() {
     
+  }
+  
+  void bounceOnEdge() {
+     //if on bottom/top edge:
+
+    if (y - radius < 0 || y + radius > height) {
+      ySpeed *= -1;
+      y += ySpeed;
+    }
+
+    //if on left/right edge:
+
+    if (x - radius < 0 || x + radius > width) {
+      xSpeed *= -1;
+      x += xSpeed;
+    }
   }
 }
