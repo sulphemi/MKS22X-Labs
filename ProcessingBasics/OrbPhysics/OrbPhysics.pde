@@ -45,3 +45,7 @@ void keyPressed() {
     orbitMode = !orbitMode;
   }
 }
+
+private float rand(float lower, float upper) {
+  return (float)Math.random() * (upper - lower + 1) + lower;
+}
