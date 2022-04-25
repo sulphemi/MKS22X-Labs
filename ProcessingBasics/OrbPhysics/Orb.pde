@@ -36,6 +36,8 @@ public class Orb {
     //PART 3
     //Change the speed when you collide with the end of the screen (all 4 sides)
 
+    /*
+
     //if on bottom/top edge:
 
     if (y - radius < 0 || y + radius > height) {
@@ -49,13 +51,15 @@ public class Orb {
       xSpeed *= -1;
       x += xSpeed;
     }
+    
+    */
 
     //Part 4
     //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
     //You don't need a variable for this if every object experiences the same
     //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well).
     final float gravity = .20;
-    ySpeed += gravity;
+    //ySpeed += gravity;
   }
   
   boolean collidingWith(Orb other) {
@@ -68,5 +72,16 @@ public class Orb {
     
     ySpeed *= -1;
     y += ySpeed;
+  }
+  
+  void attract(Orb other) {
+    final float gConst = 20.0;
+    float d = dist(x, y, other.x, other.y);
+    other.xSpeed += gConst * (x - other.x) / Math.pow(d, 2);
+    other.ySpeed += gConst * (y - other.y) / Math.pow(d, 2);
+  }
+  
+  void drawStick() {
+    
   }
 }

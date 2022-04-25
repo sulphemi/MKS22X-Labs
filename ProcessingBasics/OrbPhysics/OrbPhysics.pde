@@ -1,8 +1,12 @@
 ArrayList<Orb> orbList;
+Orb aaa;
+
 void setup() {
   size(1000, 700);
   orbList = new ArrayList<Orb>();
   noStroke(); //prettier this way
+  
+  aaa = new Orb(width / 2, height / 2, 0, 0, 10);
 }
 void mouseClicked() {
   //add a new Orb to the orbList, constructed as follows:
@@ -17,25 +21,17 @@ void mouseClicked() {
 }
 void draw() {
   background(255);
+  
+  aaa.display();
   for (Orb o : orbList) {
     o.move();
     o.display();
+    
+    aaa.attract(o);
   }
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
-  
-  /*
-  //bounce
-  for (int i = 0; i < orbList.size(); i++) {
-    for (int k = 0; k < orbList.size(); k++) {
-      if (i != k && orbList.get(i).collidingWith(orbList.get(k))) {
-        orbList.get(i).collide();
-        break;
-      }
-    }
-  }
-  */
 }
 
 private float rand(float lower, float upper) {
