@@ -1,5 +1,6 @@
 ArrayList<Orb> orbList;
 Orb aaa;
+boolean orbitMode;
 
 void setup() {
   size(1000, 700);
@@ -7,6 +8,7 @@ void setup() {
   noStroke(); //prettier this way
   
   aaa = new Orb(width / 2, height / 2, 0, 0, 10);
+  orbitMode = false;
 }
 void mouseClicked() {
   //add a new Orb to the orbList, constructed as follows:
@@ -22,18 +24,24 @@ void mouseClicked() {
 void draw() {
   background(255);
   
-  aaa.display();
   for (Orb o : orbList) {
     o.move();
     o.display();
-    
-    aaa.attract(o);
+  }
+  
+  if (orbitMode) {
+    aaa.display();
+    for (Orb o : orbList) {
+      aaa.attract(o);
+    }
   }
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
 }
 
-private float rand(float lower, float upper) {
-  return (float)Math.random() * (upper - lower + 1) + lower;
+void keyPressed() {
+  if (key == ' ') {
+    orbitMode = !orbitMode;
+  }
 }
