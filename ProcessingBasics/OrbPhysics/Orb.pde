@@ -63,7 +63,9 @@ public class Orb {
   }
   
   void drawStick() {
-    
+    stroke(0);
+    line(x, y, x + xSpeed * 10, y + ySpeed * 10);
+    noStroke();
   }
   
   void bounceOnEdge() {
