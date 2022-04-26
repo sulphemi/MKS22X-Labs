@@ -11,7 +11,7 @@ public class Orb {
     ySpeed = ySpeed_;
     radius = radius_;
     //random color... why not.
-    c = color(random(255), random(255), random(255), random(255));
+    c = color(random(255), random(255), random(255), random(155) + 100);
   }
 
 
