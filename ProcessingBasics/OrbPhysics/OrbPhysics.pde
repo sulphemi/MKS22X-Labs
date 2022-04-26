@@ -1,28 +1,28 @@
 ArrayList<Orb> orbList;
-Orb aaa;
-boolean orbitMode;
+Orb centerOrb;
+int MODE;
+boolean drawBackground;
+
+static final int GRAVITY = 0;
+static final int ORBIT = 1;
 
 void setup() {
-  size(1000, 700);
+  size(1000, 800);
   orbList = new ArrayList<Orb>();
   noStroke(); //prettier this way
   
-  aaa = new Orb(width / 2, height / 2, 0, 0, 10);
-  orbitMode = false;
+  centerOrb = new Orb(width / 2, height / 2, 0, 0, 10);
+  MODE = GRAVITY;
+  drawBackground = true;
 }
 void mouseClicked() {
-  //add a new Orb to the orbList, constructed as follows:
-  //The x and y positions are the same as the mouse
-  //the radius should be between in the range [20.0,70.0)
-  //the xSpeed and ySpeed should be in the range [-3.0,3.0)
-
-  float xSpeed = rand(-3.0, 3.0);
-  float ySpeed = rand(-3.0, 3.0);
-  float radius = rand(20.0, 70.0);
-  orbList.add(new Orb(mouseX, mouseY, xSpeed, ySpeed, radius));
+  // Modify mouseClicked to add a new Orb located at the mouse position such that:
+  // the new Orb should have a radius of 20, with an initial xspeed(dx) of 5, and a yspeed(dy) of 0
+  
+  orbList.add(new Orb(mouseX, mouseY, 5, 0, 20));
 }
 void draw() {
-  background(255);
+  if (drawBackground) {background(255);}
   
   for (Orb o : orbList) {
     o.move();
@@ -30,12 +30,13 @@ void draw() {
     //o.drawStick();
   }
   
-  if (orbitMode) {
-    aaa.display();
+  //note to self use a switch statement when implementing SPRING mode
+  if (MODE == ORBIT) {
+    centerOrb.display();
     for (Orb o : orbList) {
-      aaa.attract(o);
+      centerOrb.attract(o);
     }
-  } else {
+  } else if (MODE == GRAVITY) {
     for (Orb o : orbList) {
       o.applyGravity();
       o.bounceOnEdge();
@@ -48,8 +49,18 @@ void draw() {
 }
 
 void keyPressed() {
-  if (key == ' ') {
-    orbitMode = !orbitMode;
+  switch (key) {
+    case ' ':
+      if (++MODE >= 2) {
+        MODE = 0;
+      }
+      break;
+    case 'b':
+      drawBackground = !drawBackground;
+      break;
+    case 8: //backspace is 8
+      orbList = new ArrayList(); //frees the arraylist from memory and assigns it a new one
+      break;
   }
 }
 
