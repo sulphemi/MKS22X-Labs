@@ -27,21 +27,15 @@ public class Orb {
   }
 
   void move() {
-    //PART 2
-    //change the x based on the xSpeed
-    //change the y based on the ySpeed
-
+    switch (MODE) {
+      case GRAVITY:
+        applyGravity();
+        bounceOnEdge();
+        break;
+    }
+    
     x += xSpeed;
     y += ySpeed;
-
-    //PART 3
-    //Change the speed when you collide with the end of the screen (all 4 sides)
-    
-
-    //Part 4
-    //Add a small adjustment for gravity. Gravity is a ySpeed acceleration...
-    //You don't need a variable for this if every object experiences the same
-    //gravitational constant (find the value that looks nice experimentally, 9.8 will not work well)
   }
   
   boolean collidingWith(Orb other) {

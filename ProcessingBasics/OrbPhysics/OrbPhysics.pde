@@ -36,11 +36,6 @@ void draw() {
     for (Orb o : orbList) {
       centerOrb.attract(o);
     }
-  } else if (MODE == GRAVITY) {
-    for (Orb o : orbList) {
-      o.applyGravity();
-      o.bounceOnEdge();
-    }
   }
   
   fill(0);
