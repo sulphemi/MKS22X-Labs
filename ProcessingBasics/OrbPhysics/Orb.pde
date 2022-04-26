@@ -58,24 +58,30 @@ public class Orb {
   }
   
   void drawStick() {
-    stroke(0);
+    stroke(c);
     line(x, y, x + xSpeed * 5, y + ySpeed * 5);
     noStroke();
   }
   
   void bounceOnEdge() {
-     //if on bottom/top edge:
-
-    if (y - radius < 0 || y + radius > height) {
-      ySpeed *= -1;
-      y += ySpeed;
+    //top edge
+    if (y - radius < 0) {
+      ySpeed = Math.abs(ySpeed);
+    }
+    
+    //bottom edge
+    if (y + radius > height) {
+      ySpeed = - Math.abs(ySpeed);
     }
 
-    //if on left/right edge:
-
-    if (x - radius < 0 || x + radius > width) {
-      xSpeed *= -1;
-      x += xSpeed;
+    //left edge
+    if (x - radius < 0) {
+      xSpeed = Math.abs(xSpeed);
+    }
+    
+    //right edge
+    if (x + radius > width) {
+      xSpeed = - Math.abs(xSpeed);
     }
   }
   

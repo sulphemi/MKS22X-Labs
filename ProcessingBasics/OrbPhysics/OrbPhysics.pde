@@ -41,12 +41,13 @@ void draw() {
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
+  text(MODE == 0 ? "GRAVITY" : "ORBIT", 20, 60);
 }
 
 void keyPressed() {
   switch (key) {
     case ' ':
-      if (++MODE >= 2) {
+      if (++MODE >= 2) { //DO YOU LIKE MY CODE MR.K!!!!!!!!
         MODE = 0;
       }
       break;
