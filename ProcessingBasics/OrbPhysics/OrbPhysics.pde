@@ -13,6 +13,8 @@ static final float SPRING_CONSTANT = 0.015;
 static final float SPRING_LENGTH = 100;
 static final float SPRING_DAMPEN = .995;
 
+boolean applyGravity;
+
 void setup() {
   size(1000, 800);
   orbList = new ArrayList<Orb>();
@@ -21,6 +23,7 @@ void setup() {
   centerOrb = new Orb(width / 2, height / 2, 0, 0, 10);
   MODE = BOUNCE;
   drawBackground = true;
+  applyGravity = true;
 }
 void mouseClicked() {
   // Modify mouseClicked to add a new Orb located at the mouse position such that:
@@ -59,6 +62,7 @@ void draw() {
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
   text(modeNames[MODE], 20, 60);
+  text("GRAVITY " + (applyGravity ? "ON" : "OFF"), 20, 80);
 }
 
 void keyPressed() {
@@ -75,7 +79,7 @@ void keyPressed() {
       orbList = new ArrayList(); //frees the arraylist from memory and assigns it a new one
       break;
      case 'g':
-       MODE = BOUNCE;
+       applyGravity = ! applyGravity;
        break;
   }
 }
