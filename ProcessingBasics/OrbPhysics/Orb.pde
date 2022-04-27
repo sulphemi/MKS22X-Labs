@@ -89,4 +89,8 @@ public class Orb {
     final float gravity = .20;
     ySpeed += gravity;
   }
+  
+  void attractSpring() {
+    
+  }
 }

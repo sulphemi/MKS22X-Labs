@@ -9,6 +9,10 @@ static final int ORBIT = 1;
 static final int SPRING = 2;
 static final String[] modeNames = {"BOUNCE", "ORBIT", "SPRING"};
 
+static final int SPRING_CONSTANT = 0;
+static final int SPRING_LENGTH = 0;
+static final int SPRING_DAMPEN = 0;
+
 void setup() {
   size(1000, 800);
   orbList = new ArrayList<Orb>();
