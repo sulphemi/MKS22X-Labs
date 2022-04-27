@@ -50,6 +50,7 @@ void draw() {
           centerOrb.attractSpring(o);
           stroke(0);
           line(centerOrb.x, centerOrb.y, o.x, o.y);
+          noStroke();
         }
         break;
   }
