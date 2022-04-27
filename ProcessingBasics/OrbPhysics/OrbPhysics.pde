@@ -48,6 +48,8 @@ void draw() {
         centerOrb.display();
         for (Orb o : orbList) {
           centerOrb.attractSpring(o);
+          stroke(0);
+          line(centerOrb.x, centerOrb.y, o.x, o.y);
         }
         break;
   }

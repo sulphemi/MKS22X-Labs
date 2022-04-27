@@ -21,7 +21,7 @@ public class Orb {
     //make sure it is the correct color
     //make sure you read the parameters of ellipse, so that you have the correct size.
     //radius is NOT one of the parameters of ellipse by default.
-    drawStick();
+    //drawStick();
     fill(c);
     ellipse(x, y, radius * 2, radius * 2);
   }
