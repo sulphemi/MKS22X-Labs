@@ -3,8 +3,11 @@ Orb centerOrb;
 int MODE;
 boolean drawBackground;
 
-static final int GRAVITY = 0;
+static final int modeC = 3;
+static final int BOUNCE = 0;
 static final int ORBIT = 1;
+static final int SPRING = 2;
+static final String[] modeNames = {"BOUNCE", "ORBIT", "SPRING"};
 
 void setup() {
   size(1000, 800);
@@ -12,7 +15,7 @@ void setup() {
   noStroke(); //prettier this way
   
   centerOrb = new Orb(width / 2, height / 2, 0, 0, 10);
-  MODE = GRAVITY;
+  MODE = BOUNCE;
   drawBackground = true;
 }
 void mouseClicked() {
@@ -41,13 +44,13 @@ void draw() {
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
-  text(MODE == 0 ? "GRAVITY" : "ORBIT", 20, 60);
+  text(modeNames[MODE], 20, 60);
 }
 
 void keyPressed() {
   switch (key) {
     case ' ':
-      if (++MODE >= 2) { //DO YOU LIKE MY CODE MR.K!!!!!!!!
+      if (++MODE >= modeC) { //DO YOU LIKE MY CODE MR.K!!!!!!!!
         MODE = 0;
       }
       break;
@@ -57,5 +60,8 @@ void keyPressed() {
     case 8: //backspace is 8
       orbList = new ArrayList(); //frees the arraylist from memory and assigns it a new one
       break;
+     case 'g':
+       MODE = BOUNCE;
+       break;
   }
 }

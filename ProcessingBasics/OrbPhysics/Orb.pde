@@ -28,7 +28,7 @@ public class Orb {
 
   void move() {
     switch (MODE) {
-      case GRAVITY:
+      case BOUNCE:
         applyGravity();
         bounceOnEdge();
         break;
