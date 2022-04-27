@@ -9,9 +9,9 @@ static final int ORBIT = 1;
 static final int SPRING = 2;
 static final String[] modeNames = {"BOUNCE", "ORBIT", "SPRING"};
 
-static final float SPRING_CONSTANT = 1;
-static final float SPRING_LENGTH = 300;
-static final float SPRING_DAMPEN = .8;
+static final float SPRING_CONSTANT = 0.015;
+static final float SPRING_LENGTH = 100;
+static final float SPRING_DAMPEN = .995;
 
 void setup() {
   size(1000, 800);
