@@ -9,9 +9,9 @@ static final int ORBIT = 1;
 static final int SPRING = 2;
 static final String[] modeNames = {"BOUNCE", "ORBIT", "SPRING"};
 
-static final int SPRING_CONSTANT = 0;
-static final int SPRING_LENGTH = 0;
-static final int SPRING_DAMPEN = 0;
+static final float SPRING_CONSTANT = 1;
+static final float SPRING_LENGTH = 300;
+static final float SPRING_DAMPEN = .8;
 
 void setup() {
   size(1000, 800);
@@ -37,12 +37,19 @@ void draw() {
     //o.drawStick();
   }
   
-  //note to self use a switch statement when implementing SPRING mode
-  if (MODE == ORBIT) {
-    centerOrb.display();
-    for (Orb o : orbList) {
-      centerOrb.attract(o);
-    }
+  switch (MODE) {
+    case ORBIT:
+      centerOrb.display();
+      for (Orb o : orbList) {
+        centerOrb.attract(o);
+      }
+      break;
+     case SPRING:
+        centerOrb.display();
+        for (Orb o : orbList) {
+          centerOrb.attractSpring(o);
+        }
+        break;
   }
   
   fill(0);

@@ -90,7 +90,14 @@ public class Orb {
     ySpeed += gravity;
   }
   
-  void attractSpring() {
+  void attractSpring(Orb other) {
+    float d = dist(x, y, other.x, other.y);
+    float force = SPRING_CONSTANT * (d - SPRING_LENGTH);
     
+    other.xSpeed += force * (-(other.x - x) / d);
+    other.xSpeed *= SPRING_DAMPEN;
+    
+    other.ySpeed += force * (-(other.y - y) / d);
+    other.ySpeed *= SPRING_DAMPEN;
   }
 }
