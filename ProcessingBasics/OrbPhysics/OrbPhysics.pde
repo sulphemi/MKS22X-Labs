@@ -39,8 +39,8 @@ void mouseClicked() {
   
   if (rickroll == false && mouseX > width - 110 && mouseY < 30) {
     rickroll = true;
-    rick = loadImage("astley.png");
-    astley = loadImage("face.png");
+    rick = loadImage("META-INF/astley.png");
+    astley = loadImage("META-INF/face.png");
   }
 }
 void draw() {
@@ -93,7 +93,15 @@ void draw() {
   text(modeNames[MODE], 20, 60);
   text("GRAVITY " + (applyGravity ? "ON" : "OFF"), 20, 80);
   
-  text("click me!!!", width - 100, 20);
+  if (! rickroll) {
+    text("click me!!!", width - 100, 20);
+  } else {
+    text("look this was originally supposed to", width - 220, 20);
+    text("open a link to the rickroll", width - 200, 40);
+    text("using awt.Desktop and net.URL", width - 210, 60);
+    text("but that was a bit too intrusive", width - 190, 80);
+    text("so i settled on this instead", width - 200, 100);
+  }
   
   timeSinceLastAction++;
   fill(timeSinceLastAction * 10);
@@ -140,26 +148,28 @@ boolean rickroll;
 PImage rick;
 PImage astley;
 int sunSize = 30;
-int astleyY = height;
+int astleyY = height + 877;
 void rickroll() {
   //the following code is partially sampled from khanacademy
   noStroke();
   // the beautiful blue sky
-  background(82, 222, 240);
+  background(200, 120, 100);
+    if (astleyY > 0) {
+    astleyY--;
+  } else {
+    background((float)Math.abs(Math.sin(frameCount / 10.0)) * 100 + 100, (float)Math.abs(Math.cos(frameCount / 5.0)) * 50 + 50, 10);
+  }
  // The sun, a little circle on the horizon
   fill(255, 204, 0);
   ellipse(width / 2, height * 3 / 4, sunSize, sunSize);
 
-  image(rick, width / 2 - 995, astleyY); //the image is 995px wide
+  image(rick, width / 2 - 995 / 2, astleyY); //the image is 995px wide
 
   // The land, blocking half of the sun
-  fill(76, 168, 67);
-  rect(0, height * 3 / 4, width, height);
+  fill(45, 20, 3);
+  //rect(0, height * 3 / 4, width, height);
 
   if (sunSize < Math.max(width, height)) {
-    sunSize++;
-  }
-  if (astleyY > height / 2) {
-    astleyY--;
+    sunSize += 2;
   }
 }

@@ -25,7 +25,7 @@ public class Orb {
     fill(c);
     ellipse(x, y, radius * 2, radius * 2);
     if (rickroll) {
-      image(astley, x - radius, y - radius);
+      image(astley, x - radius * 2, y - radius * 2);
     }
   }
 
@@ -41,18 +41,6 @@ public class Orb {
     }
     
     x += xSpeed;
-    y += ySpeed;
-  }
-  
-  boolean collidingWith(Orb other) {
-    return Math.sqrt(Math.pow((this.x - other.x), 2) + Math.pow((this.y - other.y), 2)) < (this.radius + other.radius);
-  }
-  
-  void collide() {
-    xSpeed *= -1;
-    x += xSpeed;
-    
-    ySpeed *= -1;
     y += ySpeed;
   }
   
