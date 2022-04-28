@@ -67,6 +67,11 @@ void draw() {
         break;
   }
   
+  if (! drawBackground) {
+    fill(255);
+    rect(0, 0, 120, 100);
+  }
+    
   fill(0);
   text(frameRate, 20, 20);
   text(orbList.size(), 20, 40);
