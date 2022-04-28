@@ -1,3 +1,6 @@
+import java.awt.Desktop;
+import java.net.URI;
+
 ArrayList<Orb> orbList;
 Orb centerOrb;
 int MODE;
@@ -16,6 +19,8 @@ static final float SPRING_DAMPEN = .995;
 boolean applyGravity;
 
 void setup() {
+
+  
   size(1000, 800);
   orbList = new ArrayList<Orb>();
   noStroke(); //prettier this way
@@ -30,6 +35,10 @@ void mouseClicked() {
   // the new Orb should have a radius of 20, with an initial xspeed(dx) of 5, and a yspeed(dy) of 0
   
   orbList.add(new Orb(mouseX, mouseY, 5, 0, 20));
+  
+  if (mouseX > width - 110 && mouseY < 30) {
+    rickroll();
+  }
 }
 void draw() {
   if (drawBackground) {background(255);}
@@ -77,6 +86,8 @@ void draw() {
   text(orbList.size(), 20, 40);
   text(modeNames[MODE], 20, 60);
   text("GRAVITY " + (applyGravity ? "ON" : "OFF"), 20, 80);
+  
+  text("click me!!!", width - 100, 20);
 }
 
 void keyPressed() {
@@ -102,4 +113,14 @@ void drawLine(Orb a, Orb b) {
   stroke(0, 0, 0, 120);
   line(a.x, a.y, b.x, b.y);
   noStroke();
+}
+
+void rickroll() { //im not sorry
+  try {
+    Desktop desktop = java.awt.Desktop.getDesktop();
+    URI rickroll = new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+    desktop.browse(rickroll);
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
 }
