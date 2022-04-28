@@ -99,7 +99,7 @@ void keyPressed() {
 }
 
 void drawLine(Orb a, Orb b) {
-  stroke(0);
+  stroke(0, 0, 0, 120);
   line(a.x, a.y, b.x, b.y);
   noStroke();
 }
