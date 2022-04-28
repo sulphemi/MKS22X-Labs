@@ -17,6 +17,8 @@ static final float SPRING_LENGTH = 100;
 static final float SPRING_DAMPEN = .995;
 
 boolean applyGravity;
+String lastAction = "init"; //im bri'ish innit
+int timeSinceLastAction = 0;
 
 void setup() {
 
@@ -35,6 +37,7 @@ void mouseClicked() {
   // the new Orb should have a radius of 20, with an initial xspeed(dx) of 5, and a yspeed(dy) of 0
   
   orbList.add(new Orb(mouseX, mouseY, 5, 0, 20));
+  updateAction("add ball @" + mouseX + ", " + mouseY);
   
   if (mouseX > width - 110 && mouseY < 30) {
     rickroll();
@@ -88,6 +91,10 @@ void draw() {
   text("GRAVITY " + (applyGravity ? "ON" : "OFF"), 20, 80);
   
   text("click me!!!", width - 100, 20);
+  
+  timeSinceLastAction++;
+  fill(timeSinceLastAction * 10);
+  text(lastAction, 20, height - 100);
 }
 
 void keyPressed() {
@@ -96,15 +103,19 @@ void keyPressed() {
       if (++MODE >= modeNames.length) { //DO YOU LIKE MY CODE MR.K!!!!!!!!
         MODE = 0;
       }
+      updateAction("change mode to " + modeNames[MODE]);
       break;
     case 'b':
       drawBackground = !drawBackground;
+      updateAction("toggle background");
       break;
     case 8: //backspace is 8
       orbList = new ArrayList(); //frees the arraylist from memory and assigns it a new one
+      updateAction("delete all orbs");
       break;
      case 'g':
        applyGravity = ! applyGravity;
+       updateAction("toggle gravity");
        break;
   }
 }
@@ -123,4 +134,9 @@ void rickroll() { //im not sorry
   } catch (Exception e) {
     e.printStackTrace();
   }
+}
+
+void updateAction(String action) {
+  lastAction = action;
+  timeSinceLastAction = 0;
 }
