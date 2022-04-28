@@ -3,11 +3,11 @@ Orb centerOrb;
 int MODE;
 boolean drawBackground;
 
-static final int modeC = 3;
 static final int BOUNCE = 0;
 static final int ORBIT = 1;
 static final int SPRING = 2;
-static final String[] modeNames = {"BOUNCE", "ORBIT", "SPRING"};
+static final int CHAIN = 3;
+static final String[] modeNames = {"BOUNCE", "ORBIT", "SPRING", "CHAIN"};
 
 static final float SPRING_CONSTANT = 0.015;
 static final float SPRING_LENGTH = 100;
@@ -51,9 +51,18 @@ void draw() {
         centerOrb.display();
         for (Orb o : orbList) {
           centerOrb.attractSpring(o);
-          stroke(0);
-          line(centerOrb.x, centerOrb.y, o.x, o.y);
-          noStroke();
+          drawLine(centerOrb, o);
+        }
+        break;
+      case CHAIN:
+        for (int i = 0; i < orbList.size() - 1; i++) {
+          Orb a = orbList.get(i);
+          Orb b = orbList.get(i + 1);
+          
+          a.attractSpring(b);
+          b.attractSpring(a);
+          
+          drawLine(a, b);
         }
         break;
   }
@@ -68,7 +77,7 @@ void draw() {
 void keyPressed() {
   switch (key) {
     case ' ':
-      if (++MODE >= modeC) { //DO YOU LIKE MY CODE MR.K!!!!!!!!
+      if (++MODE >= modeNames.length) { //DO YOU LIKE MY CODE MR.K!!!!!!!!
         MODE = 0;
       }
       break;
@@ -82,4 +91,10 @@ void keyPressed() {
        applyGravity = ! applyGravity;
        break;
   }
+}
+
+void drawLine(Orb a, Orb b) {
+  stroke(0);
+  line(a.x, a.y, b.x, b.y);
+  noStroke();
 }
