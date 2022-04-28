@@ -24,6 +24,9 @@ public class Orb {
     //drawStick();
     fill(c);
     ellipse(x, y, radius * 2, radius * 2);
+    if (rickroll) {
+      image(astley, x - radius, y - radius);
+    }
   }
 
   void move() {

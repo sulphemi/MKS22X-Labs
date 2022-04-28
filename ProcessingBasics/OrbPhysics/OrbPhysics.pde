@@ -21,8 +21,6 @@ String lastAction = "init"; //im bri'ish innit
 int timeSinceLastAction = 0;
 
 void setup() {
-
-  
   size(1000, 800);
   orbList = new ArrayList<Orb>();
   noStroke(); //prettier this way
@@ -37,14 +35,19 @@ void mouseClicked() {
   // the new Orb should have a radius of 20, with an initial xspeed(dx) of 5, and a yspeed(dy) of 0
   
   orbList.add(new Orb(mouseX, mouseY, 5, 0, 20));
-  updateAction("add ball @" + mouseX + ", " + mouseY);
+  updateAction("add orb @" + mouseX + ", " + mouseY);
   
-  if (mouseX > width - 110 && mouseY < 30) {
-    rickroll();
+  if (rickroll == false && mouseX > width - 110 && mouseY < 30) {
+    rickroll = true;
+    rick = loadImage("astley.png");
+    astley = loadImage("face.png");
   }
 }
 void draw() {
   if (drawBackground) {background(255);}
+  if (rickroll) {
+    rickroll();
+  }
   
   for (Orb o : orbList) {
     o.move();
@@ -126,17 +129,37 @@ void drawLine(Orb a, Orb b) {
   noStroke();
 }
 
-void rickroll() { //im not sorry
-  try {
-    Desktop desktop = java.awt.Desktop.getDesktop();
-    URI rickroll = new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-    desktop.browse(rickroll);
-  } catch (Exception e) {
-    e.printStackTrace();
-  }
-}
-
 void updateAction(String action) {
   lastAction = action;
   timeSinceLastAction = 0;
+}
+
+/////////
+
+boolean rickroll;
+PImage rick;
+PImage astley;
+int sunSize = 30;
+int astleyY = height;
+void rickroll() {
+  //the following code is partially sampled from khanacademy
+  noStroke();
+  // the beautiful blue sky
+  background(82, 222, 240);
+ // The sun, a little circle on the horizon
+  fill(255, 204, 0);
+  ellipse(width / 2, height * 3 / 4, sunSize, sunSize);
+
+  image(rick, width / 2 - 995, astleyY); //the image is 995px wide
+
+  // The land, blocking half of the sun
+  fill(76, 168, 67);
+  rect(0, height * 3 / 4, width, height);
+
+  if (sunSize < Math.max(width, height)) {
+    sunSize++;
+  }
+  if (astleyY > height / 2) {
+    astleyY--;
+  }
 }
