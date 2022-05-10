@@ -19,6 +19,13 @@ void draw() {
   background(255);
   orbs.processAll();
   orbs.display();
+  
+  //text
+  fill(0);
+  text("SPRING CONSTANT: " + SPRING_CONSTANT, 20, 20);
+  text("SPRING DAMPENING: " + SPRING_DAMPEN, 20, 40);
+  text("SPRING LENGTH: " + SPRING_LENGTH, 20, 60);
+  text("GRAVITY: " + GRAVITY, 20, 80);
 }
 
 void keyPressed() {
