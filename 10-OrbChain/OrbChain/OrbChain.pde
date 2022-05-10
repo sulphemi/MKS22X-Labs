@@ -29,36 +29,36 @@ void draw() {
 }
 
 void keyPressed() {
-  switch (keyCode) {
-    case 49:
+  switch (key) {
+    case '1':
       //increase spring constant
       SPRING_CONSTANT += 0.005f;
       break;
-    case 50:
+    case '2':
       //decrease spring constant
       SPRING_CONSTANT -= 0.005f;
       break;
-    case 51:
+    case '3':
       //increase spring dampen
       SPRING_DAMPEN += 0.005f;
       break;
-    case 52:
+    case '4':
       //decrease spring dampen
       SPRING_DAMPEN -= 0.005f;
       break;
-    case 53:
+    case '5':
       //increase spring length
       SPRING_LENGTH += 1;
       break;
-    case 54:
+    case '6':
       //decrease spring length
       SPRING_LENGTH -= 1;
       break;
-    case 55:
+    case '7':
       //increase gravity
       GRAVITY += 0.05f;
       break;
-    case 56:
+    case '8':
       //decrease gravity
       GRAVITY -= 0.05f;
       break;
