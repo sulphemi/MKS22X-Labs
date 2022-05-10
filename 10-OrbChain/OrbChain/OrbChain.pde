@@ -5,7 +5,7 @@ static float SPRING_LENGTH = 50;
 static float SPRING_DAMPEN = 0.990;
 static float SPRING_CONSTANT = 0.015;
 
-static int GRAVITY = 0;
+static float GRAVITY = 0;
 
 OrbList orbs;
 void setup() {
@@ -29,30 +29,38 @@ void draw() {
 }
 
 void keyPressed() {
-  switch (key) {
-    case '1':
+  switch (keyCode) {
+    case 49:
       //increase spring constant
+      SPRING_CONSTANT += 0.005f;
       break;
-    case '2':
+    case 50:
       //decrease spring constant
+      SPRING_CONSTANT -= 0.005f;
       break;
-    case '3':
+    case 51:
       //increase spring dampen
+      SPRING_DAMPEN += 0.005f;
       break;
-    case '4':
+    case 52:
       //decrease spring dampen
+      SPRING_DAMPEN -= 0.005f;
       break;
-    case '5':
+    case 53:
       //increase spring length
+      SPRING_LENGTH += 1;
       break;
-    case '6':
+    case 54:
       //decrease spring length
+      SPRING_LENGTH -= 1;
       break;
-    case '7':
+    case 55:
       //increase gravity
+      GRAVITY += 0.05f;
       break;
-    case '8':
+    case 56:
       //decrease gravity
+      GRAVITY -= 0.05f;
       break;
   }
 }
