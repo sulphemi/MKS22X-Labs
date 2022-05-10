@@ -53,7 +53,7 @@ public class OrbNode {
     x+=dx;
     y+=dy;
     //apply gravity
-    dy+=0.35;
+    dy+=GRAVITY;
   }
 
   void springAttract(OrbNode other) {
