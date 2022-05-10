@@ -25,7 +25,13 @@ public class OrbNode {
     //If next or previous exist, draw lines to them! (aim for slightly off center)
     /*you write this part*/
 
-
+    if (prev != null) {
+      line(prev.x, prev.y, x, y);
+    }
+    
+    if (next != null) {
+      line(next.x, next.y, x, y);
+    }
   }
 
   /**
@@ -34,6 +40,14 @@ public class OrbNode {
   void move() {
     //have prev and next apply spring force to this node;
     /*you write this part*/
+
+    if (prev != null) {
+      prev.springAttract(this);
+    }
+
+    if (next != null) {
+      next.springAttract(this);
+    }
 
     //apply velocity to position
     x+=dx;
