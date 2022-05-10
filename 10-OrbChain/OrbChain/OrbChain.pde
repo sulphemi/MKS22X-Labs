@@ -16,3 +16,32 @@ void draw() {
   orbs.processAll();
   orbs.display();
 }
+
+void keyPressed() {
+  switch (key) {
+    case '1':
+      //increase spring constant
+      break;
+    case '2':
+      //decrease spring constant
+      break;
+    case '3':
+      //increase spring dampen
+      break;
+    case '4':
+      //decrease spring dampen
+      break;
+    case '5':
+      //increase spring length
+      break;
+    case '6':
+      //decrease spring length
+      break;
+    case '7':
+      //increase gravity
+      break;
+    case '8':
+      //decrease gravity
+      break;
+  }
+}
