@@ -52,13 +52,11 @@ public class OrbList {
     OrbNode current = first;
     while (current != null) {
       if (dist(x, y, current.x, current.y) <= current.radius) {
-        println("found node");
         return current;
       }
       current = current.next;
     }
 
-    println("return null");
     return null; //matching orb not found
   }
   
@@ -87,9 +85,9 @@ public class OrbList {
     for (OrbNode current = first; current != null; current = current.next) {
       if (current.x > xcor) {
         if (current.prev != null) {current.prev.next = addition;}
-        if (current.next != null) {current.next.prev = addition;}
-        addition.next = current.next;
         addition.prev = current.prev;
+        addition.next = current;
+        current.prev = addition;
         return;
       }
     }
