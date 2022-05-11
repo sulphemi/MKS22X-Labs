@@ -66,7 +66,7 @@ public class Calculator {
     testcases.put("1 2 3 4 5 + * - -", 26.0);
     testcases.put("3 4 %", 3.0);
     testcases.put("99 3 %", 0.0);
-    testcases.put("99 3 3 % *", 0);
+    testcases.put("99 3 3 % *", 0.0);
 
     for (String expression : testcases.keySet()) {
       double val = eval(expression);
