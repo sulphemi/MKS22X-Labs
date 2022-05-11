@@ -82,4 +82,16 @@ public class OrbList {
     }
     return false; //removed unsuccessfully
   }
+  
+  void add(int xcor, OrbNode addition) {
+    for (OrbNode current = first; current != null; current = current.next) {
+      if (current.x > xcor) {
+        if (current.prev != null) {current.prev.next = addition;}
+        if (current.next != null) {current.next.prev = addition;}
+        addition.next = current.next;
+        addition.prev = current.prev;
+        return;
+      }
+    }
+  }
 }

@@ -13,7 +13,8 @@ void setup() {
   orbs = new OrbList();
 }
 void mouseClicked() {
-  orbs.add(new OrbNode(mouseX,mouseY,0,0,30));
+  //orbs.add(new OrbNode(mouseX,mouseY,0,0,30));
+  orbs.add(mouseX, new OrbNode(mouseX, mouseY, 0, 0, 30));
 }
 void draw() {
   background(255);
