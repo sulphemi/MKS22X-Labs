@@ -47,4 +47,16 @@ public class OrbList {
       current = current.next;
     }
   }
+  
+  OrbNode getNodeAt(int x, int y) {
+    OrbNode current = first;
+    while (current != null) {
+      if (dist(x, y, current.x, current.y) <= current.radius) {
+        return current;
+      }
+      current = current.next;
+    }
+
+    return null; //matching orb not found
+  }
 }
