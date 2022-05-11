@@ -62,5 +62,11 @@ void keyPressed() {
       //decrease gravity
       GRAVITY -= 0.05f;
       break;
+    default:
+      switch (keyCode) {
+        case BACKSPACE:
+         orbs.delete(orbs.getNodeAt(mouseX, mouseY));
+         break;
+      }
   }
 }

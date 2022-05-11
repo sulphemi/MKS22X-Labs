@@ -52,11 +52,34 @@ public class OrbList {
     OrbNode current = first;
     while (current != null) {
       if (dist(x, y, current.x, current.y) <= current.radius) {
+        println("found node");
         return current;
       }
       current = current.next;
     }
 
+    println("return null");
     return null; //matching orb not found
+  }
+  
+  boolean delete(OrbNode target) {
+    if (target == null) {
+      return false;
+    }
+    
+    OrbNode current = first;
+    while (current != null) {
+      if (current == target) { //equivalence check is fine since we are comparing mem address
+        OrbNode before = current.prev;
+        OrbNode after = current.next;
+        
+        if (before != null) {before.next = after;}
+        if (after != null) {after.prev = before;}
+        
+        return true; //removed successfully
+      }
+      current = current.next;
+    }
+    return false; //removed unsuccessfully
   }
 }
