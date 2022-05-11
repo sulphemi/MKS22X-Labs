@@ -7,14 +7,28 @@ static float SPRING_CONSTANT = 0.015;
 
 static float GRAVITY = 0;
 
+final static int ADDMODE = 0;
+final static int INSERTMODE = 1;
+final static int DELETEMODE = 2;
+final static String[] modes = {"ADD", "INSERT", "DELETE"};
+static int CLICKMODE = 0;
+
 OrbList orbs;
 void setup() {
   size(1000, 800);
   orbs = new OrbList();
 }
 void mouseClicked() {
-  //orbs.add(new OrbNode(mouseX,mouseY,0,0,30));
-  orbs.add(mouseX, new OrbNode(mouseX, mouseY, 0, 0, 30));
+  switch (CLICKMODE) {
+    case ADDMODE:
+      orbs.add(new OrbNode(mouseX,mouseY,0,0,30));
+      break;
+    case INSERTMODE:
+      orbs.add(mouseX, new OrbNode(mouseX, mouseY, 0, 0, 30));
+      break;
+    case DELETEMODE:
+      orbs.delete(orbs.getNodeAt(mouseX, mouseY));
+  }
 }
 void draw() {
   background(255);
@@ -27,6 +41,7 @@ void draw() {
   text("SPRING DAMPENING: " + SPRING_DAMPEN, 20, 40);
   text("SPRING LENGTH: " + SPRING_LENGTH, 20, 60);
   text("GRAVITY: " + GRAVITY, 20, 80);
+  text("MODE: " + modes[CLICKMODE], 20, 100);
 }
 
 void keyPressed() {
@@ -63,11 +78,11 @@ void keyPressed() {
       //decrease gravity
       GRAVITY -= 0.05f;
       break;
+    case ' ':
+      if (++CLICKMODE >= modes.length) CLICKMODE = 0;
     default:
       switch (keyCode) {
-        case BACKSPACE:
-         orbs.delete(orbs.getNodeAt(mouseX, mouseY));
-         break;
+
       }
   }
 }
