@@ -52,15 +52,15 @@ void keyPressed() {
       break;
     case '2':
       //decrease spring constant
-      SPRING_CONSTANT -= 0.005f;
+      if ((SPRING_CONSTANT -= 0.005f) < 0f) {SPRING_CONSTANT = 0f;}
       break;
     case '3':
       //increase spring dampen
-      SPRING_DAMPEN += 0.005f;
+      if ((SPRING_DAMPEN += 0.005f) > 1f) {SPRING_DAMPEN = 1f;}
       break;
     case '4':
       //decrease spring dampen
-      SPRING_DAMPEN -= 0.005f;
+      if ((SPRING_DAMPEN -= 0.005f) < 0f) {SPRING_DAMPEN = 0f;}
       break;
     case '5':
       //increase spring length
@@ -68,7 +68,7 @@ void keyPressed() {
       break;
     case '6':
       //decrease spring length
-      SPRING_LENGTH -= 1;
+      if ((SPRING_LENGTH -= 1) < 0f) {SPRING_LENGTH = 0f;}
       break;
     case '7':
       //increase gravity
@@ -76,7 +76,7 @@ void keyPressed() {
       break;
     case '8':
       //decrease gravity
-      GRAVITY -= 0.05f;
+      if ((GRAVITY -= 0.05f) < 0f) {GRAVITY = 0f;}
       break;
     case ' ':
       if (++CLICKMODE >= modes.length) CLICKMODE = 0;
