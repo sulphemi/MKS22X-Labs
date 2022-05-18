@@ -52,6 +52,8 @@ void draw() {
   kernels[currentKernel].apply(car,output);
   image(car,0,0);
   image(output,car.width,0);
+  fill(0);
+  text(names[currentKernel], 20, 20);
 }
 
 void keyPressed() {

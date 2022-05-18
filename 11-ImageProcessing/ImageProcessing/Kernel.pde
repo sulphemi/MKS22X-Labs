@@ -15,7 +15,7 @@ public class Kernel {
   *     0-255, then clamp it to that range (< 0 becomes 0, >255 becomes 255)
   */
   color calcNewColor(PImage img, int x, int y) {
-    if (x == 0 || y == 0 || x == img.width - 1 || y == img.height - 1) {
+    if (x == 0 || y == 0 || x == img.width - 1|| y == img.height - 1) {
       return 0;
     }
     
@@ -40,9 +40,9 @@ public class Kernel {
     
     for (int i = 0; i < matrix.length; i++) {
       for (int k = 0; k < matrix.length; k++) {
-        rsum += red(matrix[i][k]) * kernel[i][k];
-        gsum += green(matrix[i][k]) * kernel[i][k];
-        bsum += blue(matrix[i][k]) * kernel[i][k];
+        rsum += red(matrix[i][k]) * kernel[k][i];
+        gsum += green(matrix[i][k]) * kernel[k][i];
+        bsum += blue(matrix[i][k]) * kernel[k][i];
       }
     }
     
@@ -52,8 +52,8 @@ public class Kernel {
   /**You must write this method that applies the kernel to the source,
     *and saves the data to the destination.*/
   void apply(PImage source, PImage destination) {
-    for (int x = 0; x < source.width; x++) {
-      for (int y = 0; y < source.height; y++) {
+    for (int y = 0; y < source.height; y++) {
+      for (int x = 0; x < source.width; x++) {
         destination.set(x, y, calcNewColor(source, x, y));
       }
     }
