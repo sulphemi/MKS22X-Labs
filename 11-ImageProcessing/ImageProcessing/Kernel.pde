@@ -24,17 +24,17 @@ public class Kernel {
     int bsum = 0;
     color[][] matrix = {
       {
-        img.get(x - 1, y - 1),
-        img.get(x - 1, y),
-        img.get(x - 1, y + 1)
+        img.get(x + 1, y - 1),
+        img.get(x + 1, y),
+        img.get(x + 1, y + 1)
       }, {
         img.get(x, y - 1),
         img.get(x, y),
         img.get(x, y + 1)
       }, {
-        img.get(x + 1, y - 1),
-        img.get(x + 1, y),
-        img.get(x + 1, y + 1)
+        img.get(x - 1, y - 1),
+        img.get(x - 1, y),
+        img.get(x - 1, y + 1)
       }
     };
     
