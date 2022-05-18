@@ -15,7 +15,10 @@ public class Kernel {
   *     0-255, then clamp it to that range (< 0 becomes 0, >255 becomes 255)
   */
   color calcNewColor(PImage img, int x, int y) {
-    //who me lazy im not lazy
+    if (x == 0 || y == 0 || x == img.width - 1 || y == img.height - 1) {
+      return 0;
+    }
+    
     int rsum = 0;
     int gsum = 0;
     int bsum = 0;
